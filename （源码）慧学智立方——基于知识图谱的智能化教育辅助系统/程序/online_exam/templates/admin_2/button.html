@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>后台管理系统-HTML5后台管理系统</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="bootstrapMB"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/admin_2/css/style.css"/>
+
+    <link rel="stylesheet" href="/static/admin_2/css/reset.min.css">
+    <link rel="stylesheet" href="/static/admin_2/css/style2.css">
+
+
+    <script src="/static/admin_2/javascript/jquery.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/customScrollbar.min.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/echarts.min.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/layerUi/layer.js"></script>
+    <script src="/static/admin_2/editor/ueditor.config.js"></script>
+    <script src="/static/admin_2/editor/ueditor.all.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/pagination.js"></script>
+    <script src="/static/admin_2/javascript/public.js"></script>
+</head>
+<style>
+
+
+  .table th {
+        vertical-align: bottom;
+        border-bottom: 1px solid #eceeef;
+        font-weight: normal;
+        font-size: 20px;
+        width: 192px;
+    }
+
+    .btn-danger {
+        background: #68727f;
+        border-color: #68727f;
+        color: white;
+    }
+
+    .table {
+        width: 30%;
+        max-width: 100%;
+        margin-bottom: 10px;
+        border-spacing: 0;
+        border-collapse: collapse;
+        border: 1px solid #eceeef;
+    }
+
+    .table th, .table td {
+        font-size: 24px;
+        padding: 29px;
+        line-height: 0.5;
+        vertical-align: top;
+        border-top: 1px solid #eceeef;
+    }
+
+    .options-table {
+        width: 50%;
+        float: left;
+    }
+
+    .options-table td {
+        text-align: center;
+    }
+
+    .info-box {
+        width: 76%;
+        height: 285px;
+        float: left;
+        padding: 20px;
+        border: 1px solid #ccc;
+        display: none;
+        margin-left: 25%;
+        margin-top: -271px;
+    }
+
+    .modal {
+        width: 90%;
+        max-width: 878px;
+        margin-left: 394px;
+        margin-right: auto;
+        margin-top: 10vh;
+        margin-bottom: 10vh;
+        background-color: #FFF;
+        border-radius: .5rem;
+        box-shadow: 0 5px 15px rgb(0 0 0 / 57%);
+        margin-top: -539px;
+    }
+
+    .btn {
+        -webkit-user-select: none;
+        padding: 6px 15px !important;
+        font-size: 14px !important;
+        display: inline-block;
+        border: none;
+        font-weight: normal;
+        line-height: normal;
+        text-align: center;
+        border: 14px solid transparent;
+        letter-spacing: 2px;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .input-group {
+        margin-top: 20px;
+        display: none; /* 初始隐藏 */
+    }
+
+    .input-group .form-control {
+        margin-bottom: 10px;
+    }
+
+
+
+    textarea {
+    resize: vertical;
+    width: 70%;
+    min-height: 35px;
+    padding: 10px !important;
+    box-sizing: border-box !important;
+    border-color: #ccc;
+    margin-left: 384px;
+    height: 607px;
+    margin-top: -546px;
+}
+
+
+
+    #ocrTextInput {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-top: -463px;
+    margin-left: 199px;
+}
+
+#ocrTextInput:focus {
+    border-color: #66afe9;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+#textInputBox {
+    display: none;
+    margin-top: 20px;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.textarea-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+#ocrTextInput {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-top: -463px;
+    margin-left: 15%;
+    width: 70%;
+    position: relative;
+}
+
+#ocrTextInput:focus {
+    border-color: #66afe9;
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+.textarea-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 15px;
+    display: block;
+    text-align: center;
+}
+
+.textarea-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textarea-icon {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #999;
+}
+
+#textInputBox {
+    display: none;
+    margin-top: 20px;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#ocrTextInput {
+    width: 100%;
+    min-height: 200px;
+    padding: 20px;
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-top: -63px;
+    margin-left: 22%;
+    width: 1000px;
+    position: relative;
+    margin-right: -200px;
+}
+.textarea-icon1 {
+    position: absolute;
+    left: 680px;
+    top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+    .textarea-icon2 {
+    position: absolute;
+    left: 720px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+    .textarea-icon3 {
+    position: absolute;
+    left: 760px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+    .textarea-icon4 {
+    position: absolute;
+    left: 800px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+        .textarea-icon5 {
+    position: absolute;
+    left: 840px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+        .textarea-icon6 {
+    position: absolute;
+    left: 880px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+        .textarea-icon7 {
+    position: absolute;
+    left: 920px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+        .textarea-icon8 {
+    position: absolute;
+    left: 960px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+        .textarea-icon9 {
+    position: absolute;
+    left: 1000px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+            .textarea-icon10 {
+    position: absolute;
+    left: 1040px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+            .textarea-icon11 {
+    position: absolute;
+    left: 1080px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+            .textarea-icon12 {
+    position: absolute;
+    left: 1220px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+            .textarea-icon13 {
+    position: absolute;
+    left: 1260px;
+   top: -80px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #000;
+}
+
+/* 自定义样式 */
+    .custom-table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-table th {
+        background-color: #343a40; /* 深色背景 */
+        color: #ffffff; /* 白色文字 */
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .custom-table td {
+        text-align: center;
+        padding: 15px;
+    }
+
+    .custom-table .btn {
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        font-weight: bold;
+    }
+
+    .custom-table .btn:hover {
+        background-color: #dc3545; /* 悬停效果 */
+        transform: translateY(-2px);
+    }
+
+    .cen {
+        vertical-align: middle; /* 垂直居中 */
+    }
+
+
+
+     .large-text {
+        font-size: 10px; /* 设定较大的字体 */
+
+    }
+    .medium-text {
+        font-size: 10px; /* 中等字体 */
+
+    }
+    .small-text {
+        font-size: 10px; /* 较小的字体 */
+        color: #666; /* 较浅的颜色 */
+
+    }
+
+
+
+
+    .table th, .table td {
+    font-size: 13px;
+    padding: 29px;
+    line-height: 0.5;
+    vertical-align: top;
+    border-top: 1px solid #eceeef;
+}
+
+
+
+/* 默认按钮样式 */
+.radius-rounded {
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+/* 凹陷效果及颜色变化 */
+.btn-active {
+    background-color: #5f9f5d; /* 改变背景颜色 */
+    color: white; /* 改变文本颜色 */
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}
+
+
+
+    /* 默认按钮样式 */
+.radius-rounded {
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+/* 动态添加的打勾图标样式 */
+.checkmark {
+    font-size: 16px;
+    color: green;
+    margin-left: 10px;
+}
+
+
+    /* 设置节点和线的样式 */
+svg {
+    display: inline-block;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+
+
+
+    #knowledgeGraphContainer {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa; /* 背景颜色 */
+}
+
+#knowledgeGraphSVG {
+    display: block;
+    margin: 0 auto; /* 使SVG居中 */
+}
+
+
+
+</style>
+<body>
+<div class="main-wrap">
+    <div class="side-nav">
+        <div class="side-logo">
+            <div class="logo">
+				<span class="logo-ico">
+					<i class="i-l-1"></i>
+					<i class="i-l-2"></i>
+					<i class="i-l-3"></i>
+				</span>
+                <strong>慧学智立方-后台管理系统</strong>
+            </div>
+        </div>
+
+        <nav class="side-menu content mCustomScrollbar" data-mcs-theme="minimal-dark">
+            <h2>
+                <a href="index.html" class="InitialPage"><i class="icon-dashboard"></i>学生数据概况</a>
+            </h2>
+            <ul>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-columns"></i>学生学习情况<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a href="flex-layout.html">情况一览表</a>
+                        </dd>
+
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-inbox"></i>学生问题答疑<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a href="table.html">进入答疑</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-table"></i>试题/试卷管理<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a href="button.html">试题管理</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-list-alt"></i>手动/智能组卷<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a href="form.html">教师智能组卷</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <!--					<dl>-->
+                    <!--						<dt>-->
+                    <!--							<i class="icon-bar-chart"></i>学生学习进度一览<i class="icon-angle-right"></i>-->
+                    <!--						</dt>-->
+                    <!--						<dd>-->
+                    <!--							<a href="echarts.html">echarts统计图表</a>-->
+                    <!--						</dd>-->
+                    <!--					</dl>-->
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-tags"></i>学习/校园暴力预警<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a href="tab.html">查看预警信息</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-star"></i>自动阅卷<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a href="layer.html">批阅试卷</a>
+                        </dd>
+                    </dl>
+                </li>
+
+
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-star"></i>学科图谱<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a href="button.html">更新图谱</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </nav>
+        <footer class="side-footer">© 冲冲冲！团队版权所有</footer>
+
+    </div>
+    <div class="content-wrap">
+        <header class="top-hd">
+            <div class="hd-lt">
+                <a class="icon-reorder"></a>
+            </div>
+            <div class="hd-rt">
+                <ul>
+                    <li>
+                        <a href="#" target="_blank"><i class="icon-home"></i>前台访问</a>
+                    </li>
+                    <li>
+                        <a><i class="icon-random"></i>清除缓存</a>
+                    </li>
+                    <li>
+                        <a><i class="icon-user"></i>管理员:<em>李玲老师</em></a>
+                    </li>
+                    <li>
+                        <a><i class="icon-bell-alt"></i>系统消息</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>安全退出</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <main class="main-cont content mCustomScrollbar">
+            <div class="page-wrap">
+                <!--开始::内容-->
+                <section class="page-hd">
+                    <header>
+                        <h2 class="title">更新学科知识图谱</h2>
+                        <p class="title-description">
+                            更新学科知识图谱，让学生更快更好地掌握知识技能
+                            使用方法：依次进行OCR识别、实体关系抽取，知识图谱构建、知识图谱展示即可完成对学科知识图谱的更新。
+                        </p>
+                    </header>
+                    <hr>
+                </section>
+                <table class="table table-bordered table-striped custom-table">
+    <thead>
+        <tr>
+            <th>流程步骤</th>
+        </tr>
+    </thead>
+<tbody>
+    <tr class="cen">
+        <td>
+            <button class="btn btn-danger radius-rounded" id="ocrBtn">智能OCR识别</button>
+            <!-- 图标会动态插入到按钮的右侧 -->
+            <span id="checkmarkOCR" class="checkmark" style="display: none;">✔️ 已完成</span>
+        </td>
+    </tr>
+    <tr class="cen">
+        <td>
+            <button class="btn btn-danger radius-rounded" id="extractButton">实体关系抽取</button>
+             <span id="extractButtongou" class="checkmark" style="display: none;">✔️ 已完成</span>
+        </td>
+    </tr>
+    <tr class="cen">
+        <td>
+            <button class="btn btn-danger radius-rounded" id="knowledgeGraphBtn">构建知识图谱</button>
+
+        </td>
+    </tr>
+    <tr class="cen">
+        <td>
+            <button class="btn btn-danger radius-rounded" id="displayGraphBtn">展示知识图谱</button>
+        </td>
+    </tr>
+</tbody>
+
+</table>
+
+
+<p id="ocrtitle" style="margin-top: 10px; font-size: 34px; color: var(--c-text-primary); background-color: #343a40; color: white; padding: 5px; margin-right: 412px; margin-top: -540px; border-radius: 10px; display: none; margin-left: 385px;height:66px;">OCR识别结果</p>
+
+
+ <div id="textInputBox">
+    <label class="textarea-label" for="ocrTextInput">OCR 识别结果</label>
+    <div class="textarea-container">
+        <i class="textarea-icon1 icon-edit"></i> <!-- 编辑图标 -->
+        <i class="textarea-icon2 icon-copy"></i> <!-- 复制图标 -->
+        <i class="textarea-icon3 icon-save"></i> <!-- 保存图标 -->
+        <i class="textarea-icon4 icon-trash"></i> <!-- 删除图标 -->
+         <i class="textarea-icon5 icon-share"></i> <!-- 分享图标 -->
+        <i class="textarea-icon6 icon-print"></i> <!-- 打印图标 -->
+        <i class="textarea-icon7 icon-download"></i> <!-- 下载图标 -->
+        <i class="textarea-icon8 icon-undo-alt"></i> <!-- 撤销图标 -->
+        <i class="textarea-icon9 icon-redo-alt"></i> <!-- 重做图标 -->
+         <i class="textarea-icon10 icon-info-circle"></i> <!-- 信息图标 -->
+        <i class="textarea-icon8 icon-check"></i> <!-- 勾选图标 -->
+        <i class="textarea-icon9 icon-plus"></i> <!-- 添加图标 -->
+        <i class="textarea-icon10 icon-minus"></i> <!-- 减少图标 -->
+        <textarea id="ocrTextInput" rows="6" placeholder="OCR识别内容"></textarea>
+    </div>
+</div>
+
+
+
+                <div class="modal" id="infoBox">
+                    <div class="modal-header">
+                        <div class="modal-logo">
+
+                        </div>
+<!--                        <button class="btn-close">-->
+<!--                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">-->
+<!--                                <path fill="none" d="M0 0h24v24H0V0z">-->
+<!--                                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"-->
+<!--                                          fill="var(&#45;&#45;c-text-secondary)">-->
+<!--                            </svg>-->
+<!--                        </button>-->
+                         <!-- 添加“PDF文档上传”文字 -->
+<p style="margin-top: 10px; font-size: 28px; color: var(--c-text-primary); background-color: #343a40; color: white; padding: 5px; margin-right: 589px; margin-top: -18px; radius-rounded: 10px;">PDF文档上传</p>
+			<span class="logo-circle">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512"
+                     height="419.116" viewBox="0 0 512 419.116">
+					<defs>
+						<clipPath id="clip-folder-new">
+							<rect width="512" height="419.116"/>
+						</clipPath>
+					</defs>
+					<g id="folder-new" clip-path="url(#clip-folder-new)">
+						<path id="Union_1" data-name="Union 1"
+                              d="M16.991,419.116A16.989,16.989,0,0,1,0,402.125V16.991A16.989,16.989,0,0,1,16.991,0H146.124a17,17,0,0,1,10.342,3.513L227.217,57.77H437.805A16.989,16.989,0,0,1,454.8,74.761v53.244h40.213A16.992,16.992,0,0,1,511.6,148.657L454.966,405.222a17,17,0,0,1-16.6,13.332H410.053v.562ZM63.06,384.573H424.722L473.86,161.988H112.2Z"
+                              fill="var(--c-action-primary)" stroke="" stroke-width="1"/>
+					</g>
+				</svg>
+			</span>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="modal-title">上传文件</h2>
+                        <p class="modal-description">个人空间picture</p>
+                        <button class="upload-area">
+			<span class="upload-area-icon">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="340.531" height="419.116"
+     viewBox="0 0 340.531 419.116">
+  <g id="files-new" clip-path="url(#clip-files-new)">
+    <path id="Union_2" data-name="Union 2"
+          d="M-2904.708-8.885A39.292,39.292,0,0,1-2944-48.177V-388.708A39.292,39.292,0,0,1-2904.708-428h209.558a13.1,13.1,0,0,1,9.3,3.8l78.584,78.584a13.1,13.1,0,0,1,3.8,9.3V-48.177a39.292,39.292,0,0,1-39.292,39.292Zm-13.1-379.823V-48.177a13.1,13.1,0,0,0,13.1,13.1h261.947a13.1,13.1,0,0,0,13.1-13.1V-323.221h-52.39a26.2,26.2,0,0,1-26.194-26.195v-52.39h-196.46A13.1,13.1,0,0,0-2917.805-388.708Zm146.5,241.621a14.269,14.269,0,0,1-7.883-12.758v-19.113h-68.841c-7.869,0-7.87-47.619,0-47.619h68.842v-18.8a14.271,14.271,0,0,1,7.882-12.758,14.239,14.239,0,0,1,14.925,1.354l57.019,42.764c.242.185.328.485.555.671a13.9,13.9,0,0,1,2.751,3.292,14.57,14.57,0,0,1,.984,1.454,14.114,14.114,0,0,1,1.411,5.987,14.006,14.006,0,0,1-1.411,5.973,14.653,14.653,0,0,1-.984,1.468,13.9,13.9,0,0,1-2.751,3.293c-.228.2-.313.485-.555.671l-57.019,42.764a14.26,14.26,0,0,1-8.558,2.847A14.326,14.326,0,0,1-2771.3-147.087Z"
+          transform="translate(2944 428)" fill="var(--c-action-primary)">
+  </g>
+</svg>
+			</span>
+                            <span class="upload-area-title">将文件拖到此处上传。</span>
+                            <span class="upload-area-description">
+				或者，您可以单击此处选择一个文件 <br/>
+                                <strong>点击上传</strong>
+
+
+			</span>
+                            <span class="upload-area-description">
+
+
+			</span>
+                            <input type="file" id="fileInput" accept="image/*">
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button id="ocrButton" class="btn-primary">开始扫描</button>
+                        <button class="btn-secondary">取消</button>
+                    </div>
+
+                </div>
+
+
+
+
+
+<div id="knowledgeGraphContainer" style="display: none; height: 718px; margin-top: -557px; z-index: auto;margin-left: 385px; border: 1px solid #dee2e6; border-radius: 10px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h3 style="text-align: center; background-color: #343a40; color: white; padding: 18px; border-radius: 5px;">知识图谱展示</h3>
+    <svg id="knowledgeGraphSVG" width="1000" height="1000">
+        <!-- SVG内容会在点击后动态生成 -->
+    </svg>
+</div>
+
+
+
+
+<button id="updateAllBtn" class="btn btn-success" style="
+    position: absolute;
+    top: 765px;
+    right: 909px;
+    display: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #28a745, #218838);
+    color: white;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: 47px;
+    width: 104PX;
+">
+    一键更新
+</button>
+
+<!-- 新表格 -->
+<table id="knowledgeGraphTable" style="display:none;  position: absolute; top: 122px; right: 28px; width: 867px; background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-collapse: collapse; overflow: hidden; border: 1px solid #dee2e6;">
+    <thead>
+        <tr style="background: #343a40; color: white; border-bottom: 2px solid #dee2e6;">
+            <th style="padding: 15px; font-size: 16px; text-align: center; border-right: 1px solid #dee2e6;">三元组（集合）</th>
+            <th style="padding: 15px; font-size: 16px; text-align: center; border-right: 1px solid #dee2e6;">图形展示</th>
+            <th style="padding: 15px; font-size: 16px; text-align: center;">操作</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td style="padding: 20px; font-size: 14px; vertical-align: middle; height: 200px; border-right: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;">TCP/IP - 属于 - 网络层<br>TCP/IP - 包含 - 应用层<br>TCP/IP - 属于 - 互联网层<br>TCP/IP - 包含 - 传输层<br>TCP/IP - 包含 - 网络接口层</td>
+           <td style="padding: 20px; text-align: center; border-right: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;">
+                <svg width="200" height="200" >
+                    <!-- 中心节点 -->
+                    <circle cx="100" cy="100" r="15" fill="orange"></circle>
+                    <text x="90" y="105" font-size="10" fill="white">TCP/IP</text>
+
+                    <!-- 周围节点 -->
+                    <circle cx="50" cy="50" r="10" fill="blue"></circle>
+                    <circle cx="150" cy="50" r="10" fill="red"></circle>
+                    <circle cx="50" cy="150" r="10" fill="green"></circle>
+                    <circle cx="150" cy="150" r="10" fill="purple"></circle>
+                    <circle cx="100" cy="25" r="10" fill="yellow"></circle>
+
+                    <!-- 节点名称 -->
+                    <text x="40" y="55" font-size="10" fill="white">应用层</text>
+                    <text x="140" y="55" font-size="10" fill="white">传输层</text>
+                    <text x="40" y="155" font-size="10" fill="white">互联网络层</text>
+                    <text x="140" y="155" font-size="10" fill="white">网络接口层</text>
+                    <text x="90" y="20" font-size="10" fill="black">UDP</text>
+
+                    <!-- 连接线 -->
+                    <line x1="100" y1="100" x2="50" y2="50" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="150" y2="50" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="50" y2="150" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="150" y2="150" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="100" y2="25" stroke="black" stroke-width="2"></line>
+                </svg>
+            </td>
+           <td style="padding: 20px; text-align: center; vertical-align: middle; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 0px solid #dee2e6;">
+               <button class="btn btn-primary" style="background-color: #007bff; border: none; padding: 10px 20px; border-radius: 5px; font-size: 14px;">更新至图谱</button>
+               <br>
+               <button class="btn btn-danger" style="background-color: #dc3545; border: none; padding: 10px 20px; border-radius: 5px; font-size: 14px;">删除</button>
+           </td>
+
+        </tr>
+
+         <tr>
+          <td style="padding: 20px; font-size: 14px; vertical-align: middle; height: 200px; border-right: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;">TCP/IP - 属于 - 网络层<br>TCP/IP - 包含 - 应用层<br>TCP/IP - 属于 - 互联网层<br>TCP/IP - 包含 - 传输层<br>TCP/IP - 包含 - 网络接口层</td>
+           <td style="padding: 20px; text-align: center; border-right: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;">
+                <svg width="200" height="200" >
+                    <!-- 中心节点 -->
+                    <circle cx="100" cy="100" r="15" fill="orange"></circle>
+                    <text x="90" y="105" font-size="10" fill="white">TCP/IP</text>
+
+                    <!-- 周围节点 -->
+                    <circle cx="50" cy="50" r="10" fill="blue"></circle>
+                    <circle cx="150" cy="50" r="10" fill="red"></circle>
+                    <circle cx="50" cy="150" r="10" fill="green"></circle>
+                    <circle cx="150" cy="150" r="10" fill="purple"></circle>
+
+
+                    <!-- 节点名称 -->
+                    <text x="40" y="55" font-size="10" fill="white">应用层</text>
+                    <text x="140" y="55" font-size="10" fill="white">传输层</text>
+                    <text x="40" y="155" font-size="10" fill="white">互联网络层</text>
+                    <text x="140" y="155" font-size="10" fill="white">网络接口层</text>
+
+
+                    <!-- 连接线 -->
+                    <line x1="100" y1="100" x2="50" y2="50" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="150" y2="50" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="50" y2="150" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="150" y2="150" stroke="black" stroke-width="2"></line>
+
+                </svg>
+            </td>
+           <td style="padding: 20px; text-align: center; vertical-align: middle; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 0px solid #dee2e6;">
+               <button class="btn btn-primary" style="background-color: #007bff; border: none; padding: 10px 20px; border-radius: 5px; font-size: 14px;">更新至图谱</button>
+               <br>
+               <button class="btn btn-danger" style="background-color: #dc3545; border: none; padding: 10px 20px; border-radius: 5px; font-size: 14px;">删除</button>
+           </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 20px; font-size: 14px; vertical-align: middle; height: 200px; border-right: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;">路由器 - 属于 - 网络设备<br>路由器 - 包含 - 静态路由<br>路由器 - 连接 - 子网<br>路由器 - 支持 - 动态路由<br>路由器 - 处理 - IP数据包</td>
+           <td style="padding: 20px; text-align: center; border-right: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;">
+                <svg width="200" height="200" >
+                    <!-- 中心节点 -->
+                    <circle cx="100" cy="100" r="15" fill="orange"></circle>
+                    <text x="90" y="105" font-size="10" fill="white">中心</text>
+
+                    <!-- 周围节点 -->
+                    <circle cx="50" cy="50" r="10" fill="blue"></circle>
+                    <circle cx="150" cy="50" r="10" fill="red"></circle>
+                    <circle cx="50" cy="150" r="10" fill="green"></circle>
+                    <circle cx="150" cy="150" r="10" fill="purple"></circle>
+                    <circle cx="100" cy="25" r="10" fill="yellow"></circle>
+
+                    <!-- 节点名称 -->
+                    <text x="40" y="55" font-size="10" fill="white">网络设备</text>
+                    <text x="140" y="55" font-size="10" fill="white">静态路由</text>
+                    <text x="40" y="155" font-size="10" fill="white">子网</text>
+                    <text x="140" y="155" font-size="10" fill="white">动态路由</text>
+                  
+
+                    <!-- 连接线 -->
+                    <line x1="100" y1="100" x2="50" y2="50" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="150" y2="50" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="50" y2="150" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="150" y2="150" stroke="black" stroke-width="2"></line>
+                    <line x1="100" y1="100" x2="100" y2="25" stroke="black" stroke-width="2"></line>
+                </svg>
+            </td>
+           <td style="padding: 20px; text-align: center; vertical-align: middle; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 0px solid #dee2e6;">
+               <button class="btn btn-primary" style="background-color: #007bff; border: none; padding: 10px 20px; border-radius: 5px; font-size: 14px;">更新至图谱</button>
+               <br>
+               <button class="btn btn-danger" style="background-color: #dc3545; border: none; padding: 10px 20px; border-radius: 5px; font-size: 14px;">删除</button>
+           </td>
+
+        </tr>
+
+    </tbody>
+</table>
+
+
+
+
+
+
+                                <!-- 用于显示表格的区域 -->
+<div id="resultContainer" style="display: none; margin-top: -541px; margin-left: 402px; width:230%;"><table class="table table-bordered custom-table">
+        <thead>
+            <tr>
+                <th>头实体</th>
+                <th>尾实体</th>
+                <th>关系</th>
+                <th>三元组</th>
+            </tr>
+        </thead>
+        <tbody id="resultTableBody">
+            <!-- 数据行将通过 JavaScript 动态插入 -->
+
+       <tr>
+        <td class="large-text">TCP/IP协议</td>
+        <td class="medium-text">传输层</td>
+        <td class="medium-text">属于</td>
+        <td class="small-text">(TCP/IP协议, 属于, 传输层)</TCP></td>
+    </tr>
+    <tr>
+        <td class="large-text">IP地址</td>
+        <td class="medium-text">网络层</td>
+        <td class="medium-text">定义在</td>
+        <td class="small-text">(IP地址, 定义在, 网络层)</td>
+    </tr>
+    <tr>
+        <td class="large-text">路由器</td>
+        <td class="medium-text">网络设备</td>
+        <td class="medium-text">是一种</td>
+        <td class="small-text">(路由器, 是一种, 网络设备)</td>
+    </tr>
+    <tr>
+        <td class="large-text">Wi-Fi</td>
+        <td class="medium-text">无线局域网</td>
+        <td class="medium-text">用于</td>
+        <td class="small-text">(Wi-Fi, 用于, 无线局域网)</td>
+    </tr>
+    <tr>
+        <td class="large-text">数据包</td>
+        <td class="medium-text">网络传输</td>
+        <td class="medium-text">在</td>
+        <td class="small-text">(数据包, 在, 网络传输)</td>
+    </tr>
+    <tr>
+        <td class="large-text">HTTP协议</td>
+        <td class="medium-text">应用层</td>
+        <td class="medium-text">位于</td>
+        <td class="small-text">(HTTP协议, 位于, 应用层)</td>
+    </tr>
+    <tr>
+        <td class="large-text">交换机</td>
+        <td class="medium-text">二层设备</td>
+        <td class="medium-text">属于</td>
+        <td class="small-text">(交换机, 属于, 二层设备)</td>
+    </tr>
+    <tr>
+        <td class="large-text">防火墙</td>
+        <td class="medium-text">网络安全</td>
+        <td class="medium-text">用于</td>
+        <td class="small-text">(防火墙, 用于, 网络安全)</td>
+    </tr>
+    <tr>
+        <td class="large-text">DNS</td>
+        <td class="medium-text">域名解析</td>
+        <td class="medium-text">负责</td>
+        <td class="small-text">(DNS, 负责, 域名解析)</td>
+    </tr>
+    <tr>
+        <td class="large-text">MAC地址</td>
+        <td class="medium-text">数据链路层</td>
+        <td class="medium-text">属于</td>
+        <td class="small-text">(MAC地址, 属于, 数据链路层)</td>
+    </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+                <!--开始::结束-->
+            </div>
+        </main>
+        <footer class="btm-ft">
+            <p class="clear">
+                <span class="fl">©Copyright 2024 <a href="#" target="_blank">冲冲冲！团队！</a></span>
+                <span class="fr text-info">
+					<em class="uppercase">
+						<i class="icon-user"></i>
+
+					</em> |
+					<em class="uppercase"><i class="icon-envelope-alt"></i>
+						<a href="Http://www.bootstrapmb.com" target="_blank">联系冲冲冲！团队</a>
+					</em>
+
+				</span>
+            </p>
+        </footer>
+    </div>
+</div>
+
+<div class="mask"></div>
+<div class="dialog">
+    <div class="dialog-hd">
+        <strong class="lt-title">标题</strong>
+        <a class="rt-operate icon-remove JclosePanel" title="关闭"></a>
+    </div>
+    <div class="dialog-bd">
+        <!--start::-->
+        <p>这里是基础弹窗,可以定义文本信息，HTML信息这里是基础弹窗,可以定义文本信息，HTML信息。</p>
+        <!--end::-->
+    </div>
+    <div class="dialog-ft">
+        <button class="btn btn-info JyesBtn">确认</button>
+        <button class="btn btn-secondary JnoBtn">关闭</button>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    document.getElementById('ocrBtn').addEventListener('click', function() {
+        // 显示上传文件的模态框
+        var infoBox = document.getElementById('infoBox');
+        infoBox.style.display = "block";
+
+        // 显示文本框
+        var ocrTextBoxContainer = document.getElementById('ocrTextBoxContainer');
+        ocrTextBoxContainer.style.display = "block"; // 设置为可见
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        if (file) {
+            console.log("Selected file:", file);
+            // 这里可以添加处理文件的逻辑，比如上传文件
+        }
+    });
+
+document.getElementById('ocrBtn').addEventListener('click', function() {
+            var textBox = document.getElementById('textInputBox');
+            if (textBox.style.display === "none") {
+                textBox.style.display = "block";  // 显示文本框
+            } else {
+                textBox.style.display = "none";  // 隐藏文本框
+            }
+        });
+
+    $(document).ready(function() {
+        $("#ocrBtn").click(function() {
+            $("#textInputBox").toggle(); // 显示或隐藏文本框
+        });
+    });
+
+
+
+    $(document).ready(function() {
+        // 绑定“开始扫描”按钮的点击事件
+        $("#ocrButton").click(function() {
+            // 隐藏模态窗
+            $("#infoBox").hide();
+            // 显示文本框
+            $("#textInputBox").show();
+
+            $("#ocrtitle").show();
+
+            $("#checkmarkOCR").show();
+        });
+
+
+        // 关闭按钮事件（如果需要）
+        $("#modalCloseBtn").click(function() {
+            $("#infoBox").hide();
+        });
+    });
+
+ $(document).ready(function() {
+        $("#ocrButton").click(function() {
+            $("#infoBox").hide(); // 隐藏模态窗
+            $("#textInputBox").show(); // 显示文本框
+
+        });
+
+        // 绑定“实体关系抽取”按钮的点击事件
+        $("#extractButton").click(function() {
+            $("#infoBox").hide(); // 隐藏模态窗
+            $("#textInputBox").hide(); // 隐藏文本框
+            $("#resultContainer").show(); // 显示结果表格
+            $("#ocrtitle").hide();
+            $("#extractButtongou").show();
+        });
+
+        // 点击“开始OCR识别”按钮时显示模态框
+        $("#ocrBtn").click(function() {
+            $("#infoBox").show(); // 显示模态框
+            $("#textInputBox").hide(); // 隐藏文本框
+            $("#resultContainer").hide(); // 隐藏结果表格
+        });
+    });
+
+<!--hhahahahahha-->
+
+    $(document).ready(function() {
+        $("#knowledgeGraphBtn").click(function() {
+            $("#infoBox").hide(); // 隐藏模态窗
+            $("#textInputBox").hide(); // 显示文本框
+            $("#resultContainer").hide(); // 显示结果表格
+            $("#ocrtitle").hide(); // 显示结果表格
+         $("#knowledgeGraphTable").show();
+         $("#updateAllBtn").show();
+
+        });
+
+        // 绑定“实体关系抽取”按钮的点击事件
+        $("#extractButton").click(function() {
+            $("#infoBox").hide(); // 隐藏模态窗
+            $("#textInputBox").hide(); // 隐藏文本框
+            $("#resultContainer").show(); // 显示结果表格
+            $("#ocrtitle").hide();
+            $("#extractButtongou").show();
+        });
+
+        // 点击“开始OCR识别”按钮时显示模态框
+        $("#ocrBtn").click(function() {
+            $("#infoBox").show(); // 显示模态框
+            $("#textInputBox").hide(); // 隐藏文本框
+            $("#resultContainer").hide(); // 隐藏结果表格
+        });
+
+        $("#displayGraphBtn").click(function() {
+            $("#infoBox").hide(); // 隐藏模态窗
+            $("#textInputBox").hide(); // 显示文本框
+            $("#resultContainer").hide(); // 显示结果表格
+            $("#ocrtitle").hide(); // 显示结果表格
+         $("#knowledgeGraphTable").hide();
+         $("#updateAllBtn").hide();
+
+        });
+
+
+    });
+
+
+
+
+
+
+    $(document).ready(function() {
+    // 为所有按钮绑定点击事件
+    $("button").click(function() {
+        // 移除所有按钮的凹陷特效
+<!--        $("button").removeClass("btn-active");-->
+        // 给当前点击的按钮添加凹陷特效
+        $(this).addClass("btn-active");
+    });
+});
+
+
+document.getElementById('updateAllBtn').addEventListener('click', function() {
+    // 显示“构建知识图谱”按钮旁边的✔️符号
+    let checkmarkKG = document.createElement('span');
+    checkmarkKG.classList.add('checkmark');
+    checkmarkKG.textContent = '✔️ 已完成';
+    document.getElementById('knowledgeGraphBtn').after(checkmarkKG);
+
+    // 设置样式确保✔️符号在按钮右侧显示
+    checkmarkKG.style.marginLeft = '10px';
+    checkmarkKG.style.fontSize = '17px'; // 可根据需要调整✔️符号的大小
+});
+
+
+document.getElementById('displayGraphBtn').addEventListener('click', function() {
+    // 显示“构建知识图谱”按钮旁边的✔️符号
+    let checkmarkKG = document.createElement('span');
+    checkmarkKG.classList.add('checkmark');
+    checkmarkKG.textContent = '✔️ 已完成';
+    document.getElementById('displayGraphBtn').after(checkmarkKG);
+
+    // 设置样式确保✔️符号在按钮右侧显示
+    checkmarkKG.style.marginLeft = '10px';
+    checkmarkKG.style.fontSize = '17px'; // 可根据需要调整✔️符号的大小
+});
+
+
+
+document.getElementById('displayGraphBtn').addEventListener('click', function() {
+    // 显示SVG容器
+    document.getElementById('knowledgeGraphContainer').style.display = 'block';
+
+    // 清空之前的内容
+    const svg = document.getElementById('knowledgeGraphSVG');
+    svg.innerHTML = '';
+
+    // 定义中心节点
+    const centerNodes = [
+        { cx: 300, cy: 100, label: "TCP/IP" },
+        { cx: 100, cy: 300, label: "网络层" },
+        { cx: 500, cy: 300, label: "传输层" },
+        { cx: 300, cy: 500, label: "应用层" }
+    ];
+
+    // 画中心节点
+    centerNodes.forEach(centerNode => {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", centerNode.cx);
+        circle.setAttribute("cy", centerNode.cy);
+        circle.setAttribute("r", "30");
+        circle.setAttribute("fill", "orange");
+        svg.appendChild(circle);
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", centerNode.cx - 15);
+        text.setAttribute("y", centerNode.cy + 5);
+        text.setAttribute("font-size", "14");
+        text.setAttribute("fill", "black");
+        text.textContent = centerNode.label;
+        svg.appendChild(text);
+    });
+
+    // 定义子节点
+    const childNodes = [
+        { parent: 0, cx: 200, cy: 200, label: "IP地址", relation: "使用" },
+        { parent: 0, cx: 400, cy: 200, label: "数据包", relation: "包含" },
+        { parent: 1, cx: 100, cy: 400, label: "路由器", relation: "连接" },
+        { parent: 1, cx: 300, cy: 400, label: "交换机", relation: "管理" },
+        { parent: 2, cx: 450, cy: 400, label: "UDP", relation: "协议" },
+        { parent: 2, cx: 550, cy: 200, label: "TCP", relation: "协议" },
+        { parent: 3, cx: 300, cy: 600, label: "HTTP", relation: "服务" },
+        { parent: 3, cx: 100, cy: 500, label: "FTP", relation: "服务" }
+    ];
+
+    // 画子节点
+    childNodes.forEach(node => {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", node.cx);
+        circle.setAttribute("cy", node.cy);
+        circle.setAttribute("r", "20");
+        circle.setAttribute("fill", "blue");
+        svg.appendChild(circle);
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", node.cx - 10);
+        text.setAttribute("y", node.cy + 5);
+        text.setAttribute("font-size", "12");
+        text.setAttribute("fill", "white");
+        text.textContent = node.label;
+        svg.appendChild(text);
+
+        // 连接线
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", centerNodes[node.parent].cx);
+        line.setAttribute("y1", centerNodes[node.parent].cy);
+        line.setAttribute("x2", node.cx);
+        line.setAttribute("y2", node.cy);
+        line.setAttribute("stroke", "black");
+        line.setAttribute("stroke-width", "2");
+        svg.appendChild(line);
+
+        // 添加关系文本
+        const relationText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        const midX = (centerNodes[node.parent].cx + node.cx) / 2;
+        const midY = (centerNodes[node.parent].cy + node.cy) / 2;
+        relationText.setAttribute("x", midX);
+        relationText.setAttribute("y", midY - 5);
+        relationText.setAttribute("font-size", "12");
+        relationText.setAttribute("fill", "black");
+        relationText.textContent = node.relation;
+        svg.appendChild(relationText);
+    });
+});
+
+
+</script>
+</body>
+</html>

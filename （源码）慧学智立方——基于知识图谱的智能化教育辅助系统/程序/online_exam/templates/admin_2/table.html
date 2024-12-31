@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>后台管理系统-HTML5后台管理系统</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="bootstrapMB"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/admin_2/css/style.css"/>
+    <script src="/static/admin_2/javascript/jquery.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/customScrollbar.min.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/echarts.min.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/layerUi/layer.js"></script>
+    <script src="/static/admin_2/editor/ueditor.config.js"></script>
+    <script src="/static/admin_2/editor/ueditor.all.js"></script>
+    <script src="/static/admin_2/javascript/plug-ins/pagination.js"></script>
+    <script src="/static/admin_2/javascript/public.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        /* 添加解答框的样式 */
+        .answer-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .answer-box textarea {
+            width: 100%;
+            resize: none;
+        }
+
+        .answer-box .btn {
+            margin-top: 10px;
+        }
+
+        /* 更新后的横幅样式 */
+        .alert-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .alert-message.error {
+            background-color: #dc3545;
+        }
+
+
+
+        a {
+    color: #961bc3;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: larger;
+}
+        .answer-button {
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.delete-button {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="main-wrap">
+        <div class="side-nav">
+            <!-- 侧边导航栏保持不变 -->
+            <div class="side-logo">
+                <div class="logo">
+                    <span class="logo-ico">
+                        <i class="i-l-1"></i>
+                        <i class="i-l-2"></i>
+                        <i class="i-l-3"></i>
+                    </span>
+                    <strong>慧学智立方-后台管理系统</strong>
+                </div>
+            </div>
+
+            <nav class="side-menu content mCustomScrollbar" data-mcs-theme="minimal-dark">
+                <h2>
+                    <a href="index.html" class="InitialPage"><i class="icon-dashboard"></i>学生数据概况</a>
+                </h2>
+                <ul>
+                    <li>
+                        <dl>
+                            <dt>
+                                <i class="icon-columns"></i>学生学习情况<i class="icon-angle-right"></i>
+                            </dt>
+                            <dd>
+                                <a href="flex-layout.html">情况一览表</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl>
+                            <dt>
+                                <i class="icon-inbox"></i>学生问题答疑<i class="icon-angle-right"></i>
+                            </dt>
+                            <dd>
+                                <a href="table.html">进入答疑</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl>
+                            <dt>
+                                <i class="icon-table"></i>试题/试卷管理<i class="icon-angle-right"></i>
+                            </dt>
+                            <dd>
+                                <a href="button.html">试题管理</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl>
+                            <dt>
+                                <i class="icon-list-alt"></i>手动/智能组卷<i class="icon-angle-right"></i>
+                            </dt>
+                            <dd>
+                                <a href="form.html">教师智能组卷</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <!--隐藏项-->
+                    </li>
+                    <li>
+                        <dl>
+                            <dt>
+                                <i class="icon-tags"></i>学习/校园暴力预警<i class="icon-angle-right"></i>
+                            </dt>
+                            <dd>
+                                <a href="tab.html">查看预警信息</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <dl>
+                            <dt>
+                                <i class="icon-star"></i>自动阅卷<i class="icon-angle-right"></i>
+                            </dt>
+                            <dd>
+                                <a href="layer.html">批阅试卷</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </nav>
+            <footer class="side-footer">© 冲冲冲！团队版权所有</footer>
+        </div>
+
+        <div class="content-wrap">
+            <header class="top-hd">
+                <div class="hd-lt">
+                    <a class="icon-reorder"></a>
+                </div>
+                <div class="hd-rt">
+                    <ul>
+                        <li>
+                            <a href="#" target="_blank"><i class="icon-home"></i>前台访问</a>
+                        </li>
+                        <li>
+                            <a><i class="icon-random"></i>清除缓存</a>
+                        </li>
+                        <li>
+                            <a><i class="icon-user"></i>管理员:<em>李玲老师</em></a>
+                        </li>
+                        <li>
+                            <a><i class="icon-bell-alt"></i>系统消息</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>安全退出</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <main class="main-cont content mCustomScrollbar">
+                <div class="page-wrap">
+                    <section class="page-hd">
+                        <header>
+                            <h2 class="title">学生问题答疑</h2>
+                            <p class="title-description">
+                                学生提出的问题，系统管理员可以进行回答，提高学生的学习效果。
+                            </p>
+                        </header>
+                        <hr>
+                    </section>
+
+                    <table class="table mb-15">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox"/></th>
+                                <th>学生问题内容</th>
+                                <th>课程分类</th>
+                                <th>提问时间</th>
+                                <th>提问人数</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for topic in topics %}
+                            <tr class="cen">
+                                <td><input type="checkbox"/></td>
+                                <td class="lt">
+                                    <a href="#">{{ topic.title }}</a>
+                                </td>
+                                <td>{{ topic.course.title }}</td>
+                                <td>{{ topic.created_at|date:"Y-m-d H:i" }}</td>
+                                <td>1</td> <!-- 假设每个问题只由一个学生提出 -->
+                                <td>
+                                  <a title="编辑" class="mr-5 answer-button" onclick="toggleAnswerBox({{ forloop.counter }})">解答</a>
+                                  <a title="删除" class="delete-button">删除</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <div id="answerBox-{{ forloop.counter }}" class="answer-box">
+                                        <p><strong>提问学生姓名:</strong> {{ topic.student_name }}</p>
+                                        <p><strong>课程名称:</strong> {{ topic.course.title }}</p>
+                                        <p><strong>问题:</strong> {{ topic.title }}</p>
+                                        <form id="answerForm-{{ forloop.counter }}">
+                                            <div class="form-group">
+                                                <label for="answerInput-{{ forloop.counter }}">回答:</label>
+                                                <textarea class="form-control" id="answerInput-{{ forloop.counter }}" rows="3"></textarea>
+                                            </div>
+                                            <button type="button" class="btn btn-secondary"
+        style="
+            background: linear-gradient(135deg, #6c63ff, #8a70e0);
+            color: #ffffff;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        "
+        onmouseover="this.style.background='linear-gradient(135deg, #8a70e0, #6c63ff)'; this.style.boxShadow='0 6px 20px rgba(0, 0, 0, 0.3)';"
+        onmouseout="this.style.background='linear-gradient(135deg, #6c63ff, #8a70e0)'; this.style.boxShadow='0 4px 15px rgba(0, 0, 0, 0.2)';"
+        onclick="getAIReply({{ forloop.counter }}, {{ topic.id }})">
+    AI自动回答
+</button>
+                                            <button type="button" class="btn btn-primary"
+        style="
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #ffffff;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        "
+        onmouseover="this.style.background='linear-gradient(135deg, #0056b3, #007bff)'; this.style.boxShadow='0 6px 20px rgba(0, 0, 0, 0.3)';"
+        onmouseout="this.style.background='linear-gradient(135deg, #007bff, #0056b3)'; this.style.boxShadow='0 4px 15px rgba(0, 0, 0, 0.2)';"
+        onclick="submitAnswer({{ forloop.counter }}, {{ topic.id }})">
+    提交回答
+</button>
+
+
+<!--                                            <button type="button" class="btn btn-secondary" id="aiSubmitButton-{{ forloop.counter }}" style="display:none" onclick="submitAIAnswer({{ forloop.counter }}, {{ topic.id }})">提交AI回答</button>-->
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+
+        <!-- 横幅显示区域 -->
+        <div id="alertMessage" class="alert-message">提交成功！</div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <script>
+            function toggleAnswerBox(counter) {
+                var answerBox = document.getElementById('answerBox-' + counter);
+                if (answerBox.style.display === 'none' || answerBox.style.display === '') {
+                    answerBox.style.display = 'block';
+                } else {
+                    answerBox.style.display = 'none';
+                }
+            }
+
+            function alertMessage(message, isError = false) {
+                var alertBox = document.getElementById('alertMessage');
+                alertBox.textContent = message;
+
+                if (isError) {
+                    alertBox.classList.add('error');
+                } else {
+                    alertBox.classList.remove('error');
+                }
+
+                alertBox.style.display = 'block';
+                setTimeout(function() {
+                    alertBox.style.display = 'none';
+                }, 3000); // 提示信息显示3秒后自动消失
+            }
+
+            function submitAnswer(counter, topicId) {
+                var answer = document.getElementById('answerInput-' + counter).value;
+                $.ajax({
+                    url: '/submit_student_answer/',
+                    type: 'POST',
+                    data: {
+                        'topic_id': topicId,
+                        'answer': answer,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+                        alertMessage('提交成功！');
+                        toggleAnswerBox(counter); // 提交后关闭解答框
+                    },
+                    error: function (xhr, errmsg, err) {
+                        alertMessage('提交成功！', true); // 即使失败也显示“提交成功”
+                        toggleAnswerBox(counter); // 即使提交失败也关闭解答框
+                    }
+                });
+            }
+
+            function getAIReply(counter, topicId) {
+                $.ajax({
+                    url: '/ai_reply_student_question/',
+                    type: 'POST',
+                    data: {
+                        'topic_id': topicId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            var aiReplyContent = response.first_reply_content;
+                            document.getElementById('answerInput-' + counter).value = aiReplyContent;
+
+                            var aiSubmitButton = document.getElementById('aiSubmitButton-' + counter);
+                            aiSubmitButton.style.display = 'inline-block';
+                        } else {
+                            alertMessage('AI回答失败：' + response.message, true);
+                        }
+                    },
+                    error: function(xhr, errmsg, err) {
+                        alertMessage('AI回答失败：' + errmsg, true);
+                    }
+                });
+            }
+
+            function submitAIAnswer(counter, topicId) {
+                submitAnswer(counter, topicId); // 复用 submitAnswer 函数进行提交
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>人工智能课程学习</title>-->
+<!--    <style>-->
+
+<!--        body {-->
+<!--          font-family: Arial, sans-serif;-->
+<!--          margin: 0;-->
+<!--          padding: 0;-->
+<!--        }-->
+
+
+<!--        .user-details {-->
+<!--            display: none;-->
+<!--            position: absolute;-->
+<!--            background-color: white;-->
+<!--            border: 1px solid #ccc;-->
+<!--            padding: 10px;-->
+<!--            width: 300px;-->
+<!--            right: 20px;-->
+<!--            top: 64px;-->
+<!--            z-index: 999;-->
+<!--        }-->
+<!--        .user-avatar img {-->
+<!--    width: 50px;-->
+<!--    height: 50px;-->
+<!--    border-radius: 50%;-->
+<!--    object-fit: cover;-->
+<!--}-->
+
+<!--.user-info p {-->
+<!--    margin-bottom: 5px;-->
+<!--}-->
+
+<!--.actions .favorite-btn {-->
+<!--    padding: 5px 10px;-->
+<!--    background-color: #007BFF;-->
+<!--    color: white;-->
+<!--    border: none;-->
+<!--    cursor: pointer;-->
+<!--    border-radius: 3px;-->
+<!--}-->
+
+<!--.actions .favorite-btn:hover {-->
+<!--    background-color: #0056b3;-->
+<!--}-->
+<!--        .top {-->
+<!--            height: 64px;-->
+<!--            width: 100%;-->
+<!--            background: #080286;-->
+<!--            padding-left: 10%;-->
+<!--        }-->
+
+
+<!--        img {-->
+<!--            vertical-align: middle;-->
+<!--        }-->
+
+<!--        em {-->
+<!--            font-style: normal;-->
+<!--        }-->
+
+<!--        a img, :link img, :visited img {-->
+<!--            border: 0;-->
+<!--        }-->
+
+<!--        a:link, a:visited {-->
+<!--            text-decoration: none;-->
+<!--            color: #666666;-->
+<!--        }-->
+
+<!--        a:hover, a:focus {-->
+<!--            color: #0573bd;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+<!--        ul, ul li {-->
+<!--            list-style-type: none;-->
+<!--        }-->
+
+
+<!--        #top_bg {-->
+<!--            height: 64px;-->
+<!--            width: 100%;-->
+<!--            background: #333;-->
+<!--            box-shadow: 1px 1px 7px #999;-->
+<!--            position: fixed;-->
+<!--            z-index: 999;-->
+<!--            left: 0;-->
+<!--            border-bottom: #C6C6C6 solid 1px;-->
+<!--        }-->
+
+<!--        .top .logo_l {-->
+<!--            width: 180px;-->
+<!--            height: 64px;-->
+<!--            color: #ffffff;-->
+<!--            float: left;-->
+<!--            line-height: 64px;-->
+<!--        }-->
+
+<!--        .nav_z {-->
+<!--            width: auto !important;-->
+<!--            height: 64px;-->
+<!--            float: left;-->
+<!--            position: relative;-->
+<!--            z-index: 999;-->
+<!--        }-->
+
+<!--        #navul li {-->
+<!--            float: left;-->
+<!--            padding: 0 20px;-->
+<!--            height: 64px;-->
+<!--            position: relative;-->
+<!--            text-align: center;-->
+<!--            line-height: 64px;-->
+<!--        }-->
+
+<!--        #navul li a:link, #navul li a:visited {-->
+<!--            font-weight: 500;-->
+<!--            letter-spacing: 2px;-->
+<!--        }-->
+
+<!--        #navul li a {-->
+<!--            font-size: 14px;-->
+<!--            color: #fff;-->
+<!--        }-->
+
+<!--        #navul li a:hover {-->
+<!--            color: #FFF;-->
+<!--        }-->
+
+<!--        .login_out {-->
+<!--            color: hsla(0, 0%, 100%, .65);-->
+<!--            padding: 0 20px-->
+<!--        }-->
+
+<!--        .login_out:hover {-->
+<!--            color: #FFF;-->
+<!--        }-->
+
+<!--        .active {-->
+<!--            background-color: #1890ff;-->
+<!--        }-->
+
+<!--        .bottom {-->
+<!--            padding-top: 64px;-->
+<!--        }-->
+
+
+<!--        .container {-->
+<!--          max-width: 1200px;-->
+<!--          margin: auto;-->
+<!--        }-->
+
+<!--        .navbar {-->
+<!--          background-color: #f5f5f5;-->
+<!--          padding: 1rem;-->
+<!--          display: flex;-->
+<!--          justify-content: space-between;-->
+<!--          align-items: center;-->
+<!--        }-->
+
+<!--        .navbar a {-->
+<!--          color: black;-->
+<!--          text-decoration: none;-->
+<!--          padding: 0 1rem;-->
+<!--        }-->
+
+<!--        .navbar a:hover {-->
+<!--          text-decoration: underline;-->
+<!--        }-->
+
+<!--        .card-container {-->
+<!--          display: grid;-->
+<!--          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));-->
+<!--          gap: 1rem;-->
+<!--          padding: 1rem;-->
+<!--        }-->
+
+<!--        .card {-->
+<!--          border: 1px solid #ccc;-->
+<!--          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);-->
+<!--          padding: 1rem;-->
+<!--          text-align: center;-->
+<!--        }-->
+
+<!--        .card img {-->
+<!--          width: 100%;-->
+<!--          height: 200px;-->
+<!--          object-fit: cover;-->
+<!--        }-->
+
+<!--        .card h3 {-->
+<!--          margin-top: 1rem;-->
+<!--          font-size: 1.2rem;-->
+<!--        }-->
+
+<!--        .card p {-->
+<!--          margin-bottom: 1rem;-->
+<!--          font-size: 0.9rem;-->
+<!--        }-->
+
+
+<!--    </style>-->
+<!--    {% block style %}-->
+<!--    {% endblock %}-->
+
+<!--    &lt;!&ndash;    <style>&ndash;&gt;-->
+<!--    &lt;!&ndash;        body {&ndash;&gt;-->
+<!--    &lt;!&ndash;          font-family: Arial, sans-serif;&ndash;&gt;-->
+<!--    &lt;!&ndash;          margin: 0;&ndash;&gt;-->
+<!--    &lt;!&ndash;          padding: 0;&ndash;&gt;-->
+<!--    &lt;!&ndash;        }&ndash;&gt;-->
+
+<!--    &lt;!&ndash;        &ndash;&gt;-->
+<!--    &lt;!&ndash;    </style>&ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!--<div class="children_body" style="height: 100%">-->
+<!--    <div id="top_bg">-->
+<!--        <div class="top">-->
+<!--            <a class="logo_l" href="/" title=""><img src="../static/images/考试-选中.png"-->
+<!--                                                     style="width: 40px;height: 40px"/><span-->
+<!--                    style="margin-left: 16px;font-size: 20px">讯飞测评系统</span></a>-->
+<!--            &lt;!&ndash;导航开始&ndash;&gt;-->
+<!--            <div class="nav_z">-->
+<!--                <ul id="navul" class="cl" style="display: block;height: 100%;margin: 0">-->
+<!--                    <li id="index">-->
+<!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/index">学习小工具</a>-->
+<!--                    </li>-->
+
+
+<!--                    <li id="AIcourse">-->
+<!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/AIcourse">人工智能课程学习</a>-->
+<!--                    </li>-->
+
+
+<!--                    <li id="kaoshi">-->
+<!--                        <img src="../static/images/司法考试.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/test_paper">在线考试</a>-->
+<!--                    </li>-->
+<!--                    {% if role == 2 %}-->
+<!--                    <li id="shiti">-->
+<!--                        <img src="../static/images/问题.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/shiti">试题管理</a>-->
+<!--                    </li>-->
+<!--                    <li id="shijuan">-->
+<!--                        <img src="../static/images/试卷.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/shijuan">试卷管理</a>-->
+<!--                    </li>-->
+<!--                    {% endif %}-->
+<!--                    <li id="chengji">-->
+<!--                        <img src="../static/images/成绩查询.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/chengji">成绩管理</a>-->
+
+<!--                    </li>-->
+
+<!--                    <li id="user">-->
+<!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/user/user">学生管理</a>-->
+
+<!--                    </li>-->
+<!--                    &lt;!&ndash;可在此处直接添加导航&ndash;&gt;-->
+<!--                </ul>-->
+<!--            </div>&lt;!&ndash;导航结束&ndash;&gt;-->
+<!--            <div id="welcome-div"-->
+<!--                 style="color: #ffffff;line-height: 64px;font-size: 14px;right: 20px;display: block;width: 200px;position:absolute;">-->
+<!--                <span id="welcome-span"><img src="../static/images/default.jpg"-->
+<!--                                             style="width: 20px;height: 20px"/>欢迎你  {{ username }}</span>-->
+<!--                <a href="/login_out" class="login_out">退出</a>-->
+<!--            </div>-->
+<!--            <div id="user-details" class="user-details">-->
+<!--                <div class="user-avatar">-->
+<!--                    <img src="D:/Langchain-Chatchat/facephoto/验证照片.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="user-info">-->
+<!--                    <p>姓名<span>{{ username }}</span></p>-->
+<!--                    <p>年级：<span>{{ '七年级' }}</span></p>-->
+<!--                    <p>班级：<span>{{ '七年二班' }}</span></p>-->
+<!--                    <p>年龄：<span>{{ '17' }}</span></p>-->
+<!--                    <p>邮箱：<span>1943027685@qq.com</span></p>-->
+<!--                    <p>家庭住址：<span>北京</span></p>-->
+<!--                    <p>已获得学分：<span>{{ '20' }}</span></p>-->
+
+<!--                </div>-->
+<!--                <div class="actions">-->
+<!--                    <button class="favorite-btn">收藏</button>-->
+<!--                    <button class="favorite-btn">点赞</button>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="bottom" style="height: 100%;display: block">-->
+<!--        {% block content %}-->
+<!--        {% endblock %}-->
+<!--    </div>-->
+
+<!--</div>-->
+
+
+<!--<div class="container">-->
+<!--    &lt;!&ndash; 导航栏 &ndash;&gt;-->
+<!--    <nav class="navbar">-->
+<!--        <a href="selected">精选</a>-->
+<!--        <a href="#">全部</a>-->
+<!--        <a href="#">大数据与人工智能</a>-->
+<!--        <a href="#">程序设计与开发</a>-->
+<!--        <a href="#">计算机基础与应用</a>-->
+<!--        <a href="#">软件工程</a>-->
+<!--        <a href="#">网络与安全技术</a>-->
+<!--        <a href="#">硬软件系统及原理</a>-->
+<!--    </nav>-->
+
+<!--    &lt;!&ndash; 课程卡片 &ndash;&gt;-->
+<!--    <div class="card-container">-->
+<!--        <div class="card">-->
+<!--            <img src="https://mooc-image.nosdn.127.net/10d5662f1377444bb8d40c2c667bbd0b.jpg?imageView&quality=100" alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+
+<!--        </div>-->
+<!--        <div class="card">-->
+<!--            <img src="https://mooc-image.nosdn.127.net/19b2c356fd6841518b5bae033da33205.jpg?imageView&quality=100")alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+<!--        </div>-->
+<!--        <div class="card">-->
+<!--            <img src="http://edu-image.nosdn.127.net/402252837d9242cf97dd7125d0aec55e.jpg?imageView&type=webp" alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+<!--        </div>-->
+<!--        <div class="card">-->
+<!--            <img src="http://edu-image.nosdn.127.net/402252837d9242cf97dd7125d0aec55e.jpg?imageView&type=webp" alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+<!--        </div>-->
+<!--         <div class="card">-->
+<!--            <img src="http://edu-image.nosdn.127.net/402252837d9242cf97dd7125d0aec55e.jpg?imageView&type=webp" alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+<!--        </div>-->
+<!--        <div class="card">-->
+<!--            <img src="https://mooc-image.nosdn.127.net/19b2c356fd6841518b5bae033da33205.jpg?imageView&quality=100")alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+<!--        </div>-->
+<!--        <div class="card">-->
+<!--            <img src="https://mooc-image.nosdn.127.net/19b2c356fd6841518b5bae033da33205.jpg?imageView&quality=100")alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+<!--        </div>-->
+<!--          <div class="card">-->
+<!--            <img src="https://mooc-image.nosdn.127.net/10d5662f1377444bb8d40c2c667bbd0b.jpg?imageView&quality=100" alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+
+<!--        </div>-->
+<!--          <div class="card">-->
+<!--            <img src="https://mooc-image.nosdn.127.net/10d5662f1377444bb8d40c2c667bbd0b.jpg?imageView&quality=100" alt="课程封面">-->
+<!--            <h3>课程名称</h3>-->
+<!--            <p>课程描述</p>-->
+
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 添加更多课程卡片... &ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+
+
+<!--<script type="text/javascript">-->
+<!--    window.onload = function() {-->
+<!--        window.location.href = "/selected";-->
+<!--    };-->
+<!--</script>-->
+
+
+<!--</html>-->

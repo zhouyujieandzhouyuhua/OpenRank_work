@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ exam_paper.title }}</title>
+</head>
+<body>
+    <h1>{{ exam_paper.title }}</h1>
+    <p>总分: {{ exam_paper.total_marks }}</p>
+    <ol>
+        {% for pq in exam_paper.paperquestion_set.all %}
+            <li>
+                {{ pq.question.content }}<br/>
+                分值: {{ pq.marks }}
+            </li>
+        {% endfor %}
+    </ol>
+</body>
+</html>

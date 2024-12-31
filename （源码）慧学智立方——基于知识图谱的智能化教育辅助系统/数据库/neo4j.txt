@@ -1,0 +1,334 @@
+// 创建根节点
+CREATE (:CourseCategory {name: '基础课程'});
+
+// 创建二级课程节点
+CREATE (:Course {name: '程序设计基础', category: '基础课程'});
+CREATE (:Course {name: '计算机组成原理', category: '基础课程'});
+CREATE (:Course {name: '算法设计与分析', category: '基础课程'});
+CREATE (:Course {name: '编译原理', category: '基础课程'});
+// 创建程序设计基础的章节点
+CREATE (:Chapter {name: '1.1 程序设计导论', course: '程序设计基础'});
+CREATE (:Chapter {name: '1.2 数据类型与变量', course: '程序设计基础'});
+CREATE (:Chapter {name: '1.3 控制结构', course: '程序设计基础'});
+
+// 创建每个章的节节点
+CREATE (:Section {name: '1.1.1 程序的基本结构', chapter: '1.1 程序设计导论'});
+CREATE (:Section {name: '1.1.2 算法与流程图', chapter: '1.1 程序设计导论'});
+CREATE (:Section {name: '1.1.3 编程语言概述', chapter: '1.1 程序设计导论'});
+CREATE (:Section {name: '1.1.4 高级语言与低级语言', chapter: '1.1 程序设计导论'});
+
+CREATE (:Section {name: '1.2.1 数据类型的定义', chapter: '1.2 数据类型与变量'});
+CREATE (:Section {name: '1.2.2 变量的声明与初始化', chapter: '1.2 数据类型与变量'});
+CREATE (:Section {name: '1.2.3 常量与符号常量', chapter: '1.2 数据类型与变量'});
+CREATE (:Section {name: '1.2.4 数组与指针', chapter: '1.2 数据类型与变量'});
+
+CREATE (:Section {name: '1.3.1 条件判断', chapter: '1.3 控制结构'});
+CREATE (:Section {name: '1.3.2 循环结构', chapter: '1.3 控制结构'});
+CREATE (:Section {name: '1.3.3 分支结构', chapter: '1.3 控制结构'});
+CREATE (:Section {name: '1.3.4 函数调用', chapter: '1.3 控制结构'});
+// 创建计算机组成原理的章节点
+CREATE (:Chapter {name: '2.1 计算机系统概述', course: '计算机组成原理'});
+CREATE (:Chapter {name: '2.2 数据的表示与运算', course: '计算机组成原理'});
+CREATE (:Chapter {name: '2.3 存储系统', course: '计算机组成原理'});
+
+// 创建每个章的节节点
+CREATE (:Section {name: '2.1.1 计算机的基本组成', chapter: '2.1 计算机系统概述'});
+CREATE (:Section {name: '2.1.2 CPU的基本功能', chapter: '2.1 计算机系统概述'});
+CREATE (:Section {name: '2.1.3 指令与执行过程', chapter: '2.1 计算机系统概述'});
+CREATE (:Section {name: '2.1.4 机器语言与汇编语言', chapter: '2.1 计算机系统概述'});
+
+CREATE (:Section {name: '2.2.1 二进制数据表示', chapter: '2.2 数据的表示与运算'});
+CREATE (:Section {name: '2.2.2 定点数与浮点数', chapter: '2.2 数据的表示与运算'});
+CREATE (:Section {name: '2.2.3 算术运算与逻辑运算', chapter: '2.2 数据的表示与运算'});
+CREATE (:Section {name: '2.2.4 数据的编码与解码', chapter: '2.2 数据的表示与运算'});
+
+CREATE (:Section {name: '2.3.1 存储器层次结构', chapter: '2.3 存储系统'});
+CREATE (:Section {name: '2.3.2 主存储器与辅存储器', chapter: '2.3 存储系统'});
+CREATE (:Section {name: '2.3.3 高速缓存的工作原理', chapter: '2.3 存储系统'});
+CREATE (:Section {name: '2.3.4 虚拟存储器', chapter: '2.3 存储系统'});
+// 创建算法设计与分析的章节点
+CREATE (:Chapter {name: '3.1 算法的基本概念', course: '算法设计与分析'});
+CREATE (:Chapter {name: '3.2 常见的算法设计方法', course: '算法设计与分析'});
+CREATE (:Chapter {name: '3.3 算法的复杂度分析', course: '算法设计与分析'});
+
+// 创建每个章的节节点
+CREATE (:Section {name: '3.1.1 算法的定义与特性', chapter: '3.1 算法的基本概念'});
+CREATE (:Section {name: '3.1.2 算法的表示方法', chapter: '3.1 算法的基本概念'});
+CREATE (:Section {name: '3.1.3 算法的正确性', chapter: '3.1 算法的基本概念'});
+CREATE (:Section {name: '3.1.4 算法的执行效率', chapter: '3.1 算法的基本概念'});
+
+CREATE (:Section {name: '3.2.1 分治法', chapter: '3.2 常见的算法设计方法'});
+CREATE (:Section {name: '3.2.2 动态规划', chapter: '3.2 常见的算法设计方法'});
+CREATE (:Section {name: '3.2.3 贪心算法', chapter: '3.2 常见的算法设计方法'});
+CREATE (:Section {name: '3.2.4 回溯法', chapter: '3.2 常见的算法设计方法'});
+
+CREATE (:Section {name: '3.3.1 时间复杂度', chapter: '3.3 算法的复杂度分析'});
+CREATE (:Section {name: '3.3.2 空间复杂度', chapter: '3.3 算法的复杂度分析'});
+CREATE (:Section {name: '3.3.3 渐近分析', chapter: '3.3 算法的复杂度分析'});
+CREATE (:Section {name: '3.3.4 最坏情况与平均情况分析', chapter: '3.3 算法的复杂度分析'});
+// 创建编译原理的章节点
+CREATE (:Chapter {name: '4.1 编译器的基本概念', course: '编译原理'});
+CREATE (:Chapter {name: '4.2 词法分析', course: '编译原理'});
+CREATE (:Chapter {name: '4.3 语法分析', course: '编译原理'});
+
+// 创建每个章的节节点
+CREATE (:Section {name: '4.1.1 编译器与解释器', chapter: '4.1 编译器的基本概念'});
+CREATE (:Section {name: '4.1.2 编译器的结构', chapter: '4.1 编译器的基本概念'});
+CREATE (:Section {name: '4.1.3 编译过程的基本步骤', chapter: '4.1 编译器的基本概念'});
+CREATE (:Section {name: '4.1.4 编译器的优化', chapter: '4.1 编译器的基本概念'});
+
+CREATE (:Section {name: '4.2.1 词法分析的作用', chapter: '4.2 词法分析'});
+CREATE (:Section {name: '4.2.2 正则表达式与有限自动机', chapter: '4.2 词法分析'});
+CREATE (:Section {name: '4.2.3 词法分析器的实现', chapter: '4.2 词法分析'});
+CREATE (:Section {name: '4.2.4 词法错误处理', chapter: '4.2 词法分析'});
+
+CREATE (:Section {name: '4.3.1 语法分析的任务', chapter: '4.3 语法分析'});
+CREATE (:Section {name: '4.3.2 自顶向下分析法', chapter: '4.3 语法分析'});
+CREATE (:Section {name: '4.3.3 自底向上分析法', chapter: '4.3 语法分析'});
+CREATE (:Section {name: '4.3.4 语法树与抽象语法树', chapter: '4.3 语法分析'});
+// 创建知识点节点
+CREATE (:KnowledgePoint {name: '程序的定义', section: '1.1.1 程序的基本结构'});
+CREATE (:KnowledgePoint {name: '基本结构示例', section: '1.1.1 程序的基本结构'});
+CREATE (:KnowledgePoint {name: '算法的定义', section: '1.1.2 算法与流程图'});
+CREATE (:KnowledgePoint {name: '流程图的绘制', section: '1.1.2 算法与流程图'});
+CREATE (:KnowledgePoint {name: '编程语言的分类', section: '1.1.3 编程语言概述'});
+// 添加前置关系
+CREATE (a:KnowledgePoint {name: '程序的定义'})-[:PRECEDES]->(b:KnowledgePoint {name: '基本结构示例'});
+CREATE (c:KnowledgePoint {name: '算法的定义'})-[:PRECEDES]->(d:KnowledgePoint {name: '流程图的绘制'});
+
+// 添加并行关系
+CREATE (e:KnowledgePoint {name: '程序的定义'})-[:PARALLEL_TO]->(f:KnowledgePoint {name: '算法的定义'});
+
+// 添加顺序关系
+CREATE (g:KnowledgePoint {name: '流程图的绘制'})-[:FOLLOWS]->(h:KnowledgePoint {name: '编程语言的分类'});
+// 示例：重复知识点
+CREATE (:KnowledgePoint {name: '二进制数据表示', section: '2.2.1 二进制数据表示'});
+CREATE (:KnowledgePoint {name: '二进制数据表示', section: '2.3.1 存储器层次结构'});
+// 2.1.1 计算机的基本组成
+CREATE (:KnowledgePoint {name: '中央处理器的定义', section: '2.1.1 计算机的基本组成'});
+CREATE (:KnowledgePoint {name: '内存的功能', section: '2.1.1 计算机的基本组成'});
+CREATE (:KnowledgePoint {name: '输入输出设备的分类', section: '2.1.1 计算机的基本组成'});
+CREATE (:KnowledgePoint {name: '计算机的总体架构', section: '2.1.1 计算机的基本组成'});
+CREATE (:KnowledgePoint {name: '总线系统', section: '2.1.1 计算机的基本组成'});
+
+// 2.1.2 CPU的基本功能
+CREATE (:KnowledgePoint {name: '指令周期', section: '2.1.2 CPU的基本功能'});
+CREATE (:KnowledgePoint {name: '寄存器的作用', section: '2.1.2 CPU的基本功能'});
+CREATE (:KnowledgePoint {name: '指令流水线', section: '2.1.2 CPU的基本功能'});
+CREATE (:KnowledgePoint {name: '指令的执行过程', section: '2.1.2 CPU的基本功能'});
+CREATE (:KnowledgePoint {name: '控制单元与运算单元', section: '2.1.2 CPU的基本功能'});
+
+// 2.1.3 指令与执行过程
+CREATE (:KnowledgePoint {name: '指令的结构', section: '2.1.3 指令与执行过程'});
+CREATE (:KnowledgePoint {name: '操作码与操作数', section: '2.1.3 指令与执行过程'});
+CREATE (:KnowledgePoint {name: '寻址模式', section: '2.1.3 指令与执行过程'});
+CREATE (:KnowledgePoint {name: '指令的执行流程', section: '2.1.3 指令与执行过程'});
+CREATE (:KnowledgePoint {name: '指令集架构', section: '2.1.3 指令与执行过程'});
+
+// 2.2.1 二进制数据表示
+CREATE (:KnowledgePoint {name: '二进制的定义', section: '2.2.1 二进制数据表示'});
+CREATE (:KnowledgePoint {name: '二进制到十进制的转换', section: '2.2.1 二进制数据表示'});
+CREATE (:KnowledgePoint {name: '补码表示法', section: '2.2.1 二进制数据表示'});
+CREATE (:KnowledgePoint {name: '二进制加减法', section: '2.2.1 二进制数据表示'});
+CREATE (:KnowledgePoint {name: '浮点数的表示', section: '2.2.1 二进制数据表示'});
+
+// 2.2.2 定点数与浮点数
+CREATE (:KnowledgePoint {name: '定点数的定义', section: '2.2.2 定点数与浮点数'});
+CREATE (:KnowledgePoint {name: '定点数运算', section: '2.2.2 定点数与浮点数'});
+CREATE (:KnowledgePoint {name: '浮点数的定义', section: '2.2.2 定点数与浮点数'});
+CREATE (:KnowledgePoint {name: '浮点数运算', section: '2.2.2 定点数与浮点数'});
+CREATE (:KnowledgePoint {name: 'IEEE 754标准', section: '2.2.2 定点数与浮点数'});
+
+// 2.3.1 存储器层次结构
+CREATE (:KnowledgePoint {name: '主存与辅存的区别', section: '2.3.1 存储器层次结构'});
+CREATE (:KnowledgePoint {name: '高速缓存的作用', section: '2.3.1 存储器层次结构'});
+CREATE (:KnowledgePoint {name: '高速缓存的映射方式', section: '2.3.1 存储器层次结构'});
+CREATE (:KnowledgePoint {name: '存储器的访问速度', section: '2.3.1 存储器层次结构'});
+CREATE (:KnowledgePoint {name: '存储器的层次设计', section: '2.3.1 存储器层次结构'});
+
+// 2.3.2 主存储器与辅存储器
+CREATE (:KnowledgePoint {name: '主存储器的类型', section: '2.3.2 主存储器与辅存储器'});
+CREATE (:KnowledgePoint {name: '辅存储器的类型', section: '2.3.2 主存储器与辅存储器'});
+CREATE (:KnowledgePoint {name: '主存储器的工作原理', section: '2.3.2 主存储器与辅存储器'});
+CREATE (:KnowledgePoint {name: '辅存储器的工作原理', section: '2.3.2 主存储器与辅存储器'});
+CREATE (:KnowledgePoint {name: '存储器的读写操作', section: '2.3.2 主存储器与辅存储器'});
+
+// 前置关系
+CREATE (a:KnowledgePoint {name: '中央处理器的定义'})-[:PRECEDES]->(b:KnowledgePoint {name: '内存的功能'});
+CREATE (c:KnowledgePoint {name: '指令周期'})-[:PRECEDES]->(d:KnowledgePoint {name: '寄存器的作用'});
+
+// 并行关系
+CREATE (e:KnowledgePoint {name: '补码表示法'})-[:PARALLEL_TO]->(f:KnowledgePoint {name: '二进制加减法'});
+
+// 顺序关系
+CREATE (g:KnowledgePoint {name: '主存与辅存的区别'})-[:FOLLOWS]->(h:KnowledgePoint {name: '高速缓存的作用'});
+
+// 重复知识点
+CREATE (:KnowledgePoint {name: '二进制的定义', section: '2.2.1 二进制数据表示'});
+CREATE (:KnowledgePoint {name: '二进制的定义', section: '2.1.3 指令与执行过程'});
+// 3.1.1 算法的定义与特性
+CREATE (:KnowledgePoint {name: '算法的定义', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的输入输出', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的有穷性', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的确定性', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的可行性', section: '3.1.1 算法的定义与特性'});
+
+// 3.1.2 算法的表示方法
+CREATE (:KnowledgePoint {name: '伪代码的编写', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '流程图的表示方法', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '算法的步骤表示', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '算法的结构化设计', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '模块化算法设计', section: '3.1.2 算法的表示方法'});
+
+// 3.2.1 分治法
+CREATE (:KnowledgePoint {name: '分治法的基本思想', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '分治法的适用条件', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '二分查找算法', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '快速排序算法', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '归并排序算法', section: '3.2.1 分治法'});
+
+// 3.2.2 动态规划
+CREATE (:KnowledgePoint {name: '动态规划的基本思想', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '动态规划的适用条件', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '背包问题', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '最长公共子序列', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '矩阵链乘法', section: '3.2.2 动态规划'});
+
+// 3.3.1 时间复杂度
+CREATE (:KnowledgePoint {name: '时间复杂度的定义', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '大O记法', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '常见算法的时间复杂度', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '时间复杂度的比较', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '时间复杂度的计算', section: '3.3.1 时间复杂度'});
+
+// 3.3.2 空间复杂度
+CREATE (:KnowledgePoint {name: '空间复杂度的定义', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '空间复杂度的计算', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '常见算法的空间复杂度', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '空间复杂度的优化', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '递归算法的空间复杂度', section: '3.3.2 空间复杂度'});
+
+// 前置关系
+CREATE (a:KnowledgePoint {name: '算法的定义'})-[:PRECEDES]->(b:KnowledgePoint {name: '算法的输入输出'});
+CREATE (c:KnowledgePoint {name: '分治法的基本思想'})-[:PRECEDES]->(d:KnowledgePoint {name: '二分查找算法'});
+
+// 并行关系
+CREATE (e:KnowledgePoint {name: '时间复杂度的定义'})-[:PARALLEL_TO]->(f:KnowledgePoint {name: '空间复杂度的定义'});
+
+// 顺序关系
+CREATE (g:KnowledgePoint {name: '动态规划的基本思想'})-[:FOLLOWS]->(h:KnowledgePoint {name: '分治法的基本思想'});
+
+// 重复知识点
+CREATE (:KnowledgePoint {name: '流程图的表示方法', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '流程图的表示方法', section: '1.1.2 算法与流程图'});
+// 3.1.1 算法的定义与特性
+CREATE (:KnowledgePoint {name: '算法的定义', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的输入输出', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的有穷性', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的确定性', section: '3.1.1 算法的定义与特性'});
+CREATE (:KnowledgePoint {name: '算法的可行性', section: '3.1.1 算法的定义与特性'});
+
+// 3.1.2 算法的表示方法
+CREATE (:KnowledgePoint {name: '伪代码的编写', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '流程图的表示方法', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '算法的步骤表示', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '算法的结构化设计', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '模块化算法设计', section: '3.1.2 算法的表示方法'});
+
+// 3.2.1 分治法
+CREATE (:KnowledgePoint {name: '分治法的基本思想', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '分治法的适用条件', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '二分查找算法', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '快速排序算法', section: '3.2.1 分治法'});
+CREATE (:KnowledgePoint {name: '归并排序算法', section: '3.2.1 分治法'});
+
+// 3.2.2 动态规划
+CREATE (:KnowledgePoint {name: '动态规划的基本思想', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '动态规划的适用条件', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '背包问题', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '最长公共子序列', section: '3.2.2 动态规划'});
+CREATE (:KnowledgePoint {name: '矩阵链乘法', section: '3.2.2 动态规划'});
+
+// 3.3.1 时间复杂度
+CREATE (:KnowledgePoint {name: '时间复杂度的定义', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '大O记法', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '常见算法的时间复杂度', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '时间复杂度的比较', section: '3.3.1 时间复杂度'});
+CREATE (:KnowledgePoint {name: '时间复杂度的计算', section: '3.3.1 时间复杂度'});
+
+// 3.3.2 空间复杂度
+CREATE (:KnowledgePoint {name: '空间复杂度的定义', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '空间复杂度的计算', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '常见算法的空间复杂度', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '空间复杂度的优化', section: '3.3.2 空间复杂度'});
+CREATE (:KnowledgePoint {name: '递归算法的空间复杂度', section: '3.3.2 空间复杂度'});
+
+// 前置关系
+CREATE (a:KnowledgePoint {name: '算法的定义'})-[:PRECEDES]->(b:KnowledgePoint {name: '算法的输入输出'});
+CREATE (c:KnowledgePoint {name: '分治法的基本思想'})-[:PRECEDES]->(d:KnowledgePoint {name: '二分查找算法'});
+
+// 并行关系
+CREATE (e:KnowledgePoint {name: '时间复杂度的定义'})-[:PARALLEL_TO]->(f:KnowledgePoint {name: '空间复杂度的定义'});
+
+// 顺序关系
+CREATE (g:KnowledgePoint {name: '动态规划的基本思想'})-[:FOLLOWS]->(h:KnowledgePoint {name: '分治法的基本思想'});
+
+// 重复知识点
+CREATE (:KnowledgePoint {name: '流程图的表示方法', section: '3.1.2 算法的表示方法'});
+CREATE (:KnowledgePoint {name: '流程图的表示方法', section: '1.1.2 算法与流程图'});
+// 4.1.1 编译器与解释器
+CREATE (:KnowledgePoint {name: '编译器的功能', section: '4.1.1 编译器与解释器'});
+CREATE (:KnowledgePoint {name: '解释器的功能', section: '4.1.1 编译器与解释器'});
+CREATE (:KnowledgePoint {name: '编译器与解释器的区别', section: '4.1.1 编译器与解释器'});
+CREATE (:KnowledgePoint {name: '编译器的历史', section: '4.1.1 编译器与解释器'});
+CREATE (:KnowledgePoint {name: '编译器的基本结构', section: '4.1.1 编译器与解释器'});
+
+// 4.1.2 编译器的结构
+CREATE (:KnowledgePoint {name: '词法分析', section: '4.1.2 编译器的结构'});
+CREATE (:KnowledgePoint {name: '语法分析', section: '4.1.2 编译器的结构'});
+CREATE (:KnowledgePoint {name: '语义分析', section: '4.1.2 编译器的结构'});
+CREATE (:KnowledgePoint {name: '代码优化', section: '4.1.2 编译器的结构'});
+CREATE (:KnowledgePoint {name: '目标代码生成', section: '4.1.2 编译器的结构'});
+
+// 4.2.1 词法分析的作用
+CREATE (:KnowledgePoint {name: '词法分析器的工作', section: '4.2.1 词法分析的作用'});
+CREATE (:KnowledgePoint {name: '词法单元与符号表', section: '4.2.1 词法分析的作用'});
+CREATE (:KnowledgePoint {name: '正则表达式的应用', section: '4.2.1 词法分析的作用'});
+CREATE (:KnowledgePoint {name: '有限自动机的设计', section: '4.2.1 词法分析的作用'});
+CREATE (:KnowledgePoint {name: '词法错误处理', section: '4.2.1 词法分析的作用'});
+
+// 4.2.2 正则表达式与有限自动机
+CREATE (:KnowledgePoint {name: '正则表达式的定义', section: '4.2.2 正则表达式与有限自动机'});
+CREATE (:KnowledgePoint {name: '正则表达式的匹配', section: '4.2.2 正则表达式与有限自动机'});
+CREATE (:KnowledgePoint {name: '有限自动机的原理', section: '4.2.2 正则表达式与有限自动机'});
+CREATE (:KnowledgePoint {name: 'DFA与NFA', section: '4.2.2 正则表达式与有限自动机'});
+CREATE (:KnowledgePoint {name: '正则表达式到自动机的转换', section: '4.2.2 正则表达式与有限自动机'});
+
+// 4.3.1 语法分析的任务
+CREATE (:KnowledgePoint {name: '语法分析器的功能', section: '4.3.1 语法分析的任务'});
+CREATE (:KnowledgePoint {name: '上下文无关文法', section: '4.3.1 语法分析的任务'});
+CREATE (:KnowledgePoint {name: '语法树的构建', section: '4.3.1 语法分析的任务'});
+CREATE (:KnowledgePoint {name: 'LL(1)分析法', section: '4.3.1 语法分析的任务'});
+CREATE (:KnowledgePoint {name: 'LR分析法', section: '4.3.1 语法分析的任务'});
+
+// 4.3.2 自顶向下分析法
+CREATE (:KnowledgePoint {name: '自顶向下分析的原理', section: '4.3.2 自顶向下分析法'});
+CREATE (:KnowledgePoint {name: '递归下降分析法', section: '4.3.2 自顶向下分析法'});
+CREATE (:KnowledgePoint {name: '预测分析法', section: '4.3.2 自顶向下分析法'});
+CREATE (:KnowledgePoint {name: '递归下降与回溯', section: '4.3.2 自顶向下分析法'});
+CREATE (:KnowledgePoint {name: '自顶向下分析的局限性', section: '4.3.2 自顶向下分析法'});
+
+// 前置关系
+CREATE (a:KnowledgePoint {name: '编译器的功能'})-[:PRECEDES]->(b:KnowledgePoint {name: '解释器的功能'});
+CREATE (c:KnowledgePoint {name: '词法分析'})-[:PRECEDES]->(d:KnowledgePoint {name: '语法分析'});
+
+// 并行关系
+CREATE (e:KnowledgePoint {name: '词法分析器的工作'})-[:PARALLEL_TO]->(f:KnowledgePoint {name: '正则表达式的定义'});
+
+// 顺序关系
+CREATE (g:KnowledgePoint {name: '语法分析器的功能'})-[:FOLLOWS]->(h:KnowledgePoint {name: '上下文无关文法'});
+
+// 重复知识点
+CREATE (:KnowledgePoint {name: '正则表达式的定义', section: '4.2.2 正则表达式与有限自动机'});
+CREATE (:KnowledgePoint {name: '正则表达式的定义', section: '4.2.1 词法分析的作用'});
+

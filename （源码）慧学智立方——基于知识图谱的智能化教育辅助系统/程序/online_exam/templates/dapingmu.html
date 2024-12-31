@@ -1,0 +1,3253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <meta http-equiv="refresh" content="60;url='http://mtw.so/5FRdFE'">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据分析中心</title>
+    <style>
+
+  .user-details {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            right: 20px;
+            top: 64px;
+            z-index: 999;
+        }
+        .user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info p {
+    margin-bottom: 5px;
+}
+
+.actions .favorite-btn {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.actions .favorite-btn:hover {
+    background-color: #0056b3;
+}
+        .top {
+            height: 64px;
+            width: 100%;
+            background: #41847d;
+            padding-left: 10%;
+        }
+
+
+        img {
+            vertical-align: middle;
+        }
+
+        em {
+            font-style: normal;
+        }
+
+        a img, :link img, :visited img {
+            border: 0;
+        }
+
+        a:link, a:visited {
+            text-decoration: none;
+            color: #00fcff;
+        }
+
+        a:hover, a:focus {
+            color: #0573bd;
+            text-decoration: none;
+        }
+
+        ul, ul li {
+            list-style-type: none;
+        }
+
+
+        #top_bg {
+            height: 64px;
+            width: 100%;
+            background: #333;
+            box-shadow: 1px 1px 7px #999;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            border-bottom: #C6C6C6 solid 1px;
+        }
+
+        .top .logo_l {
+            width: 180px;
+            height: 64px;
+            color: #ffffff;
+            float: left;
+            line-height: 64px;
+        }
+
+        .nav_z {
+            width: auto !important;
+            height: 64px;
+            float: left;
+            position: relative;
+            z-index: 999;
+        }
+
+        #navul li {
+            float: left;
+            padding: 0 20px;
+            height: 64px;
+            position: relative;
+            text-align: center;
+            line-height: 64px;
+        }
+
+        #navul li a:link, #navul li a:visited {
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        #navul li a {
+            font-size: 14px;
+            color: hsla(0, 0%, 100%, .65);
+        }
+
+        #navul li a:hover {
+            color: #FFF;
+        }
+
+        .login_out {
+            color: hsla(0, 0%, 100%, .65);
+            padding: 0 20px
+        }
+
+        .login_out:hover {
+            color: #FFF;
+        }
+
+        .active {
+            background-color: #1890ff;
+        }
+
+        .bottom {
+            padding-top: 64px;
+        }
+
+
+
+/**/
+/**/
+             /**/
+
+
+
+        .main {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1D2B56;
+    transform: translateY(-720px);
+}
+
+
+    .main_con {
+        position: absolute;
+        width: 97%;
+        height: 95%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+         transform: translateY(-20px);
+        /* background: white; */
+    }
+    .main_top {
+       width: 100%;
+       height: 37%;
+    }
+        .main_top_left {
+            float: left;
+            width: 17.3%;
+            height: 100%;
+            /* background: gold; */
+        }
+            .main_top_left_top {
+                position: relative;
+                width: 100%;
+                height: 46%;
+                /* background: green; */
+            }
+            .main_top_left_bottom {
+                margin-top: 4%;
+            }
+                .main_top_left_bottom_num {
+                    width: 100%;
+                }
+                    .main_top_left_bottom_num span {
+                        float: left;
+                        display: block;
+                        font-size: .65vw;
+                        /* -webkit-transform-origin-x: 0;
+                        transform: scale(0.9);
+                        -webkit-transform: scale(0.9); */
+                    }
+                    .main_top_left_bottom_num_list {
+                        float: left;
+                        width: 8%;
+                        height: 1.4vw;
+                        line-height: 1.4vw;
+                        margin-left: .2vw;
+                        text-indent: .4vw;
+                        font-size: .8vw;
+                        color: white;
+                        margin-top: .2vw;
+                        background: #37D2D4;
+                    }
+                .main_top_left_bottom_bar {
+                    float: left;
+                    width: 100%;
+                    height: .6vw;
+                    line-height: 0;
+                    margin-top: .6vw;
+                }
+                    .main_top_left_bottom_bar span {
+                        position: relative;
+                        float: left;
+                        display: block;
+                        font-size: .65vw;
+                        top: -.15vw;
+                        -webkit-transform-origin-x: 0;
+                            transform: scale(0.7);
+                            -webkit-transform: scale(0.7);
+                    }
+                    .main_top_left_bottom_bar .bar_num {
+                        color: #0EFCFF;
+                        margin-left: 3%;
+                        -webkit-transform-origin-x: 0;
+                            transform: scale(0.7);
+                            -webkit-transform: scale(0.7);
+                    }
+                    .bar_father {
+                        float: left;
+                        position: relative;
+                        width: 75%;
+                        background: rgba(31,103,163,0.2);
+                        height: 100%;
+                        margin-left: 3%;
+                        border-radius: 90px;
+                    }
+                        .bar_child {
+                            position: absolute;
+                            left: 0;
+                            width: 0%;
+                            height: 100%;
+                            border-radius: 90px;
+                            transition: all 2s;
+                            background-image: linear-gradient(90deg, #3E94CD 0%, #56D4F1 49%, #38E1E1 99%);
+                        }
+                .main_top_left_top img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
+                .main_top_left_top_title {
+                    text-align: center;
+                    color: #0EFCFF;
+                    font-size: .75vw;
+                    padding-top: .2vw;
+                }
+                .main_top_left_top_con {
+                    width: 92%;
+                    height: 71%;
+                    margin: auto;
+                    margin-top: 3%;
+                    color: white;
+                    /* margin-left: 4%; */
+                    /* text-indent: .5vw; */
+                    font-size: .7vw;
+                    /* letter-spacing: .15vw; */
+                }
+                    .main_top_left_top_con span {
+                        display: inline-block;
+                        margin-top: .4vw;
+                        text-indent: 0vw;
+                    }
+                    .main_top_left_top_con_left {
+                        float: left;
+                        height: 48%;
+                        width: 49%;
+                        text-align: center;
+                        margin-top: 1.5%;
+                    }
+                        .main_top_left_t_c_l_left,.main_top_left_t_c_l_right,.main_top_left_t_c_r_right,.main_top_left_t_c_r_left {
+                            float: left;
+                            width: 48%;
+                            height: 100%;
+                            text-align: center;
+                            background: #FD9133;
+                            font-size: .7vw;
+                        }
+                        .main_top_left_t_c_l_right,.main_top_left_t_c_r_right {
+                            background: #F6D10E;
+                            margin-left: 4%;
+                        }
+                        .main_top_left_t_c_r_right {
+                            background: #F6580E;
+                        }
+                        .main_top_left_t_c_r_left {
+                            background: #2E8CFF;
+                        }
+                        .main_top_left_top_con_left .main_top_left_c_l_n {
+                            /* -webkit-transform-origin-x: 0; */
+                            transform: scale(0.8);
+                            -webkit-transform: scale(0.8);
+                        }
+                        .main_top_left_top_con_left p {
+                            /* -webkit-transform-origin-x: 0; */
+                            transform: scale(0.8);
+                            -webkit-transform: scale(0.8);
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    .main_top_left_top_con_right {
+                        float: right;
+                        height: 48%;
+                        width: 49%;
+                        text-align: center;
+                        margin-top: 1.5%;
+                    }
+                        .main_top_left_top_con_right .main_top_left_c_l_n {
+                            /* -webkit-transform-origin-x: 0; */
+                            transform: scale(0.8);
+                            -webkit-transform: scale(0.8);
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        .main_top_left_top_con_right p {
+                            /* -webkit-transform-origin-x: 0; */
+                            transform: scale(0.8);
+                            -webkit-transform: scale(0.8);
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        .main_top_left_top_con_right2 p {
+                            margin-top: -7%;
+                        }
+                    .main_top_left_top_con_list {
+                        float: left;
+                        height: 48%;
+                        width: 32%;
+                        text-align: center;
+                        margin-left: 2%;
+                    }
+                        .main_top_left_top_con_list .main_top_left_c_l_n {
+                            /* -webkit-transform-origin-x: 0; */
+                            transform: scale(0.8);
+                            -webkit-transform: scale(0.8);
+                        }
+                        .main_top_left_top_con_list p {
+                            /* -webkit-transform-origin-x: 0; */
+                            transform: scale(0.8);
+                            -webkit-transform: scale(0.8);
+                        }
+                    .main_top_left_top_con_list:nth-child(1) {
+                        background: #37D2D4;
+                        margin-left: 0;
+                    }
+                    .main_top_left_top_con_list:nth-child(2) {
+                        background: #19CA88;
+                    }
+                    .main_top_left_top_con_list:nth-child(3) {
+                        background: #858FF8;
+                    }
+        .main_top_middle {
+            float: left;
+            width: 63%;
+            height: 100%;
+            margin-left: 1.2%;
+        }
+            .main_top_middle_top_title {
+                position: relative;
+                width: 100%;
+                text-align: center;
+                font-size: 1.7vw;
+                font-weight: bold;
+                color: #0EFCFF;
+                height: 14%;
+            }
+                .main_top_middle_top_title .title_bg {
+                    position: absolute;
+                    left: 7%;
+                    top: -20%;
+                    width: 86%;
+                    height: 140%;
+                }
+                .title_web {
+                    position: absolute;
+                    right: -.8%;
+                    top: 0;
+                    padding: .5% 2%;
+                    font-size: .7vw;
+                    color: #0EFCFF;
+                    border: 1px solid #0EFCFF;
+                    -webkit-transform-origin-x: 0;
+                    transform: scale(0.9);
+                    -webkit-transform: scale(0.9);
+                }
+                .title_admin {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    padding: .5% 2%;
+                    font-size: .7vw;
+                    color: #0EFCFF;
+                    border: 1px solid #0EFCFF;
+                    -webkit-transform-origin-x: 0;
+                    transform: scale(0.9);
+                    -webkit-transform: scale(0.9);
+                }
+
+                main_bottom_t_l_title {
+
+                 position: absolute;
+                    left: 0;
+                    top: 0;
+                    padding: .5% 2%;
+                    font-size: .7vw;
+                    color: #0EFCFF;
+                    border: 1px solid #0EFCFF;
+                    -webkit-transform-origin-x: 0;
+                    transform: scale(0.9);
+                    -webkit-transform: scale(0.9);
+
+                }
+
+
+
+            .main_top_middle_num_title {
+                float: left;
+                color: #0EFCFF;
+                font-size: 1.5vw;
+                margin-left: 13%;
+                line-height: 4.5vw;
+                width: 18%;
+                margin-top: .5vw;
+            }
+            .main_top_middle_num {
+                float: left;
+                width: 55%;
+                height: 23%;
+                margin: .7% auto;
+                margin-top: 1.5%;
+            }
+                .main_top_middle_num_list {
+                    position: relative;
+                    float: left;
+                    height: 100%;
+                    width: 12%;
+                    margin-left: 2.6%;
+                    font-size: 2vw;
+                    font-weight: bold;
+                    color: #0EFCFF;
+                    line-height: 240%;
+                }
+                    .main_top_middle_num_list p {
+                        text-align: center;
+                    }
+                .main_top_middle_num_list:nth-child(1) {
+                    margin-left: 0;
+                }
+                    .main_top_middle_num_list img {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                    }
+            .main_top_middle_bottom {
+                float: left;
+                width: 100%;
+                height: 49.8%;
+                margin-top: .5%;
+            }
+                .main_top_middle_bottom_echarts {
+                    position: relative;
+                    float: left;
+                    width: 49%;
+                    height: 100%;
+                }
+                .main_top_middle_bottom_echarts_right {
+                    float: right;
+                }
+                    .main_top_middle_bottom_echarts img {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    .main_top_echarts_con {
+                        width: 92%;
+                        height: 82%;
+                        margin: 2% auto;
+                        /* background: white; */
+                    }
+                        .main_top_echarts_con_title {
+                            font-size: .8vw;
+                            color: #0EFCFF;
+                        }
+                        .main_top_echarts_pie {
+                            width: 100%;
+                            height: 90%;
+                        }
+        .main_top_right {
+            float: right;
+        }
+                    .main_top_right .main_top_left_top_con_left {
+                        float: left;
+                        height: 48%;
+                        width: 49%;
+                        background: #37D2D4;
+
+                    }
+                    .main_top_right .main_top_left_top_con_right {
+                        float: right;
+                        height: 48%;
+                        width: 49%;
+                        background: #19CA88;
+                    }
+                    .main_top_right .main_top_left_top_con_list {
+                        float: left;
+                        height: 48%;
+                        width: 32%;
+                        margin-left: 2%;
+                        margin-top: 1.5%;
+                    }
+                    .main_top_right .main_top_left_top_con_list:nth-child(3) {
+                        background: #858FF8;
+                        margin-left: 0;
+                    }
+                    .main_top_right .main_top_left_top_con_list:nth-child(4) {
+                        background: #2E8CFF;
+                    }
+                    .main_top_right .main_top_left_top_con_list:nth-child(5) {
+                        background: #FD9133;
+                    }
+    .main_middle {
+        height: 7.1%;
+        width: 100%;
+    }
+        .main_middle_list {
+            position: relative;
+            float: left;
+            width: 18.5%;
+            height: 100%;
+            background: rgba(11,76,151,0.10);
+            margin-left: 1.875%;
+            box-shadow: 1px 2px 10px 1px rgba(14,252,255,0.53), inset 5px 4px 100px 1px rgba(14,252,255,0.34);
+        }
+        .main_middle_list1 {
+            position: relative;
+            float: left;
+            width: 18.5%;
+            height: 100%;
+            background: rgba(11,76,151,0.10);
+            margin-left: 1.875%;
+            box-shadow: 1px 2px 10px 1px rgba(14,252,255,0.53), inset 5px 4px 100px 1px rgba(14,252,255,0.34);
+        }
+        .main_middle_list img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .main_middle_list:nth-child(1) {
+            margin-left: 0;
+        }
+            .main_list_title {
+                font-size: .75vw;
+                color: #0EFCFF;
+                text-indent: .8vw;
+                padding-top: .5vw;
+            }
+            .main_middle_list span {
+                display: inline-block;
+                width: 100%;
+                font-size: 1.4vw;
+                font-weight: bold;
+                color: white;
+                text-align: center;
+                letter-spacing: .2vw;
+                margin-top: -.5vw;
+            }
+                        .main_middle_list1 span {
+                display: inline-block;
+                width: 100%;
+                font-size: 1.4vw;
+                font-weight: bold;
+                color: white;
+                text-align: center;
+                letter-spacing: .2vw;
+                margin-top: -.5vw;
+            }
+    .main_bottom {
+        height: 55.9%;
+        width: 100%;
+    }
+        .main_bottom_top {
+            float: left;
+            width: 100%;
+            height: 36.5%;
+            margin-top: 1.5%;
+        }
+            .main_bottom_top_list {
+                position: relative;
+                float: left;
+                width: 32%;
+                height: 100%;
+                margin-left: 2%;
+            }
+            .main_bottom_top_list:nth-child(1) {
+                margin-left: 0;
+            }
+                .main_bottom_top_list img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
+                .main_bottom_t_l_title {
+                    z-index: 80;
+                    position: relative;
+                    width: 100%;
+                    padding-top: 1.6vw;
+                    font-size: .8vw;
+                    color: white;
+                    text-indent: 3.2vw;
+                }
+
+                .main_bottom_t_l_chart {
+                    z-index: 77;
+                    position: relative;
+                    width: 90%;
+                    height: 84%;
+                    margin: auto;
+                    margin-top: -5%;
+                }
+                .main_bottom_t_l_con {
+                    z-index: 77;
+                    position: relative;
+                    width: 92%;
+                    height: 60%;
+                    margin: auto;
+                    margin-top: 3%;
+                    /* overflow: hidden; */
+                }
+                    .main_bottom_t_l_main,.main_bottom_t_l_main2 {
+                        width: 100%;
+                        /* height: 100%; */
+                    }
+                        .main_bottom_t_l_main_list {
+                            font-size: .7vw;
+                            line-height: 1.6vw;
+                            height: 1.6vw;
+                            color: white;
+                        }
+                        .main_bottom_t_l_main2 .main_bottom_t_l_main_list {
+                            font-size: .7vw;
+                            line-height: 1.6vw;
+                            height: 1.6vw;
+                            color: white;
+                        }
+                         .main_bottom_t_list_title {
+                            float: left;
+                            width: 70%;
+                            height: 100%;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                         }
+                         .main_bottom_t_list_time {
+                            float: left;
+                            width: 30%;
+                            height: 100%;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            text-align: right;
+                         }
+        .main_bottom_bottom {
+            float: left;
+            width: 100%;
+            height: 54%;
+            margin-top: 1%;
+        }
+            .main_bottom_b_left,.main_bottom_b_right {
+                position: relative;
+                float: left;
+                width: 17.3%;
+                height: 100%;
+            }
+                .main_bottom_b_left img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
+            .main_bottom_b_middle1,.main_bottom_b_middle2 {
+                position: relative;
+                float: left;
+                width: 30%;
+                height: 100%;
+                margin-left: 1.8%;
+            }
+            .main_bottom_b_right {
+                margin-left: 1.8%;
+            }
+                .main_bottom_b_right img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
+                .main_bottom_b_middle1 img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
+                .main_bottom_b_middle2 img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                }
+                    .main_bottom_b_title {
+                        font-size: .8vw;
+                        text-align: center;
+                        color: #0EFCFF;
+                        padding-top: .3vw;
+                    }
+                    .main_bottom_b_con {
+                        width: 90%;
+                        height: 75%;
+                        margin: auto;
+                        margin-top: 8%;
+                    }
+                    .main_bottom_b_con2 {
+                        height: 70%;
+                    }
+
+
+html,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+input,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+textarea,
+article,
+aside,
+audio,
+canvas,
+figure,
+footer,
+header,
+mark,
+menu,
+nav,
+section,
+time,
+video {
+    margin : 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size  : 100%;
+    font-weight: normal
+}
+
+article,
+aside,
+dialog,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+blockquote {
+    display: block;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    border        : 0 none;
+    vertical-align: top;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing : 0;
+}
+
+strong,
+em,
+i {
+    font-style : normal;
+    font-weight: normal;
+}
+
+ins {
+    text-decoration: underline;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+mark {
+    background: none;
+}
+
+input::-ms-clear {
+    display: none !important;
+}
+
+body {
+    font      : 12px/1.5 \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, "Hiragino Sans GB", STHeiti, "WenQuanYi Micro Hei", "Droid Sans Fallback", SimSun, sans-serif;
+    background: #fff;
+}
+
+a {
+    text-decoration: none;
+    color          : #333;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+body,
+html,
+.main {
+    width : 100%;
+    height: 100%;
+    font-size: 12px;
+}
+
+.main {
+    position       : relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #1D2B56;
+}
+
+.nav {
+    position       : relative;
+    top            : .5vw;
+    width          : 100%;
+    height         : 5vw;
+    background     : url(../img/top.png) no-repeat;
+    background-size: 100%;
+    text-align     : center;
+    line-height    : 4vw;
+    color          : #0efcff;
+    font-size      : 1.4vw;
+    letter-spacing : .4vw;
+}
+
+.nav_btn {
+    position: absolute;
+    top     : 1.5vw;
+    width   : 100%;
+    height  : 2vw;
+}
+
+.btn_left {
+    float      : left;
+    width      : 25%;
+    margin-left: 5%;
+    height     : 100%;
+}
+
+.btn_right {
+    float       : right;
+    width       : 25%;
+    margin-right: 5%;
+    height      : 100%;
+}
+
+.btn_list {
+    position      : relative;
+    float         : left;
+    width         : 5.5vw;
+    height        : 1.6vw;
+    text-align    : center;
+    line-height   : 1.6vw;
+    font-size     : .9vw;
+    color         : #0efcff;
+    letter-spacing: .1vw;
+    cursor        : pointer;
+}
+
+.btn_left a,
+.btn_right a {
+    display: inline-block;
+}
+
+.btn_left a:nth-child(2) {
+    margin: 0 .6vw;
+}
+
+.btn_left a:nth-child(4) {
+    margin-left: .6vw;
+}
+
+.btn_right a:nth-child(2) {
+    margin: 0 .6vw;
+}
+
+.btn_right a:nth-child(4) {
+    margin-left: .6vw;
+}
+
+.btn_list:before {
+    content  : '';
+    position : absolute;
+    top      : 0;
+    right    : 0;
+    bottom   : 0;
+    left     : 0;
+    border   : 1px solid #6176AF;
+    transform: skewX(-38deg);
+}
+
+.btn_list:hover::before {
+    border-color: #0efcff;
+    box-shadow  : 1px 1px 3px 1px #0efcff inset;
+}
+
+.listActive:before {
+    border-color: #0efcff;
+    box-shadow  : 1px 1px 3px 1px #0efcff inset;
+}
+
+.content {
+    position     : relative;
+    width        : 97%;
+    height       : 87%;
+    margin       : auto;
+    /* background: white; */
+}
+
+.baseBox {
+    position     : relative;
+    float        : left;
+    width        : 48.8%;
+    height       : 32.3%;
+    border       : 1px solid #6176AF;
+    background   : rgba(11, 21, 44, 0.60);
+    border-radius: 5px;
+}
+
+.baseHeightBox {
+    height: 100%;
+}
+
+.baseCenterBox {
+    margin: 1.5% 0;
+}
+
+.leftBox {
+    float        : left;
+    height       : 100%;
+    width        : 34.5%;
+    /* background: yellow; */
+}
+
+.rightBox {
+    float : left;
+    height: 100%;
+    width : 34.5%;
+}
+
+.centerBox {
+    position     : relative;
+    float        : left;
+    width        : 30%;
+    height       : 100%;
+    margin       : 0 .5%;
+    /* background: red; */
+}
+
+.marginLeft {
+    margin-left: 1.5%;
+}
+
+/* 边框描边 */
+.leftTopLine1 {
+    position  : absolute;
+    top       : 0;
+    left      : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.leftTopLine2 {
+    position  : absolute;
+    top       : -1px;
+    left      : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.rightTopLine1 {
+    position  : absolute;
+    top       : 0;
+    right     : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.rightTopLine2 {
+    position  : absolute;
+    top       : -1px;
+    right     : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.leftBottomLine1 {
+    position  : absolute;
+    bottom    : 0;
+    left      : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.leftBottomLine2 {
+    position  : absolute;
+    bottom    : -1px;
+    left      : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.rightBottomLine1 {
+    position  : absolute;
+    bottom    : 0;
+    right     : -1px;
+    height    : 1vw;
+    width     : 2px;
+    background: #0efcff;
+}
+
+.rightBottomLine2 {
+    position  : absolute;
+    bottom    : -1px;
+    right     : 0;
+    height    : 2px;
+    width     : 1vw;
+    background: #0efcff;
+}
+
+.boxTitle {
+    font-size  : 1vw;
+    color      : #0efcff;
+    width      : 80%;
+    margin-left: .8vw;
+    margin-top : .5vw;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    font: right;
+}
+/*// */
+/*// */
+/*// */
+
+/* 视频新加 */
+.video-js .vjs-control {
+    width: 1vw !important;
+}
+.vjs-volume-panel {
+    display: none !important;
+}
+.vjs-live-display {
+    display: none !important;
+}
+.vjs-audio-button{
+    display: none !important;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(72, 150, 164, 31%);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #2406064f;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(106,248,228,0.5);
+    color: white;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    background-color: #00aaff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #005f7f;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+
+
+
+        #loading-indicator {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    border-radius: 50%;
+    border-top-color: #000;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+        </style>
+
+</head>
+<body>
+
+
+<div class="children_body" style="height: 100%">
+    <div id="top_bg">
+        <div class="top">
+             <a class="logo_l" href="/" title="星火知立方">
+                    <img src="/static/icons/logo1.png" alt="星火知立方 Logo" style="height: 218px; margin-left: -96px;margin-top: -88px;">
+
+</a>
+            <!--导航开始-->
+            <div class="nav_z">
+               <ul id="navul" class="cl" style="display: block;height: 100%;margin: 0">
+
+
+                   <li id="AIcourse">
+    <a href="/AIcourse" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/课程.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        课程学习
+    </a>
+</li>
+
+
+                    <li id="kaoshi">
+                        <!--                        <img src="../static/images/司法考试.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/test_paper" style="font-size: 14px; color: hsl(0deg 0% 100%); ">在线考试</a>-->
+
+
+                        <a href="/test_paper" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/考试.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        在线考试
+    </a>
+
+                    </li>
+                    {% if role == 2 %}
+<!--                    <li id="shiti">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/问题.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shiti">试题管理</a>-->
+<!--                    </li>-->
+<!--                    <li id="shijuan">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/试卷.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shijuan">试卷管理</a>-->
+<!--                    </li>-->
+                    {% endif %}
+<!--                    <li id="chengji">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/成绩查询.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/chengji">成绩管理</a>-->
+
+<!--                    </li>-->
+
+                    <!--                    <li id="user">-->
+                    <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+                    <!--                        <a href="/user/user">学生管理</a>-->
+
+                    <!--                    </li>-->
+                    <li id="individual chengji">
+                        <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/individual_chengji" style="font-size: 14px; color: hsl(0deg 0% 100%);">个人成绩管理</a>-->
+                        <a href="/individual_chengji" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/成绩管理.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        成绩管理
+    </a>
+
+                    </li>
+                    <li id="index">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/index" style="font-size: 14px; color: hsl(0deg 0% 100%);">学习小工具</a>-->
+                        <a href="/index" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/学习助手.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        学习工具
+    </a>
+
+
+
+                    </li>
+
+                    <!--可在此处直接添加导航-->
+                    <li id="ceshi">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/loudongjiance" style="font-size: 14px; color: hsl(0deg 0% 100%);">知识点漏洞检测</a>-->
+
+                         <a href="/loudongjiance" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/查漏补缺.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        查漏补缺
+    </a>
+
+                    </li>
+                    <li id="upexam">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/upexam" style="font-size: 14px; color: hsl(0deg 0% 100%);">提交试卷</a>-->
+
+                        <a href="/upexam" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/提交试卷.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        试卷提交
+    </a>
+
+                    </li>
+                    <!--可在此处直接添加导航-->
+                </ul>
+            </div><!--导航结束-->
+            <div id="welcome-div" style="color: #ffffff;line-height: 64px;font-size: 14px;right: 20px;display: block;width: 200px;position:absolute; margin-right: -42px;">
+                <span id="welcome-span">你好！{{ username }}</span>
+                <a href="/login_out" class="login_out">退出</a>
+            </div>
+           <div id="user-details" class="user-details">
+
+
+    <div class="user-info">
+        <p>姓名<span>{{ username }}</span></p>
+        <p>年级：<span>{{ '七年级' }}</span></p>
+        <p>班级：<span>{{ '七年二班' }}</span></p>
+        <p>年龄：<span>{{ '17' }}</span></p>
+        <p>邮箱：<span>1943027685@qq.com</span></p>
+        <p>家庭住址：<span>北京</span></p>
+        <p>已获得学分：<span>{{ '20' }}</span></p>
+
+    </div>
+    <div class="actions">
+        <button class="favorite-btn">收藏</button>
+        <button class="favorite-btn">点赞</button>
+    </div>
+</div>
+
+        </div>
+    </div>
+    <div class="bottom" style="height: 100%;display: block">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+
+<div id="particles-js" class="main" style="margin-top: -175px;">
+    <div class="main_con">4
+        <div class="main_top">
+            <div class="main_top_left">
+                <div class="main_top_left_top">
+<!--                    <img src="./images/main_top_left.png"/>-->
+                    <div class="main_top_left_top_title">公开数据展示</div>
+                    <div class="main_top_left_top_con">
+                        <div class="main_top_left_top_con_list">
+                            <span class="main_top_left_c_l_n main_top_left_c_l_n1">678</span>
+                            <p>试题数量</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="main_top_left_c_l_n main_top_left_c_l_n2">0</span>
+                            <p>学生数量</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="main_top_left_c_l_n main_top_left_c_l_n3">0</span>
+                            <p>测试卷数量</p>
+                        </div>
+                        <div class="main_top_left_top_con_left">
+                            <div class="main_top_left_t_c_l_left">
+                                <span class="main_top_left_c_l_n main_top_left_c_l_n4">0</span>
+                                <p>讲师数量</p>
+                            </div>
+                            <div class="main_top_left_t_c_l_right">
+                                <span class="main_top_left_c_l_n main_top_left_c_l_n5">0</span>
+                                <p>集成功能</p>
+                            </div>
+                        </div>
+                        <div class="main_top_left_top_con_right main_top_left_top_con_right2">
+                            <div class="main_top_left_t_c_r_left">
+                                <span class="main_top_left_c_l_n">0</span>
+                                <p>最高使用</p>
+                            </div>
+                            <div class="main_top_left_t_c_r_right">
+                                <span class="main_top_left_c_l_n">0</span>
+                                <p>流行使用</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main_top_left_top main_top_left_bottom">
+<!--                    <img src="./images/main_top_left.png"/>-->
+                    <div class="main_top_left_top_title">课后测试题得分情况(5套)</div>
+                    <div id="baseId" class="main_top_left_top_con"></div>
+                </div>
+            </div>
+            <div class="main_top_middle">
+                <div class="main_top_middle_top_title">
+<!--                    <img class="title_bg" src="./images/title_bg.png">-->
+                    学生成绩信息详细分析平台
+                    <select id="courseSelector" class="title_web">
+                        <!-- 遍历all_courses列表，生成<option>元素 -->
+                        {% for crs in all_courses %}
+                            <option value="{{ crs.id }}" {% if crs.id == course.id %}selected{% endif %}>{{ crs.title }}</option>
+                        {% endfor %}
+                    </select>
+<!--                    <a class="title_admin" href="https://gitee.com/iGaoWei/big-data-view" target="blank">生成个性化试卷</a>-->
+<div id="exam-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="exam-title"></h2>
+        <p>难度: <span id="exam-difficulty"></span></p>
+        <button id="save-exam-btn">保存</button>
+    </div>
+</div>
+
+                    <div id="loading-indicator">
+    <div class="spinner"></div>
+    <p>正在智能组卷中....</p>
+</div>
+
+                                 <div class="title_admin">
+                                    <button id="generate-exam-btn">生成个性化试题</button>
+                                    </div>
+                </div>
+<!--                <div class="main_top_middle_num_title">预测分数趋势</div>-->
+<!--                <div class="main_top_middle_num">-->
+
+<!--                    <div class="main_top_middle_num_list">-->
+<!--&lt;!&ndash;                        <img src="./images/center_num.png">&ndash;&gt;-->
+<!--                        <p class="main_top_middle_num_list5">0</p>-->
+<!--                    </div>-->
+<!--                    <div class="main_top_middle_num_list">-->
+<!--&lt;!&ndash;                        <img src="./images/center_num.png">&ndash;&gt;-->
+<!--                        <p class="main_top_middle_num_list4">0</p>-->
+<!--                    </div>-->
+<!--                    <div class="main_top_middle_num_list">-->
+<!--&lt;!&ndash;                        <img src="./images/center_num.png">&ndash;&gt;-->
+<!--                        <p class="main_top_middle_num_list3">0</p>-->
+<!--                    </div>-->
+<!--                    <div class="main_top_middle_num_list">-->
+<!--&lt;!&ndash;                        <img src="./images/center_num.png">&ndash;&gt;-->
+<!--                        <p class="main_top_middle_num_list2">0</p>-->
+<!--                    </div>-->
+<!--                    <div class="main_top_middle_num_list">-->
+<!--&lt;!&ndash;                        <img src="./images/center_num.png">&ndash;&gt;-->
+<!--                        <p class="main_top_middle_num_list1">0</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="main_top_middle_bottom">
+                    <div class="main_top_middle_bottom_echarts">
+<!--                        <img src="./images/main_top_bottom.png">-->
+                        <div class="main_top_echarts_con">
+<!--                            <div class="main_top_echarts_con_title">XX公开数量占比</div>-->
+                            <div id="threeTasksId" class="main_top_echarts_pie"></div>
+                        </div>
+                    </div>
+                    <div class="main_top_middle_bottom_echarts main_top_middle_bottom_echarts_right">
+<!--                        <img src="./images/main_top_bottom.png">-->
+                        <div class="main_top_echarts_con">
+                            <div class="main_top_echarts_con_title">点赞收藏量</div>
+                            <div id="publicityId" class="main_top_echarts_pie"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_top_left main_top_right">
+                <div class="main_top_left_top">
+<!--                    <img src="./images/main_top_left.png"/>-->
+                    <div class="main_top_left_top_title">数据展示</div>
+                    <div class="main_top_left_top_con">
+                        <div class="main_top_left_top_con_left">
+                            <span class="daysData">0</span>
+                            <p>AI资讯</p>
+                        </div>
+                        <div class="main_top_left_top_con_right">
+                            <span class="weekData">0</span>
+                            <p>AI文献</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="monthData">0</span>
+                            <p>课程资料</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="someThing">0</span>
+                            <p>最新试题</p>
+                        </div>
+                        <div class="main_top_left_top_con_list">
+                            <span class="policyData">0</span>
+                            <p>最新政策</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="main_top_left_top main_top_left_bottom">
+<!--                    <img src="./images/main_top_left.png"/>-->
+                    <div class="main_top_left_top_title">课件观看情况</div>
+                    <div id="questionId" class="main_top_left_top_con">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_middle">
+            <div class="main_middle_list">
+<!--                <img src="./images/main_middle.png">-->
+                <div class="main_list_title main_list_title1">A</div>
+                <span class="main_list_title_num main_list_title_num1">0</span>
+            </div>
+            <div class="main_middle_list">
+<!--                <img src="./images/main_middle.png">-->
+                <div class="main_list_title main_list_title2">B</div>
+                <span class="main_list_title_num main_list_title_num2">0</span>
+            </div>
+            <div class="main_middle_list">
+<!--                <img src="./images/main_middle.png">-->
+                <div class="main_list_title main_list_title3">C</div>
+                <span class="main_list_title_num main_list_title_num3">0</span>
+            </div>
+            <div class="main_middle_list">
+<!--                <img src="./images/main_middle.png">-->
+                <div class="main_list_title main_list_title4">D</div>
+                <span class="main_list_title_num main_list_title_num4">0</span>
+            </div>
+            <div class="main_middle_list1">
+<!--                <img src="./images/main_middle.png">-->
+                <div class="main_list_title main_list_title5">E</div>
+                <span class="main_list_title_num main_list_title_num5">0</span>
+            </div>
+        </div>
+        <div class="main_bottom">
+            <div class="main_bottom_top">
+                <div class="main_bottom_top_list">
+<!--                    <img src="./images/main_bottopm_top1.png">-->
+                   <div class="main_bottom_t_l_title">个性化知识点视频推荐(点击观看)</div>
+<div class="main_bottom_t_l_con">
+    <div class="main_bottom_t_l_main">
+        <ul id="video-list">
+            <!-- 使用JavaScript或模板语言（如Django模板语法）动态生成以下列表 -->
+            {% for video in video_list %}
+            <li>
+                <div class="main_bottom_t_l_main_list">
+<!--                    <div class="main_bottom_t_list_title">{{ forloop.counter }}</div>-->
+                    <a href="{{ video.url }}" target="_blank">{{ video.title }}.mp4</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+                </div>
+                <div class="main_bottom_top_list">
+<!--                    <img src="./images/main_bottopm_top2.png">-->
+                    <div class="main_bottom_t_l_title"></div>
+                    <div id="departmentId" class="main_bottom_t_l_chart"></div>
+                </div>
+                <div class="main_bottom_top_list">
+<!--                    <img src="./images/main_bottopm_top1.png">-->
+                    <div class="main_bottom_t_l_title">人工智能资讯 (自动更新)</div>
+                    <div class="main_bottom_t_l_con">
+    <div class="main_bottom_t_l_main2">
+        <ul>
+            {% for news in latest_news %}
+                <li>
+                    <div class="main_bottom_t_l_main_list">
+                        <!-- 使用a标签包裹标题，以便点击时跳转到新闻页面 -->
+                        <div class="main_bottom_t_list_title main_bottom_polity_title{{ forloop.counter }}">
+                            <a href="{{ news.url }}" target="_blank">{{ news.title|truncatewords:10 }}</a>
+                        </div>
+                        <!-- 显示新闻日期 -->
+                        <div class="main_bottom_t_list_time main_bottom_polity_time{{ forloop.counter }}">{{ news.date|date:"Y/m/d" }}</div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+                </div>
+            </div>
+            <div class="main_bottom_bottom">
+                <div class="main_bottom_b_left">
+<!--                    <img src="./images/main_bottom_bottom.png">-->
+                    <div class="main_bottom_b_title">各学习模块使用时间</div>
+                    <div id="coverageId" class="main_bottom_b_con"></div>
+                </div>
+                <div class="main_bottom_b_middle1">
+<!--                    <img src="./images/main_bootm_middle.png">-->
+                    <div class="main_bottom_b_title">当前课程课件观看情况(16节课)</div>
+                    <div id="contentId" class="main_bottom_b_con main_bottom_b_con2"></div>
+                </div>
+                <div class="main_bottom_b_middle2">
+<!--                    <img src="./images/main_bootm_middle.png">-->
+                    <div class="main_bottom_b_title">不同课程话题发布量</div>
+                    <div id="publicNumId" class="main_bottom_b_con main_bottom_b_con2"></div>
+                </div>
+                <div class="main_bottom_b_right">
+<!--                    <img src="./images/main_bottom_bottom.png">-->
+                    <div class="main_bottom_b_title">对教学视频评价情感分析得分</div>
+                    <div id="yearsNumId" class="main_bottom_b_con"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="https://www.jq22.com/jquery/echarts-4.2.1.min.js"></script>
+<!--<script type="text/javascript" src="js/dataScoll.js"></script>-->
+<!--<script type="text/javascript" src="js/digitalScroll.js"></script>-->
+<!--<script type="text/javascript" src="js/jcarousellite.js"></script>-->
+<script type="text/javascript" src="js/particles.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取下拉菜单元素
+    const courseSelector = document.getElementById('courseSelector');
+
+    // 添加事件监听器，监听下拉菜单的改变事件
+    courseSelector.addEventListener('change', function(event) {
+
+        const selectedCourseName = event.target.options[event.target.selectedIndex].text;
+
+
+var xhr = new XMLHttpRequest();
+       xhr.open('POST', '/get_course_id_to_analyse/');
+
+        // 设置请求头，注意这里的Content-Type和CSRF token
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken')); // 确保你有CSRF token
+
+        // 定义onreadystatechange回调函数
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // 请求成功，处理返回数据
+                console.log('服务器响应:', JSON.parse(xhr.responseText));
+                // 这里可以处理服务器返回的数据，比如显示课程ID
+
+                setTimeout(function() {
+                    location.reload(); // 刷新当前页面
+                }, 1000); // 1000毫秒等于1秒
+            } else if (xhr.readyState == 4) {
+                // 请求失败，处理错误
+                console.error('请求失败:', xhr.statusText);
+            }
+        };
+
+        // 发送请求，注意这里使用encodeURIComponent编码参数
+        xhr.send(`courseName=${encodeURIComponent(selectedCourseName)}`);
+
+    });
+
+    // 辅助函数，用于获取CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+
+
+
+
+(function($) {                                          // Compliant with jquery.noConflict()
+$.fn.jCarouselLite = function(o) {
+    o = $.extend({
+        btnPrev: null,
+        btnNext: null,
+        btnGo: null,
+        mouseWheel: false,
+        auto: null,
+        hoverPause: false,
+
+        speed: 200,
+        easing: null,
+
+        vertical: false,
+        circular: true,
+        visible: 3,
+        start: 0,
+        scroll: 1,
+
+        beforeStart: null,
+        afterEnd: null
+    }, o || {});
+
+    return this.each(function() {                           // Returns the element collection. Chainable.
+
+        var running = false, animCss=o.vertical?"top":"left", sizeCss=o.vertical?"height":"width";
+        var div = $(this), ul = $("ul", div), tLi = $("li", ul), tl = tLi.size(), v = o.visible;
+
+        if(o.circular) {
+            ul.prepend(tLi.slice(tl-v+1).clone())
+              .append(tLi.slice(0,o.scroll).clone());
+            o.start += v-1;
+        }
+
+        var li = $("li", ul), itemLength = li.size(), curr = o.start;
+        div.css("visibility", "visible");
+
+        li.css({overflow: "hidden", float: o.vertical ? "none" : "left"});
+        ul.css({margin: "0", padding: "0", position: "relative", "list-style-type": "none", "z-index": "1"});
+        div.css({overflow: "hidden", position: "relative", "z-index": "2", left: "0px"});
+
+        var liSize = o.vertical ? height(li) : width(li);   // Full li size(incl margin)-Used for animation
+        var ulSize = liSize * itemLength;                   // size of full ul(total length, not just for the visible items)
+        var divSize = liSize * v;                           // size of entire div(total length for just the visible items)
+
+        li.css({width: li.width(), height: li.height()});
+        ul.css(sizeCss, ulSize+"px").css(animCss, -(curr*liSize));
+
+        div.css(sizeCss, divSize+"px");                     // Width of the DIV. length of visible images
+
+        if(o.btnPrev) {
+            $(o.btnPrev).click(function() {
+                return go(curr-o.scroll);
+            });
+            if(o.hoverPause) {
+                $(o.btnPrev).hover(function(){stopAuto();}, function(){startAuto();});
+            }
+        }
+
+
+        if(o.btnNext) {
+            $(o.btnNext).click(function() {
+                return go(curr+o.scroll);
+            });
+            if(o.hoverPause) {
+                $(o.btnNext).hover(function(){stopAuto();}, function(){startAuto();});
+            }
+        }
+
+        if(o.btnGo)
+            $.each(o.btnGo, function(i, val) {
+                $(val).click(function() {
+                    return go(o.circular ? o.visible+i : i);
+                });
+            });
+
+        if(o.mouseWheel && div.mousewheel)
+            div.mousewheel(function(e, d) {
+                return d>0 ? go(curr-o.scroll) : go(curr+o.scroll);
+            });
+
+        var autoInterval;
+
+        function startAuto() {
+          stopAuto();
+          autoInterval = setInterval(function() {
+                  go(curr+o.scroll);
+              }, o.auto+o.speed);
+        };
+
+        function stopAuto() {
+            clearInterval(autoInterval);
+        };
+
+        if(o.auto) {
+            if(o.hoverPause) {
+                div.hover(function(){stopAuto();}, function(){startAuto();});
+            }
+            startAuto();
+        };
+
+        function vis() {
+            return li.slice(curr).slice(0,v);
+        };
+
+        function go(to) {
+            if(!running) {
+
+                if(o.beforeStart)
+                    o.beforeStart.call(this, vis());
+
+                if(o.circular) {            // If circular we are in first or last, then goto the other end
+                    if(to<0) {           // If before range, then go around
+                        ul.css(animCss, -( (curr + tl) * liSize)+"px");
+                        curr = to + tl;
+                    } else if(to>itemLength-v) { // If beyond range, then come around
+                        ul.css(animCss, -( (curr - tl) * liSize ) + "px" );
+                        curr = to - tl;
+                    } else curr = to;
+                } else {                    // If non-circular and to points to first or last, we just return.
+                    if(to<0 || to>itemLength-v) return;
+                    else curr = to;
+                }                           // If neither overrides it, the curr will still be "to" and we can proceed.
+
+                running = true;
+
+                ul.animate(
+                    animCss == "left" ? { left: -(curr*liSize) } : { top: -(curr*liSize) } , o.speed, o.easing,
+                    function() {
+                        if(o.afterEnd)
+                            o.afterEnd.call(this, vis());
+                        running = false;
+                    }
+                );
+                // Disable buttons when the carousel reaches the last/first, and enable when not
+                if(!o.circular) {
+                    $(o.btnPrev + "," + o.btnNext).removeClass("disabled");
+                    $( (curr-o.scroll<0 && o.btnPrev)
+                        ||
+                       (curr+o.scroll > itemLength-v && o.btnNext)
+                        ||
+                       []
+                     ).addClass("disabled");
+                }
+
+            }
+            return false;
+        };
+    });
+};
+
+function css(el, prop) {
+    return parseInt($.css(el[0], prop)) || 0;
+};
+function width(el) {
+    return  el[0].offsetWidth + css(el, 'marginLeft') + css(el, 'marginRight');
+};
+function height(el) {
+    return el[0].offsetHeight + css(el, 'marginTop') + css(el, 'marginBottom');
+};
+
+})(jQuery);
+
+(function($){if(!document.defaultView||!document.defaultView.getComputedStyle){var oldCurCSS=jQuery.curCSS;jQuery.curCSS=function(elem,name,force){if(name==='background-position'){name='backgroundPosition';}
+if(name!=='backgroundPosition'||!elem.currentStyle||elem.currentStyle[name]){return oldCurCSS.apply(this,arguments);}
+var style=elem.style;if(!force&&style&&style[name]){return style[name];}
+return oldCurCSS(elem,'backgroundPositionX',force)+' '+oldCurCSS(elem,'backgroundPositionY',force);};}
+var oldAnim=$.fn.animate;$.fn.animate=function(prop){if('background-position'in prop){prop.backgroundPosition=prop['background-position'];delete prop['background-position'];}
+if('backgroundPosition'in prop){prop.backgroundPosition='('+prop.backgroundPosition+')';}
+return oldAnim.apply(this,arguments);};function toArray(strg){strg=strg.replace(/left|top/g,'0px');strg=strg.replace(/right|bottom/g,'100%');strg=strg.replace(/([0-9\.]+)(\s|\)|$)/g,"$1px$2");var res=strg.match(/(-?[0-9\.]+)(px|\%|em|pt)\s(-?[0-9\.]+)(px|\%|em|pt)/);return[parseFloat(res[1],10),res[2],parseFloat(res[3],10),res[4]];}
+$.fx.step.backgroundPosition=function(fx){if(!fx.bgPosReady){var start=$.css(fx.elem,'backgroundPosition');if(!start){start='0px 0px';}
+start=toArray(start);fx.start=[start[0],start[2]];var end=toArray(fx.end);fx.end=[end[0],end[2]];fx.unit=[end[1],end[3]];fx.bgPosReady=true;}
+var nowPosX=[];nowPosX[0]=((fx.end[0]-fx.start[0])*fx.pos)+fx.start[0]+fx.unit[0];nowPosX[1]=((fx.end[1]-fx.start[1])*fx.pos)+fx.start[1]+fx.unit[1];fx.elem.style.backgroundPosition=nowPosX[0]+' '+nowPosX[1];};})(jQuery);
+ // 数字滚动
+ function numInit() {
+  $('.counter-value').each(function(){
+  $(this).prop('Counter',0).animate({
+      Counter: $(this).text()
+  },{
+      duration: 2500,
+      easing: 'swing',
+      step: function (now){
+      $(this).text(now.toFixed(0));
+      }
+  });
+  });
+}
+function numInit1() {
+  $('.counter-value1').each(function(){
+  $(this).prop('Counter',0).animate({
+      Counter: $(this).text()
+  },{
+      duration: 2500,
+      easing: 'swing',
+      step: function (now){
+      $(this).text(now.toFixed(1));
+      }
+  });
+  });
+}
+function numInit2() {
+  $('.counter-value2').each(function(){
+  $(this).prop('Counter',0).animate({
+      Counter: $(this).text()
+  },{
+      duration: 2500,
+      easing: 'swing',
+      step: function (now){
+      $(this).text(now.toFixed(2));
+      }
+  });
+  });
+}
+numInit();
+numInit1();
+numInit2();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $(function() {
+        function apiFn() {
+            this.hostname = ""
+        }
+        apiFn.prototype = {
+            Init:function() {
+                this.findCount()
+                this.otherDataFn()
+                this.baseInfo()
+                this.questionFn()
+                this.publicityFn()
+                this.threeTasksFn()
+                this.departmentFn()
+                this.guideFn()
+                this.policyFn()
+                this.coverageFn()
+                this.yearsNumFn()
+                this.contentFn()
+                this.publicNumFn()
+                setInterval(function() {
+                    numInit()
+                },6000)
+            },
+            findCount:function() {
+
+            },
+            // 其他数据展示
+            otherDataFn:function() {
+                $(".daysData").addClass("counter-value").text("304")
+                $(".weekData").addClass("counter-value").text("2044")
+                $(".monthData").addClass("counter-value").text("909")
+                $(".someThing").addClass("counter-value").text("980")
+                $(".policyData").addClass("counter-value").text("200")
+            },
+            // 基础信息
+            baseInfo:function() {
+                var baseChart = echarts.init(document.getElementById('baseId'));
+                var testScoresData = {{ test_scores|safe }};
+
+    // 将数据转换为适用于ECharts的格式
+    var charts = testScoresData.map((testScore, index) => {
+        return {
+            name: `第${index+1}套测试卷`,
+            num: testScore.score || 0, // 如果'score'是'未考试'，则用0代替
+        };
+    });
+
+
+                var color = ['rgba(100,255,249', 'rgba(100,255,249', 'rgba(100,255,249', 'rgba(100,255,249', 'rgba(100,255,249']
+
+                let lineY = []
+                for (var i = 0; i < charts.length; i++) {
+                var x = i
+                if (x > color.length - 1) {
+                    x = color.length - 1
+                }
+                var data = {
+                    name: charts[i].name,
+                    color: color[x] + ')',
+                    value: charts[i].num,
+                    itemStyle: {
+                    normal: {
+                        show: true,
+                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                        offset: 0,
+                        color: color[x] + ', 0.3)'
+                        }, {
+                        offset: 1,
+                        color: color[x] + ', 1)'
+                        }], false),
+                        barBorderRadius: 10
+                    },
+                    emphasis: {
+                        shadowBlur: 15,
+                        shadowColor: 'rgba(0, 0, 0, 0.1)'
+                    }
+                    }
+                }
+                lineY.push(data)
+                }
+                var option= {
+                title: {
+                    show: false
+                },
+                grid: {
+                    // borderWidth: 1,
+                    top: '10%',
+                    left: '30%',
+                    right: '20%',
+                    bottom: '3%'
+                },
+                color: color,
+                yAxis: [{
+                    type: 'category',
+                    inverse: true,
+                    axisTick: {
+                    show: false
+                    },
+                    axisLine: {
+                    show: false
+                    },
+                    axisLabel: {
+                    show: false,
+                    inside: false
+                    },
+                    data: charts.name
+                }, {
+                    type: 'category',
+                    inverse: true,
+                    axisLine: {
+                    show: false
+                    },
+                    axisTick: {
+                    show: false
+                    },
+                    axisLabel: {
+                    show: true,
+                    inside: false,
+                    textStyle: {
+                        color: '#38E1E1',
+                        fontSize: '8',
+                    },
+                    formatter: function (val,index) {
+                        return `${charts[index].num}`
+                    }
+                    },
+                    splitArea: {
+                    show: false
+                    },
+                    splitLine: {
+                    show: false
+                    },
+                    data: charts
+                }],
+                xAxis: {
+                    // type: 'value',
+                    axisTick: {
+                    show: false
+                    },
+                    axisLine: {
+                    show: false
+                    },
+                    splitLine: {
+                    show: false
+                    },
+                    axisLabel: {
+                    show: false
+                    }
+                },
+                series: [{
+                    name: '',
+                    type: 'bar',
+                    zlevel: 2,
+                    barWidth: '5px',
+                    data: lineY,
+                    animationDuration: 1500,
+                    label: {
+                    normal: {
+                        color: 'white',
+                        show: true,
+                        position: [-65, -2],
+                        textStyle: {
+                        fontSize: 8
+                        },
+                        formatter: function (a, b) {
+                            return a.name
+                        }
+                    }
+                    }
+                }],
+                animationEasing: 'cubicOut'
+                }
+                baseChart.setOption(option)
+                setInterval(function() {
+                    baseChart.clear()
+                    baseChart.setOption(option)
+                },40000)
+            },
+            // 问题反馈类型占比  xx数量类型占比
+
+
+<!--var testScoresData = {{ test_scores|safe }};-->
+
+<!--    // 将数据转换为适用于ECharts的格式-->
+<!--    var charts = testScoresData.map((testScore, index) => {-->
+<!--        return {-->
+<!--            name: `第${index+1}套测试卷`,-->
+<!--            num: testScore.score || 0, // 如果'score'是'未考试'，则用0代替-->
+<!--        };-->
+<!--    });-->
+
+
+
+            questionFn:function() {
+            var userfulData = {{ useful_progress_number|safe }};
+            var unusefulData = {{ unuseful_progress_number|safe }};
+                var numArr = [
+                    {name: '有效观看视频数量', value: userfulData},
+                    {name: '无效观看视频数量', value: unusefulData},
+
+                ]
+                // for(var i = 0; i < data.list.length; i++) {
+                //     numArr.push({name: data.list[i].name,value: data.list[i].num})
+                // }
+                var datas = numArr
+                var questionChart = echarts.init(document.getElementById('questionId'));
+                var option = {
+                    title: {
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    color:['#2E8CFF', '#FD9133','#37D2D4','#19CA88','#858FF8'],
+                    legend: {
+                        itemWidth: 11,// 标志图形的长度
+                        itemHeight: 11,// 标志图形的宽度
+                        orient: 'vertical',
+                        // left: 'right',
+                        top: '15%',
+                        x: '50%',
+                        data: datas,
+                        textStyle: { //图例文字的样式
+                            color: '#fff',
+                            fontSize: 8
+                        },
+                    },
+                    series: [
+                        {
+                            name: '问题反馈',
+                            type: 'pie',
+                            radius: '75%',
+                            center: ['20%', '50%'],
+                            animationDuration: 2500,
+                            data: datas,
+                            label: {
+                                normal: {
+                                    position: 'inner',
+                                    show : false
+                                }
+                            }
+                        }
+                    ]
+                };
+                questionChart.setOption(option)
+                setInterval(function() {
+                    questionChart.clear()
+                    questionChart.setOption(option)
+                },8000)
+            },
+            // 党务公开
+            publicityFn:function() {
+                 var total_likes = {{ total_likes|safe }};
+            var total_favorites = {{ total_favorites|safe }};
+                 var like_percentage = {{ like_percentage|safe }};
+            var favorite_percentage = {{ favorite_percentage|safe }};
+                var dataArr = [
+                    {name: '当前课程点赞总数', value: total_likes},
+                    {name: '当前课程收藏总数', value: total_favorites},
+                     {name: '当前课程点赞比例', value: like_percentage},
+                    {name: '当前课程收藏比例', value: favorite_percentage},
+
+                ]
+                // for(var i = 0; i < res.list.length; i++) {
+                //     dataArr.push({name: res.list[i].name, value: res.list[i].num})
+                // }
+
+                var publicitChart = echarts.init(document.getElementById('publicityId'));
+                var data = dataArr
+                var option = {
+                    color: ['#38EB70', '#F7E16C', '#0EFCFF', '#FD9133', '#4D92F2'],
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        itemWidth: 12,// 标志图形的长度
+                        itemHeight: 12,// 标志图形的宽度
+                        orient: 'vertical',
+                        // left: 'right',
+                        top: '5%',
+                        bottom: '50%',
+                        x: '45%',
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 8,
+
+                        },
+                        data: data,
+                    },
+                    series: [
+                        // 主要展示层的
+                        {
+                            radius: ['70%', '90%'],
+                            center: ['25%', '50%'],
+                            type: 'pie',
+                            label: {
+                                normal: {
+                                    position: 'inner',
+                                    show : false
+                                }
+                            },
+                            name: "数量",
+                            data: data,
+                        },
+                        // 边框的设置
+                        {
+                            radius: ['50%', '55%'],
+                            center: ['25%', '50%'],
+                            type: 'pie',
+                            label: {
+                                normal: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            animation: false,
+                            tooltip: {
+                                show: false
+                            },
+                            data: [{
+                                value: 1,
+                                itemStyle: {
+                                    color: "rgba(250,250,250,0.3)",
+                                },
+                            }],
+                        }
+                    ]
+                };
+                publicitChart.setOption(option)
+                setInterval(function() {
+                    publicitChart.clear()
+                    publicitChart.setOption(option)
+                },6000)
+            },
+            // 三务公开数量
+            threeTasksFn:function() {
+
+
+
+
+                let names = "666666";
+                if(6 - names.length > 0) {
+                    for(g = 0; g < 6 - names.length; g++) {
+                        $(".main_top_middle_num_list"+(6 - g)).text('0')
+                    }
+                }
+                for(var j = 0; j < names.length; j++) {
+                    $(".main_top_middle_num_list"+(names.length - j)).text(names.substr(j,1))
+                }
+                var dataArr = [
+                    {name: '三号', value: 300},
+                    {name: '测试22', value: 500},
+                    {name: '测试33', value: 400},
+                    {name: '测试44', value: 350},
+                    {name: '测试55', value: 363},
+                    {name: '测试66', value: 800},
+                ]
+                for(var i = 1; i < dataArr.length; i++) {
+                    $(".main_top_left_c_l_n"+i).addClass("counter-value").text(dataArr[i].value)
+                }
+                var threeTasksChart = echarts.init(document.getElementById('threeTasksId'));
+                var data = dataArr
+                var option = {
+                    color: ['#38EB70', '#2E8CFF', '#0EFCFF', '#858FF8', '#FD9133','#F7E270'],
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        itemWidth: 15,// 标志图形的长度
+                        itemHeight: 15,// 标志图形的宽度
+                        orient: 'vertical',
+                        // left: 'right',
+                        top: '10%',
+                        bottom: '50%',
+                        x: '50%',
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 8,
+
+                        },
+                        data: data
+                    },
+                    series :
+                        {
+                            name:'一类',
+                            type:'pie',
+                            animationDuration: 1500,
+                            radius: ['70%', '90%'],
+                            center: ['25%', '50%'],
+                            roseType : 'radius',
+                            label: {
+                                normal: {
+                                    position: 'inner',
+                                    show : false
+                                }
+                            },
+                            data:data
+                        }
+                };
+                threeTasksChart.setOption(option)
+                setInterval(function() {
+                    threeTasksChart.clear()
+                    threeTasksChart.setOption(option)
+                },4000)
+            },
+            // 各部门苏木镇嘎查村公开占比
+            departmentFn:function() {
+            var exam_1 = {{ exam_1|safe }};
+            var exam_2 = {{ exam_2|safe }};
+            var exam_3 = {{ exam_3|safe }};
+            var exam_4 = {{ exam_4|safe }};
+            var exam_5 = {{ exam_5|safe }};
+            var predict_socre = {{ predict_score|safe }};
+
+
+                var dataArr = [
+                    {name: '成绩一测', value: exam_1},
+                    {name: '成绩二测', value: exam_2},
+                    {name: '成绩三测', value: exam_3},
+                    {name: '成绩四测', value: exam_4},
+                    {name: '下次成绩预测', value: predict_socre},
+                ]
+                    // 中间滚动数据展示
+                    for(var j = 0; j < dataArr.length; j++) {
+                        $(".main_list_title_num"+(j+1)).addClass("counter-value").text(dataArr[j].value)
+                        $(".main_list_title"+(j+1)).text(dataArr[j].name)
+                    }
+                var departmentChart = echarts.init(document.getElementById('departmentId'));
+                var data = dataArr
+                var option = {
+                    color: ['#FD9133', '#47F6A2', '#37D2D4', '#3493FF'],
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        itemWidth: 15,// 标志图形的长度
+                        itemHeight: 15,// 标志图形的宽度
+                        orient: 'vertical',
+                        // left: 'right',
+                        top: '30%',
+                        bottom: '50%',
+                        x: '5%',
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 8,
+
+                        },
+                        data: data,
+                    },
+                    series: [
+                        {
+                            name: '占比',
+                            type: 'pie',
+                            radius: ['50%', '70%'],
+                            center: ['78%', '52%'],
+                            labelLine: {
+                                normal: {
+                                    length: 12,
+                                    lineStyle: {
+                                        type: 'solid',
+                                        color: '#0EFCFF'
+                                    }
+                                }
+
+                            },
+                            label: {
+                                normal: {
+                                    formatter: (params)=>{
+                                        return params.name
+                                    },
+                                    borderWidth: 0,
+                                    borderRadius: 4,
+                                    padding: [0,0],
+                                    height: 20,
+                                    fontSize: 8,
+                                    align: 'center',
+                                    color: '#0EFCFF',
+                                }
+                            },
+                            data: data
+                        },
+                        {
+                            color: '#0EFCFF',
+                            type: 'pie',
+                            radius: ['55', '56'],
+                            center: ['78%', '52%'],
+                            data: [100],
+                            label: {
+                                show: false
+                            }
+                        },
+                        {
+                            type: 'pie',
+                            radius: ['25', '26'],
+                            center: ['78%', '52%'],
+                            data: [100],
+                            label: {
+                                show: false
+                            }
+                        }
+                    ]
+                };
+                departmentChart.setOption(option)
+                setInterval(function() {
+                    departmentChart.clear()
+                    departmentChart.setOption(option)
+                },12000)
+            },
+            // 办事指南
+            guideFn:function() {
+                $(".main_bottom_t_l_main").jCarouselLite({
+                    vertical: true,
+                    hoverPause:true,
+                    visible: 4,
+                    auto: 1000,
+                    speed: 500
+                });
+            },
+            // 政策解读
+            policyFn:function() {
+                $(".main_bottom_t_l_main2").jCarouselLite({
+                    vertical: true,
+                    hoverPause:true,
+                    visible: 4,
+                    auto: 1000,
+                    speed: 500
+                });
+            },
+            // 主要关注内容区域占比
+            coverageFn:function() {
+                var resArr = [
+                    {name: '学习小工具', value: 300},
+                    {name: '网课', value: 500},
+                    {name: '论坛交流', value: 800},
+                    {name: '资讯阅读', value: 350},
+                    {name: '习题', value: 363},
+
+                ]
+                var indicatorArr = []
+                var numArr = []
+                for(var i = 0; i < resArr.length; i++) {
+                    indicatorArr.push({name: resArr[i].name,max: 900})
+                    numArr.push(resArr[i].value)
+                }
+                var data = [
+                    {
+                        value: numArr,
+                    }
+                ]
+                var coverageChart = echarts.init(document.getElementById('coverageId'));
+                var option = {
+                    legend: {
+                        show: true,
+                        icon: "circle",
+                        bottom: 30,
+                        center: 0,
+                        itemWidth: 14,
+                        itemHeight: 14,
+                        itemGap: 21,
+                        orient: "horizontal",
+                        data: ['a', 'b'],
+                        textStyle: {
+                            fontSize: '70%',
+                            color: '#0EFCFF'
+                        },
+                    },
+
+                    radar: {
+                        // shape: 'circle',
+                        radius: '70%',
+                        triggerEvent: true,
+                        // type: 'default',
+                        name: {
+                            textStyle: {
+                                color: '#39DCF4',
+                                fontSize: '10',
+                                // borderRadius: 3,
+                                padding: [10, 10]
+                            }
+                        },
+                        nameGap: '2',
+                        indicator: indicatorArr,
+                        splitArea: {
+                            areaStyle: {
+                                color: 'rgba(255,255,255,0)'
+                            }
+                        },
+                        axisLine: { //指向外圈文本的分隔线样式
+                            lineStyle: {
+                                color: 'rgba(255,255,255,.2)'
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                width: 1,
+                                color: 'rgba(255,255,255,.2)'
+                            }
+                        },
+
+                    },
+                    series: [{
+                        name: '占比',
+                        type: 'radar',
+                        animationDuration: 2000,
+                        areaStyle: {
+                            normal: {
+                                color: {
+                                    type: 'linear',
+                                    opacity: 1,
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    color: '#2EEFAD'
+                                }
+                            }
+                        },
+                        symbolSize: 0,
+                        lineStyle: {
+                            normal: {
+                                // color: 'rgba(252,211,3, 1)',
+                                width: 0
+                            }
+                        },
+                        data: data
+                    }]
+                };
+                coverageChart.setOption(option)
+                setInterval(function() {
+                    coverageChart.clear()
+                    coverageChart.setOption(option)
+                },10000)
+            },
+            // 情感分展示
+            yearsNumFn:function() {
+
+             var emo_1 = {{ emo_1|safe }};
+             var emo_2 = {{ emo_2|safe }};
+             var emo_3 = {{ emo_3|safe }};
+             var emo_4 = {{ emo_4|safe }};
+             var emo_5 = {{ emo_5|safe }};
+             var emo_6 = {{ emo_6|safe }};
+             var emo_7 = {{ emo_7|safe }};
+             var emo_8 = {{ emo_8|safe }};
+             var emo_9 = {{ emo_9|safe }};
+             var emo_10 = {{ emo_10|safe }};
+             var emo_11 = {{ emo_11|safe }};
+             var emo_12 = {{ emo_12|safe }};
+             var emo_13 = {{ emo_13|safe }};
+             var emo_14 = {{ emo_14|safe }};
+             var emo_15 = {{ emo_15|safe }};
+             var emo_16 = {{ emo_16|safe }};
+
+
+                var resArr = [
+                    {name: '1', value: emo_1},
+                    {name: '2', value: emo_2},
+                    {name: '3', value: emo_3},
+                    {name: '4', value: emo_4},
+                    {name: '5', value: emo_5},
+                    {name: '6', value: emo_6},
+                    {name: '7', value: emo_7},
+                    {name: '8', value: emo_8},
+                    {name: '9', value: emo_9},
+                    {name: '10', value: emo_10},
+                    {name: '11', value: emo_11},
+                    {name: '12', value: emo_12},
+                    {name: '13', value: emo_13},
+                    {name: '14', value: emo_14},
+                    {name: '15', value: emo_15},
+                    {name: '16', value: emo_16},
+                ]
+                var nameArr = []
+                var caiArr = []
+                var cunArr = []
+                var danArr = []
+                var junArr = []
+                var zhenArr = []
+                for(var i = 0; i < resArr.length; i++) {
+                    nameArr.push(resArr[i].name)
+                    caiArr.push(resArr[i].value)
+                    cunArr.push(resArr[i].value)
+                    danArr.push(resArr[i].value)
+                    junArr.push(resArr[i].value)
+                    zhenArr.push(resArr[i].value)
+                }
+                var yearsNumChart = echarts.init(document.getElementById('yearsNumId'));
+                var spNum = 5,_max=100;
+                var y_data = nameArr.reverse();
+                var _datamax = [100,100,100,100,100,100,100,100,100,100,100,100],
+                    _data1 = caiArr.reverse(),
+                    _data2 = cunArr.reverse(),
+                    _data3 = danArr.reverse();
+                    _data4 = junArr.reverse();
+                    _data5 = zhenArr.reverse();
+                var fomatter_fn = function(v) {
+                    return (v.value / _max * 100).toFixed(0)
+                }
+                var _label = {
+                    normal: {
+                        show: true,
+                        position: 'inside',
+                        formatter: fomatter_fn,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 8
+                        }
+                    }
+                };
+                var option = {
+                    grid: {
+                        containLabel: true,
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        bottom: 0
+                    },
+                    tooltip: {
+                        show: true,
+                        backgroundColor: '#fff',
+                        borderColor: '#ddd',
+                        borderWidth: 1,
+                        textStyle: {
+                            color: '#3c3c3c',
+                            fontSize: 16
+                        },
+                        extraCssText: 'box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)'
+                    },
+                    xAxis: {
+                        splitNumber: spNum,
+                        interval: _max / spNum,
+                        max: _max,
+                        axisLabel: {
+                            show: false,
+                            formatter: function(v) {
+                                var _v = (v / _max * 100).toFixed(0);
+                                return _v == 0 ? _v : _v + '%';
+                            }
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        splitLine: {
+                            show: false
+                        }
+
+                    },
+                    yAxis: [{
+                        data: y_data,
+                        axisLabel: {
+                            fontSize: 8,
+                            color: 'rgba(255,255,255,.7)'
+
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        splitLine: {
+                            show: false
+                        }
+                    }, {
+                        show: false,
+                        data: y_data,
+                        axisLine: {
+                            show: false
+                        }
+                    }],
+                    series: [{
+                        type: 'bar',
+                        name: '第一节',
+                        stack: '2',
+                        label: _label,
+                        legendHoverLink: false,
+                        barWidth: 7,
+                        itemStyle: {
+                            normal: {
+                                color: '#FD9133'
+                            },
+                            emphasis: {
+                                color: '#FD9133'
+                            }
+                        },
+                        data: _data1
+                    }, {
+                        type: 'bar',
+                        name: '第二节',
+                        stack: '2',
+                        legendHoverLink: false,
+                        barWidth: 20,
+                        label: _label,
+                        itemStyle: {
+                            normal: {
+                                color: '#2E8CFF'
+                            },
+                            emphasis: {
+                                color: '#2E8CFF'
+                            }
+                        },
+                        data: _data2
+                    }, {
+                        type: 'bar',
+                        stack: '2',
+                        name: '第三节',
+                        legendHoverLink: false,
+                        barWidth: 20,
+                        label: _label,
+                        itemStyle: {
+                            normal: {
+                                color: '#37D2D4'
+                            },
+                            emphasis: {
+                                color: '#37D2D4'
+                            }
+                        },
+                        data: _data3
+                    }, {
+                        type: 'bar',
+                        stack: '2',
+                        name: '第四节',
+                        legendHoverLink: false,
+                        barWidth: 20,
+                        label: _label,
+                        itemStyle: {
+                            normal: {
+                                color: '#19CA88'
+                            },
+                            emphasis: {
+                                color: '#19CA88'
+                            }
+                        },
+                        data: _data4
+                    }, {
+                        type: 'bar',
+                        stack: '2',
+                        name: '第五节',
+                        legendHoverLink: false,
+                        barWidth: 20,
+                        label: _label,
+                        itemStyle: {
+                            normal: {
+                                color: '#0EFCFF'
+                            },
+                            emphasis: {
+                                color: '#0EFCFF'
+                            }
+                        },
+                        data: _data5
+                    }]
+                };
+                yearsNumChart.setOption(option)
+                setInterval(function() {
+                    yearsNumChart.clear()
+                    yearsNumChart.setOption(option)
+                },120000)
+            },
+            // 关注内容区域占比
+            contentFn:function() {
+            var progress_1 = {{ progress_1|safe }};
+            var progress_2 = {{ progress_2|safe }};
+            var progress_3 = {{ progress_3|safe }};
+            var progress_4 = {{ progress_4|safe }};
+            var progress_5 = {{ progress_5|safe }};
+            var progress_6 = {{ progress_6|safe }};
+            var progress_7 = {{ progress_7|safe }};
+            var progress_8 = {{ progress_8|safe }};
+            var progress_9 = {{ progress_9|safe }};
+            var progress_10 = {{ progress_10|safe }};
+            var progress_11 = {{ progress_11|safe }};
+            var progress_12 = {{ progress_12|safe }};
+            var progress_13 = {{ progress_13|safe }};
+            var progress_14 = {{ progress_14|safe }};
+            var progress_15 = {{ progress_15|safe }};
+            var progress_16 = {{ progress_16|safe }};
+
+                var resArr = [
+                    {name: '1', value: progress_1},
+                    {name: '2', value: progress_2},
+                    {name: '3', value: progress_3},
+                    {name: '4', value: progress_4},
+                    {name: '5', value: progress_5},
+                    {name: '6', value: progress_6},
+                    {name: '7', value: progress_7},
+                    {name: '8', value: progress_8},
+                    {name: '9', value: progress_9},
+                    {name: '10', value: progress_10},
+                    {name: '11', value: progress_11},
+                    {name: '12', value: progress_12},
+                    {name: '13', value: progress_13},
+                    {name: '14', value: progress_14},
+                    {name: '15', value: progress_15},
+                    {name: '16', value: progress_16},
+                ]
+                var nameArr = []
+                var caiArr = []
+                var cunArr = []
+                var danArr = []
+                var junArr = []
+                var zhenArr = []
+                for(var i = 0; i < resArr.length; i++) {
+                    nameArr.push(resArr[i].name)
+                    caiArr.push(resArr[i].value)
+                    cunArr.push(resArr[i].value)
+                    danArr.push(resArr[i].value)
+                    junArr.push(resArr[i].value)
+                    zhenArr.push(resArr[i].value)
+                }
+
+                var contentChart = echarts.init(document.getElementById('contentId'));
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        x: '35%',
+                        y: '0%',
+                        data: ["视频观看进度"],
+                        textStyle: {
+                            color: "#fff",
+                            fontSize: 8
+                        },
+                        itemWidth: 10,
+                        itemHeight: 10,
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: nameArr,
+                            axisLabel: {
+                                interval: 0,
+                                textStyle: {
+                                    fontSize: 8,
+                                    color: 'rgba(255,255,255,.7)',
+                                }
+                            },
+                            "axisTick": {       //y轴刻度线
+                                "show": false
+                            },
+                            "axisLine": {       //y轴
+                                "show": false,
+                            },
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            scale: true,
+                            name: '单位：%',
+                            nameTextStyle: {
+                                color: 'rgba(255,255,255,.7)',
+                                fontSize: 8
+                            },
+                            max: 100,
+                            min: 0,
+                            boundaryGap: [0.2, 0.2],
+                            "axisTick": {       //y轴刻度线
+                                "show": false
+                            },
+                            "axisLine": {       //y轴
+                                "show": false,
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: 'rgba(255,255,255,.8)',
+                                    fontSize: 8
+                                    // opacity: 0.1,
+                                }
+                            },
+                            splitLine: {  //决定是否显示坐标中网格
+                                show: true,
+                                lineStyle: {
+                                    color: ['#fff'],
+                                    opacity: 0.2
+                                }
+                            },
+                        },
+                        {
+                            type: 'value',
+                            scale: true,
+                            show: false,
+                            // name: "个",
+                            nameTextStyle: {
+                                color: 'rgba(255,255,255,.2)',
+                            },
+                            max: 1,
+                            min: 0,
+                            boundaryGap: [0.2, 0.2],
+                            "axisTick": {       //y轴刻度线
+                                "show": false
+                            },
+                            "axisLine": {       //y轴
+                                "show": false,
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: 'rgba(255,255,255,.2)',
+                                    // opacity: 0.1,
+                                }
+                            },
+                            splitLine: {  //决定是否显示坐标中网格
+                                show: true,
+                                lineStyle: {
+                                    color: ['#fff'],
+                                    opacity: 0.2
+                                }
+                            },
+
+                        }
+                    ],
+                    color: ['#0EFCFF', '#FD9133'],
+                    grid: {
+                        left: '5%',
+                        right: '1%',
+                        top: '25%',
+                        bottom: '15%'
+                        // containLabel: true
+                    },
+                    series: [
+                        {
+                            barWidth: '10%',
+                            name: '视频观看进度',
+                            type: 'bar',
+                            data: caiArr,
+                        },
+
+                    ]
+                };
+                contentChart.setOption(option)
+                setInterval(function() {
+                    contentChart.clear()
+                    contentChart.setOption(option)
+                },90000)
+            },
+            // 巡察
+            publicNumFn:function() {
+
+               var topic_1 = {{ topic_1|safe }};
+                var topic_2 = {{ topic_2|safe }};
+                var topic_3 = {{ topic_3|safe }};
+                var topic_4 = {{ topic_4|safe }};
+                var topic_5 = {{ topic_5|safe }};
+                var topic_6 = {{ topic_6|safe }};
+                var topic_7 = {{ topic_7|safe }};
+                var topic_8 = {{ topic_8|safe }};
+                var topic_9 = {{ topic_9|safe }};
+
+
+
+                var resArr = [
+                    {name: '机器人系统', value: topic_1},
+                    {name: '智能信息', value: topic_2},
+                    {name: '人智原理', value: topic_3},
+                    {name: '云计算技术', value: topic_4},
+                    {name: '深度学习', value: topic_5},
+                    {name: '大数据算法', value: topic_6},
+                    {name: '智能城镇化', value: topic_7},
+                    {name: '模型与算法', value: topic_8},
+                    {name: '可视化导论', value: topic_9},
+
+                ]
+                var xunArr = []
+                var jingArr = []
+                var dateArr = []
+                for(var i = 0; i < resArr.length; i++) {
+                    xunArr.push(resArr[i].value)
+                    jingArr.push(resArr[i].value)
+                    dateArr.push(resArr[i].name)
+                }
+                var publicNumChart = echarts.init(document.getElementById('publicNumId'));
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        x: '35%',
+                        y: '0%',
+                        data: ['发布的话题', '评论数量'],
+                        textStyle: {
+                            color: "#fff",
+                            fontSize: 8
+                        },
+                        itemWidth: 10,
+                        itemHeight: 10,
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: dateArr,
+                            axisLabel: {
+                                interval: 0,
+                                textStyle: {
+                                    fontSize: 8,
+                                    color: 'rgba(255,255,255,.7)',
+                                }
+                            },
+                            "axisTick": {       //y轴刻度线
+                                "show": false
+                            },
+                            "axisLine": {       //y轴
+                                "show": false,
+                            },
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            scale: true,
+                            name: '单位：条',
+                            nameTextStyle: {
+                                color: 'rgba(255,255,255,.7)',
+                                fontSize: 8
+                            },
+                            max: 10,
+                            min: 0,
+                            boundaryGap: [0, '100'],
+                            "axisTick": {       //y轴刻度线
+                                "show": false
+                            },
+                            "axisLine": {       //y轴
+                                "show": false,
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: 'rgba(255,255,255,.8)',
+                                    fontSize: 8
+                                    // opacity: 0.1,
+                                }
+                            },
+                            splitLine: {  //决定是否显示坐标中网格
+                                show: true,
+                                lineStyle: {
+                                    color: ['#fff'],
+                                    opacity: 0.2
+                                }
+                            },
+                        },
+                        {
+                            type: 'value',
+                            scale: true,
+                            show: false,
+                            // name: "销量额(万元)",
+                            nameTextStyle: {
+                                color: 'rgba(255,255,255,.2)',
+                            },
+                            max: 1,
+                            min: 0,
+                            boundaryGap: [0.2, 0.2],
+                            "axisTick": {       //y轴刻度线
+                                "show": false
+                            },
+                            "axisLine": {       //y轴
+                                "show": false,
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    color: 'rgba(255,255,255,.2)',
+                                    // opacity: 0.1,
+                                }
+                            },
+                            splitLine: {  //决定是否显示坐标中网格
+                                show: true,
+                                lineStyle: {
+                                    color: ['#fff'],
+                                    opacity: 0.2
+                                }
+                            },
+
+                        }
+                    ],
+                    color: ['#2E8CFF', '#38EB70'],
+                    grid: {
+                        left: '5%',
+                        right: '1%',
+                        top: '25%',
+                        bottom: '15%'
+                        // containLabel: true
+                    },
+                    series: [
+                        {
+                            animationDuration: 2500,
+                            barWidth: '20%',
+                            name: '发布的话题',
+                            type: 'bar',
+                            data: xunArr,
+                        },
+                        {
+                            barWidth: '20%',
+                            name: '评论数量',
+                            type: 'bar',
+                            data: jingArr,
+                        }
+                    ],
+                    animationEasing: 'cubicOut'
+                };
+                publicNumChart.setOption(option)
+                setInterval(function() {
+                    publicNumChart.clear()
+                    publicNumChart.setOption(option)
+                },60000)
+            }
+
+        }
+        var start = new apiFn()
+        start.Init()
+    })
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('exam-modal');
+    var span = document.getElementsByClassName('close')[0];
+    var generateExamBtn = document.getElementById('generate-exam-btn');
+    var saveExamBtn = document.getElementById('save-exam-btn');
+    var predictScore = {{ predict_score|safe }};
+    var difficulty = determineDifficulty(predictScore);
+
+    // 添加对加载指示器的引用
+    var loadingIndicator = document.getElementById('loading-indicator');
+
+    generateExamBtn.onclick = function() {
+        // 在请求开始前显示加载指示器
+        loadingIndicator.style.display = 'block';
+
+        fetch(`/get_exam_info/?difficulty=${difficulty}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    document.getElementById('exam-title').innerText = data.title;
+                    document.getElementById('exam-difficulty').innerText = data.difficulty;
+                    setTimeout(() => {
+                    // 请求成功后隐藏加载指示器并显示模态窗
+                    loadingIndicator.style.display = 'none';
+                    modal.style.display = 'block';
+                }, 3000); // 2700毫秒
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // 如果请求失败，也要确保加载指示器被关闭
+                loadingIndicator.style.display = 'none';
+            });
+    };
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
+
+    saveExamBtn.onclick = function() {
+        window.location.href = `/generate_exam/?difficulty=${difficulty}`;
+        modal.style.display = 'none';
+    };
+
+    function determineDifficulty(score) {
+        if (score >= 90) {
+            return 'A';
+        } else if (score >= 80) {
+            return 'B';
+        } else if (score >= 60) {
+            return 'C';
+        } else {
+            return 'D';
+        }
+    }
+});
+
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const videoListElement = document.getElementById('video-list');
+    const videoList = {{ video_list|safe }}; // 假设video_list是一个JSON数组，需要使用|safe过滤器使其安全地呈现为HTML
+
+    videoList.forEach((video, index) => {
+        const liElement = document.createElement('li');
+        const titleDiv = document.createElement('div');
+        titleDiv.classList.add('main_bottom_t_list_title');
+        titleDiv.textContent = index + 1;
+        const linkElement = document.createElement('a');
+        linkElement.href = video.url;
+        linkElement.target = '_blank';
+        linkElement.textContent = video.title;
+        liElement.appendChild(titleDiv);
+        liElement.appendChild(linkElement);
+        videoListElement.appendChild(liElement);
+    });
+});
+</script>

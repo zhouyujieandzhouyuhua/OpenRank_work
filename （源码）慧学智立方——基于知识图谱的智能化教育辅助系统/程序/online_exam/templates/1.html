@@ -1,0 +1,308 @@
+{% extends "base.html" %}
+<!--73 87 92-->
+{% block title %}My New Page{% endblock %}
+
+{% block content %}
+<script onerror="javascript:window.errorEventHandler && window.errorEventHandler(event)"
+        src="//mc.stu.126.net/pub/s/pt_web_course_info_7892815b7f35c7a42e513577a3fe4e0f.js"></script>
+
+<!DOCTYPE html>
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <link rel="shortcut icon"
+          href="//edu-image.nosdn.127.net/32a8dd2a-b9aa-4ec9-abd5-66cd8751befb.png?imageView&quality=100"/>
+    <meta http-equiv="x-dns-prefetch-control" content="on"/>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #89b4201a; /* 淡紫色 */
+    }
+
+    .enroll-button {
+        background-color: #6200ea; /* 深紫色 */
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .enroll-button:hover {
+        background-color: #41847d;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .enroll-button:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+
+
+        .m-infomation {
+        width: calc(100%); /* 原始宽度加上50px */
+        margin-right: calc(200px - 50px); /* 减少margin-right的值 */
+        padding: 0 32px 1px;
+        border-radius: 8px;
+    }
+
+
+
+
+        .course-details {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    .course-info-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .course-info {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+
+    .course-info .label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .course-info .value {
+        color: #666;
+    }
+
+    .course-price-wrapper {
+        display: flex;
+        align-items: center;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #d9534f;
+    }
+
+    .course-price-wrapper .label {
+        margin-right: 10px;
+        color: #333;
+    }
+</style>
+<link rel="stylesheet" href="//mc.stu.126.net/pub/s/pt_web_course_intro_1cf949f72f1b271d28f8cece1954e017.css"/>
+<body class="">
+<div id="j-activityBanner" style="display:none;"></div>
+<div id="j-activityRightBanner" style="display:none;"></div>
+<div id="j-appbanner" style="display:none;"></div>
+<div id="g-container">
+    <div id="g-body">
+        <div class="">
+            <div class="m-top f-cb f-pr f-f0">
+                <div class="g-flow">
+                    <div class="introCard">
+                        <div id="j-breadcrumb" class=""></div>
+                        <div class="g-sd1 video-intro">
+                            <div id="j-courseImg" class="m-recimg">
+                                <img class="img" id=""
+                                     src="http://edu-image.nosdn.127.net/B4839DBDE2346ADEAB71918D799EB73D.png?imageView&thumbnail=510y288&quality=100&type=webp"
+                                     width="510" height="288" alt="图片">
+                                <div class="click-btn-wrapper f-pa">
+                                    <a class="clickBtn">
+                                        <span class="u-icon-play f-ib f-vam"></span>
+                                        <span class="f-ib f-vam">播放</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="g-mn1 course-enroll-info-wrapper">
+                            <div class="title-wrapper">
+                                <div class="f-cb f-pr">
+                                    <div class="f-fl course-title-wrapper">
+                                        <span class="course-title f-ib f-vam">《智能机器人系统》</span>
+                                        <span id="j-teacherAssistMark" class="f-fcf f-f0 taMark"
+                                              style="display:none;"></span>
+                                    </div>
+
+                                    <button class="enroll-button f-ib f-vam"
+                                            onclick="window.location.href='http://127.0.0.1:8000/AIcourse/1/11/gonggao_11';">
+                                        立即学习
+                                    </button>
+
+                                    <div class="f-fr f-f0 f-fs1 course-share f-pa " id="j-coushare">
+                                        <!--                                        <span class="f-ib f-vam">分享</span>-->
+                                    </div>
+                                </div>
+                                <div id="course-enroll-info"></div>
+                                <div class="f-cb f-pr course-details">
+                                    <div class="f-fl course-info-wrapper">
+                                        <div class="course-info f-f0 f-fs1">
+                                            <span class="label f-ib f-vam">课程类型：</span>
+                                            <span class="value f-ib f-vam">理论</span>
+                                        </div>
+                                        <div class="course-info f-f0 f-fs1">
+                                            <span class="label f-ib f-vam">课程时长：</span>
+                                            <span class="value f-ib f-vam">5小时</span>
+                                        </div>
+                                        <div class="course-info f-f0 f-fs1">
+                                            <span class="label f-ib f-vam">学习人数：</span>
+                                            <span class="value f-ib f-vam">102</span>
+                                        </div>
+                                        <div class="course-info f-f0 f-fs1">
+                                            <span class="label f-ib f-vam">课程评分：</span>
+                                            <span class="value f-ib f-vam">4.7</span>
+                                        </div>
+                                        <div class="course-info f-f0 f-fs1">
+                                            <span class="label f-ib f-vam">大学：</span>
+                                            <span class="value f-ib f-vam">哈尔滨工业大学</span>
+                                        </div>
+
+                                        <div class="course-info f-f0 f-fs1">
+                                            <span class="label f-ib f-vam">发布日期：</span>
+                                            <span class="value f-ib f-vam">2024年6月1日</span>
+                                        </div>
+                                    </div>
+                                    <div class="f-fr f-f0 f-fs1 course-price-wrapper">
+                                        <span class="label f-ib f-vam">价格：</span>
+                                        <span class="value f-ib f-vam">免费</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g-flow">
+            <div class="b-20"></div>
+            <div class="g-wrap f-cb">
+                <div class="g-mn2">
+                    <div class="g-mn2c f-bgw m-infomation f-f0">
+                        <div class="m-infomation_tabs">
+                            <div data-action="点击详情tab" data-label="1471852470"
+                                 class="ga-click m-infomation_tabs_tab selected f-ib f-vam" id="detail-tag-button">课程详情
+                            </div>
+
+                        </div>
+                        <div id="content-section" class="m-infomation_content-section">
+                            <!--                            -->
+                        </div>
+                        <div class="category-title f-f0">
+                            <span class="category-title_icon f-ib f-vam u-icon-categories"></span>
+                            <span class="f-ib f-vam">课程概述</span>
+                        </div>
+                        <div class="category-content j-cover-overflow">
+                            <div class="f-richEditorText"><p style="text-indent:28px">
+
+                                智能机器人系统是一种能够模拟人类智能行为的软件或硬件设备，它们能够执行复杂的任务，与用户进行交互，并从经验中学习和改进。这些系统通常结合了多种人工智能技术，包括但不限于自然语言处理（NLP）、机器学习（ML）、深度学习、计算机视觉和语音识别等。
+
+                                智能机器人系统的功能广泛，可以应用于多个领域，例如：
+                                客户服务：自动回答常见问题，提供产品信息，处理订单，甚至解决一些客户问题，减轻人工客服的工作负担。
+                                教育辅助：提供个性化学习体验，帮助学生掌握新知识，为教师提供教学分析。
+                                医疗健康：监控患者健康状况，提供初步诊断，协助医生进行治疗决策。
+                                商业智能：分析市场数据，预测趋势，优化业务流程。
+                                家庭助手：控制智能家居设备，提醒日程安排，播放音乐，讲故事等。
+                                工业自动化：在制造环境中执行精确和重复的任务，提高生产效率。
+                                智能机器人系统的核心优势在于它们能够24/7不间断工作，处理大量数据，提供即时反馈，并随着时间推移不断学习和优化其性能。它们可以减少人为错误，提高效率，并在某些情况下提供比人类更好的服务。
+
+                                随着技术的发展，智能机器人系统正变得越来越复杂和人性化，它们能够理解复杂指令，感知情绪，甚至展示一定程度的创造性思维。未来，智能机器人系统将在更多领域发挥重要作用，成为人类生活和工作中不可或缺的一部分。
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="g-sd2">
+                        <div id="j-sideContent" class="g-sd2c">
+                            <div class="m-recomm-wrap">
+                                <div class="f-f0"></div>
+                                <div class="u-recomm-list ">
+                                    <div class="j-list j-list-f" style="display: block;">
+                                        <ul class="f-cb">
+                                            <!--                                        -->
+                                        </ul>
+                                    </div>
+                                    <div class="j-list j-list-z f-dn">
+                                        <ul class="f-cb">
+                                            <li class="f-cb f-pr">
+                                                <a class="u-cover f-pr f-f0" title="电器理论基础"
+                                                   href="//www.icourse163.org/course/HIT-1460030150"
+                                                   target="_blank">
+                                                    <img class="j-img" width="120" height="90" alt="图片"
+                                                         src="https://mooc-image.nosdn.127.net/d8e9113a4ea54e368781963d5f252e12.jpg">
+                                                </a>
+                                                <div class="u-content f-f0">
+                                                    <a href="//www.icourse163.org/course/HIT-1460030150"
+                                                       class="f-thide" title="电器理论基础">电器理论基础</a>
+                                                    <div title="哈尔滨工业大学" class="u-school f-thide">
+                                                        哈尔滨工业大学
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--                          -->
+                            </div>
+                            <div class="u-side-card"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-loading" style="display: none;"></div>
+        </div>
+    </div>
+    <div id="j-subcribePanel" class="g-btm-fixed j-fc-g" style="display:none;"></div>
+</body>
+<script>
+
+
+        document.getElementById('welcome-span').addEventListener('click', function() {
+        var userDetails = document.getElementById('user-details');
+        if (userDetails.style.display === "none") {
+            userDetails.style.display = "block";
+        } else {
+            userDetails.style.display = "none";
+        }
+    });
+    let currentElemt = window.location.pathname;
+    console.log(currentElemt)
+    // nav菜单选择
+    if (currentElemt.indexOf('user') > -1) {
+        currentElemt = 'user'
+    } else if (currentElemt.indexOf('chengji') > -1) {
+        currentElemt = 'chengji'
+    } else if (currentElemt.indexOf('shijuan') > -1) {
+        currentElemt = 'shijuan'
+    } else if (currentElemt.indexOf('shiti') > -1) {
+        currentElemt = 'shiti'
+    } else if (currentElemt.indexOf('index') > -1) {
+        currentElemt = 'index'
+    } else {
+        currentElemt = 'kaoshi'
+    }
+    $('#' + currentElemt).addClass('active');
+
+
+
+</script>
+
+
+
+
+</html>
+{% endblock %}

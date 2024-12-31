@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>星火智立方登录</title>
+    <!-- For-Mobile-Apps-and-Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+    </script>
+    <!-- //For-Mobile-Apps-and-Meta-Tags -->
+    <style>
+        body{
+             background-image: url('../static/images/bj1.jpg');
+            background-repeat:  no-repeat;
+            background-size: cover;
+        }
+        #messageBanner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: lightgreen;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+    </style>
+
+    <link href="../static/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="../static/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<style>
+    h1 {
+        font-family: 'Roboto', sans-serif; /* 字体 */
+        color: #003366; /* 深蓝色 */
+        text-align: center; /* 文字居中 */
+        margin-top: 55px; /* 上边距 */
+        animation: fadeInOut 2s forwards; /* 动画效果 */
+    }
+
+    /* 定义动画 */
+    @keyframes fadeInOut {
+        0% { opacity: 1; }
+        100% { opacity: 1; }
+    }
+</style>
+<h1>星火智立方系统-登录</h1>
+<section>
+
+    <div class="stage">
+
+        <div class="cbImage w3">
+            <h3>教师登录</h3>
+            <form>
+                <input type="text" class="number" name="number" placeholder="工号" id="number" required="">
+                <input type="password" class="password" name="password" placeholder="密码" id="teac_password"
+                       required="">
+                <!--                <input type="button" class="done" value="登录" id="login_teacher">-->
+                <input type="button" class="done" value="账号密码登录" id="login_teacher"
+                       style="margin-top: 10px; display: block; width: 100%; text-align: center;">
+                <input type="button" value="扫脸登录" id="face_login"
+                       style="margin-top: 10px; display: block; width: 100%; text-align: center;">
+            </form>
+
+        </div>
+        <div id="messageBanner" style="display:none;">
+            <!-- This will display the message -->
+        </div>
+        <div class="cbImage active signin agileits">
+            <h3>学生登录</h3>
+            <form>
+                <input type="text" name="Name" class="name" id="std_number" placeholder="学号" required="">
+                <input type="password" name="password" class="password" id="std_password" placeholder="密码"
+                       required="">
+                <input type="button" value="账号密码登录" id="login_student"
+                       style="margin-top: 10px; display: block; width: 100%; text-align: center;">
+                <input type="button" value="扫脸登录" id="student_face_login"
+                       style="margin-top: 10px; display: block; width: 100%; text-align: center;">
+<!--                <input type="button" value="声纹登录" id="student_sound_login"-->
+<!--                       style="margin-top: 10px; display: block; width: 100%; text-align: center;">-->
+
+            </form>
+        </div>
+
+        <div class="cbImage agileinfo">
+            <h3>学生注册</h3>
+            <form id="my_form">
+                <input type="text" class="number_std" name="number_std" placeholder="学号" id="number_std" required="">
+                <input type="text" class="username_std" name="username_std" placeholder="姓名" id="username_std"
+                       required="">
+                <input type="password" class="password1" name="password1" id="password1" placeholder="密码" required="">
+                <input type="text" class="phone" name="phone" placeholder="手机" id="phone" required="">
+
+                <!-- 显示的按钮 -->
+                <!--<button id="photo_update_button" style="margin-top: 10px; display: block; width: 100%; text-align: center;">上传证件照</button>-->
+                <input type="button" value="上传照片" id="photo_update_button"
+                       style="margin-top: 10px; display: block; width: 100%; text-align: center;">
+                <input type="button" value="注册" id="register"
+                       style="margin-top: 10px; display: block; width: 100%; text-align: center;">
+                <!-- 隐藏的文件输入框 -->
+                <input type="file" id="hidden_file_input" accept="image/*" style="display:none">
+            </form>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="footer">
+        <p>&copy; 2024 智能测评系统</p>
+    </div>
+</section>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script src="../static/coverflow-slideshow.js"></script>
+
+</body>
+<script>
+
+    $(function () {
+        $("#login_teacher").click(function () {
+            var number = $("#number").val();
+            var teac_password = $("#teac_password").val();
+            if ("" == number || undefined == number) {
+                alert("工号不能为空");
+                return
+            }
+            if ("" == teac_password || undefined == teac_password) {
+               alert("密码不能为空");
+                return
+            }
+            $.ajax({
+                type: 'GET',
+                url: "/user/login_check",
+                dataType: 'json', //服务端返回json格式的数据
+                data: {'username': number, 'password': teac_password,'role':2},
+                contentType: "application/json; charset=utf-8",
+                success: function (data) { // 这里的data就是返回的json格式的数据
+                    window.location.href = '/admin_2'
+                },
+                error: function (xhr, type) {
+                   alert("账户密码不正确！");
+                }
+            });
+
+        })
+document.getElementById('photo_update_button').addEventListener('click', function() {
+document.getElementById('hidden_file_input').click();
+});
+$('#hidden_file_input').on('change', function(e) {
+const file = e.target.files[0];
+if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const imageData = event.target.result;
+        // 发送imageData到服务器
+        // 可以使用AJAX请求
+    };
+    reader.readAsDataURL(file);
+}
+});
+        $("#student_face_login").click(function() {
+            $.ajax({
+                url: "/user/student_face_login",
+                type: "POST",
+                data: { 'action': 1 },
+                success: function(response) {
+                    if (response.result === 'pass') {
+                $('#messageBanner').text('正在打开摄像头拍摄！正在识别.....');
+                $('#messageBanner').show().delay(3000).fadeOut();
+
+
+                setTimeout(function() {$('#messageBanner').fadeOut('slow', function() {
+                    $(this).text('登录成功！加载中....');
+                    $(this).fadeIn('slow');
+
+                    setTimeout(function() {
+                        window.location.href = 'http://127.0.0.1:8000/AIcourse/';
+
+                    }, 3000); // 3000毫秒等于3秒
+                });}, 3000); // 3000毫秒等于3秒，等待第一消息消失后再显示第二条消息
+        }
+                    else {console.log('请让本人扫脸或者调整角度重试！');}},
+
+<!--                   error: function(error) {-->
+<!--                        console.error('Error occurred:', error);-->
+<!--                    }-->
+            });
+        });
+<!--  ============================================声纹登录============================================================          -->
+
+
+// 当点击“声纹登录”按钮时触发录音
+$("#student_sound_login").click(function() {
+
+        $.ajax({
+            type: 'POST',
+            url: '/user/student_sound_login',
+            data:{ 'action': 1 } ,
+            success: function(response) {
+                if (response.result === 'pass') {
+                   console.log('okkk');
+                } else {
+                    console.log('请重新尝试声纹登录！');
+                }
+            },
+
+        });
+
+
+});
+<!-- ======================================================================================================================-->
+        $("#login_student").click(function () {
+            var username = $("#std_number").val();
+            var password = $("#std_password").val();
+            if ("" == username || undefined == username) {
+                alert("学号不能为空");
+                return
+            }
+            if ("" == password || undefined == password) {
+               alert("密码不能为空");
+                return
+            }
+            $.ajax({
+                type: 'GET',
+                url: "/user/login_check",
+                dataType: 'json', //服务端返回json格式的数据
+                data: {'username': username, 'password': password,'role':1},
+                contentType: "application/json; charset=utf-8",
+                success: function (data) { // 这里的data就是返回的json格式的数据
+                    window.location.href = '/AIcourse'
+                },
+                error: function (xhr, type) {
+                   alert("账户密码不正确！");
+                }
+            });
+
+        })
+
+        $("#register").click(function () {
+            var number = $("#number_std").val()
+            var username = $("#username_std").val();
+            var password = $("#password1").val();
+            var phone = $('#phone').val()
+             if ("" == number || undefined == number) {
+               alert("学号不能为空");
+                return
+            }
+            if ("" == username || undefined == username) {
+                alert("姓名不能为空");
+                return
+            }
+            if ("" == password || undefined == password) {
+                alert("密码不能为空");
+                return
+            }
+            if ("" == phone || undefined == phone) {
+                alert("手机不能为空");
+                return
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "/user/register",
+                dataType: 'json', //服务端返回json格式的数据
+                data: $('#my_form').serialize(),
+                success: function (data) { // 这里的data就是返回的json格式的数据
+                    alert('注册成功！')
+
+                    setTimeout(function () {
+                        window.location.href = "/"
+                    }, 1000);
+
+                },
+                error: function (xhr, type) {
+                    if (xhr.status == 401) {
+                        alert("注册失败！")
+                    } else if (xhr.status == 403) {
+                        alert('用户已存在！2s后跳转到登录页面')
+                        setTimeout(function () {
+                            window.location.href = '/'
+                        }, 2000)
+
+                    }
+                }
+            });
+
+        })
+    })
+</script>
+</html>

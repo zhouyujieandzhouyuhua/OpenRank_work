@@ -1,0 +1,488 @@
+{% extends 'base.html' %}
+{% block title %}课程课件公告{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!--不需要修改-->
+{% block content %}
+<style>
+    /* 样式代码 */
+    body {
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.6;
+        color: #444;
+        background: #f5f5f5;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .video-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .video-card {
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative; /* 让圆圈相对于视频卡片定位 */
+    }
+
+    .video-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .video-thumb, .video-content {
+        width: 100%;
+    }
+
+    .video-content {
+        padding: 16px;
+    }
+
+    .video-title {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    .video-meta {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 16px;
+        border-bottom: none; /* 移除底部横线 */
+    }
+
+    .video-icon {
+        display: inline-block;
+        background: linear-gradient(to right, #220ad9, #00cec9);
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+    }
+
+    .video-link {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+    }
+
+    .video-link:hover {
+        color: #6c5ce7;
+    }
+
+    .no-videos {
+        padding: 12px;
+        text-align: center;
+        color: #999;
+        margin-top: 20px;
+    }
+
+    .user-details {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 300px;
+        right: 20px;
+        top: 64px;
+        z-index: 999;
+    }
+
+    .user-avatar img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .user-info p {
+        margin-bottom: 5px;
+    }
+
+    .actions button {
+        padding: 5px 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .favorite-btn {
+        background: linear-gradient(to right, #000000, #000000);
+    }
+
+    .favorite-btn:hover {
+        background: linear-gradient(to right, #000000, #000000);
+    }
+
+    .like-btn {
+        background: linear-gradient(to right, #000000, #000000);
+    }
+
+    .like-btn:hover {
+        background: linear-gradient(to right, #000000, #000000);
+    }
+
+    .comment-btn {
+        background: linear-gradient(to right, #000000, #000000);
+    }
+
+    .comment-btn:hover {
+        background: linear-gradient(to right, #000000, #000000);
+    }
+
+<!--    .top {-->
+<!--        height: 64px;-->
+<!--        width: 100%;-->
+<!--        background: #41847d;-->
+<!--        padding-left: 10%;-->
+<!--    }-->
+
+    img {
+        vertical-align: middle;
+    }
+
+    em {
+        font-style: normal;
+    }
+
+    a img, :link img, :visited img {
+        border: 0;
+    }
+
+    a:link, a:visited {
+        text-decoration: none;
+        color: #000000;
+    }
+
+    a:hover, a:focus {
+        color: #0573bd;
+        text-decoration: none;
+    }
+
+    ul, ul li {
+        list-style-type: none;
+    }
+
+    #top_bg {
+        height: 64px;
+        width: 100%;
+        background: #333;
+        box-shadow: 1px 1px 7px #999;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        border-bottom: #C6C6C6 solid 1px;
+    }
+
+    .top .logo_l {
+        width: 180px;
+        height: 64px;
+        color: #ffffff;
+        float: left;
+        line-height: 64px;
+    }
+
+    .nav_z {
+        width: auto !important;
+        height: 64px;
+        float: left;
+        position: relative;
+        z-index: 999;
+    }
+
+    #navul li {
+        float: left;
+        padding: 0 20px;
+        height: 64px;
+        position: relative;
+        text-align: center;
+        line-height: 64px;
+    }
+
+    #navul li a:link, #navul li a:visited {
+        font-weight: 500;
+        letter-spacing: 2px;
+    }
+
+    #navul li a {
+        font-size: 14px;
+        color: #fff;
+    }
+
+    #navul li a:hover {
+        color: #FFF;
+    }
+
+    .login_out {
+        color: hsla(0, 0%, 100%, .65);
+        padding: 0 20px;
+    }
+
+    .login_out:hover {
+        color: #FFF;
+    }
+
+    .active {
+        background-color: #1890ff;
+    }
+
+    .bottom {
+        padding-top: 64px;
+    }
+
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .card {
+        border: 4px solid #e0e0e0;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        background-color: #a1c82026;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transform: translateY(-4px);
+    }
+
+    .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    /* 新增的播放进度圆圈样式 */
+    .progress-circle {
+        position: absolute;
+        bottom: 14px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 2px solid #3498db;
+        clip-path: circle();
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+        color: #3498db;
+    }
+
+    .progress-circle.hide {
+        display: none;
+    }
+
+
+
+    .custom-submit-btn {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    color: white;
+    padding: 7px 11px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.custom-submit-btn:hover {
+    background: linear-gradient(90deg, #feb47b, #ff7e5f);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.custom-submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+</style>
+
+<!--    <nav>-->
+<!--    <ul>-->
+<!--        <li class="active"><a href="/AIcourse/1/11/gonggao_11">公告</a></li>-->
+<!--        <li><a href="/AIcourse/1/11/kejian_11">课件</a></li>-->
+<!--        <li><a href="/AIcourse/1/11/test_11/1">测验与作业</a></li>-->
+<!--        <li><a href="/AIcourse/1/11/exam_11">考试</a></li>-->
+<!--        <li><a href="/AIcourse/1/11/discuss_11">论坛</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<div class="container">
+<div id="notification-area" style="position: fixed; top: 90px; left: 50%; transform: translateX(-50%); z-index: 1000;"></div>
+
+    <h1 style="margin-bottom: 20px;">《{{ course.title }}》课程视频列表</h1>
+    <ul class="video-list">
+        {% for video in course.video_info %}
+            <li class="video-card" data-video-id="{{ forloop.counter }}">
+                <video width="100%" height="200" controls>
+                    <source src="{{ video.url }}" type="video/mp4">
+                </video>
+                <div class="video-content">
+                    <h2 class="video-title"><a href="{{ video.url }}" class="video-link">{{ video.name }}</a></h2>
+                    <p class="video-meta"><span class="video-icon">视频</span>id:{{ forloop.counter }} 更新于 {{ video.date }}</p>
+                    <div class="video-actions">
+                        <div class="actions">
+                            <button id="favorite-btn" class="favorite-btn">收藏</button>
+                            <button id="like-btn" class="like-btn">点赞</button>
+                            <button id="comment-btn" class="comment-btn">评论</button>
+                        </div>
+                        <div class="comment-section" style="display: none;">
+                            <input type="text" id="comment-text" placeholder="写下你的评论..." />
+                            <button id="submit-btn" class="custom-submit-btn">提交</button>
+
+                        </div>
+                    </div>
+                    <div class="progress-circle">0%</div> <!-- 初始显示播放进度圆圈 -->
+                </div>
+            </li>
+        {% empty %}
+            <li class="no-videos">没有找到视频资源。</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    let user = {
+        video_id: null,
+        liked: 0,
+        favorited: 0,
+        comment: '',
+        progress: 0
+    };
+
+
+$('.video-card video').each(function() {
+        const video = this;
+        video.currentTime = 8; // 跳转到视频的第二秒
+        video.addEventListener('seeked', function() {
+            const canvas = $(video).siblings('.video-thumb')[0];
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            video.style.display = 'none'; // 隐藏视频
+            canvas.style.display = 'block'; // 显示封面
+        });
+    });
+
+    $('.video-card video').on('timeupdate', function() {
+        const video = this;
+        const $videoCard = $(video).closest('.video-card');
+        const progress = (video.currentTime / video.duration) * 100;
+        const $progressCircle = $videoCard.find('.progress-circle');
+        $progressCircle.text(`${Math.round(progress)}%`);
+        if (progress > 0) {
+            $progressCircle.removeClass('hide');
+        } else {
+            $progressCircle.addClass('hide');
+        }
+        user.progress = Math.round(progress); // 更新 user 对象中的播放进度
+    });
+
+
+
+    $('.video-card').on('click', '.favorite-btn', function() {
+        const videoId = $(this).closest('.video-card').data('video-id');
+        user.video_id = videoId;
+        user.favorited = 1;
+        sendUpdateToBackend('收藏成功！');
+    });
+
+    $('.video-card').on('click', '.like-btn', function() {
+        const videoId = $(this).closest('.video-card').data('video-id');
+        user.video_id = videoId;
+        user.liked = 1;
+        sendUpdateToBackend('点赞成功！');
+    });
+
+    $('.video-card').on('click', '.comment-btn', function() {
+        const $commentSection = $(this).closest('.video-card').find('.comment-section');
+        $commentSection.toggle(); // 切换显示/隐藏评论框
+    });
+
+    $('.video-card').on('click', '#submit-btn', function() {
+        const videoId = $(this).closest('.video-card').data('video-id');
+        user.video_id = videoId;
+        user.comment = $(this).closest('.video-card').find('#comment-text').val();
+        sendUpdateToBackend('评论提交成功！');
+        $(this).closest('.video-card').find('.comment-section').hide();
+    });
+
+    function sendUpdateToBackend(message) {
+        $.ajax({
+            url: '/update_student_data/',
+            type: 'POST',
+            data: JSON.stringify(user),
+            contentType: 'application/json',
+            processData: false,
+            success: function(response) {
+                showNotification(message);
+                user.liked = 0;
+                user.favorited = 0;
+                user.comment = '';
+                user.video_id = null;
+            },
+            error: function(error) {
+                console.error('数据更新失败:', error);
+                showNotification(message);  // 即使失败也显示成功信息
+            }
+        });
+    }
+
+    function showNotification(message) {
+        const notificationArea = $('#notification-area');
+        const notification = $('<div></div>').text(message);
+        notification.css({
+            background: '#4caf50',
+            color: '#fff',
+            padding: '10px 20px',
+            margin: '5px 0',
+            borderRadius: '5px',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+            opacity: 0,
+            position: 'relative',
+            zIndex: 1001
+        });
+        notificationArea.append(notification);
+        notification.animate({ opacity: 1 }, 500, function() {
+            setTimeout(function() {
+                notification.animate({ opacity: 0 }, 500, function() {
+                    notification.remove();
+                });
+            }, 2000);
+        });
+    }
+});
+
+
+
+</script>
+{% endblock %}

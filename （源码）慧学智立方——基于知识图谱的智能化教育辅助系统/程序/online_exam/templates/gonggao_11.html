@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+<!--不需要修改-->
+{% block title %}公告页面{% endblock %}
+
+{% block content %}
+
+{% include '11.html' with course=course %}
+
+<style>
+    /* Customizing the font and colors for a sophisticated look */
+    body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #333;
+        background-color: #f9f9f9;
+    }
+
+    .announcement {
+        margin-top: 40px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .announcement h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .announcement p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #7f8c8d;
+    }
+
+    /* Additional styling for the course content */
+    .course-content {
+        margin-top: 30px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-content h3 {
+        margin-bottom: 15px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #34495e;
+    }
+
+    .course-content p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #95a5a6;
+    }
+</style>
+
+<section class="announcement">
+    <h2>公告</h2>
+    <p>{{ course.gonggao_context }}</p>
+</section>
+
+<section class="course-content">
+    <h1>课程内容</h1>
+
+
+<h2>第一讲 人工智能概述</h2>
+<h3>1.1 简介</h3>
+<h3>1.2 人工智能的概念</h3>
+<h3>1.3 人工智能的发展简史</h3>
+<h3>1.4 人工智能研究的基本内容</h3>
+<p>第一讲 人工智能概述单元测试</p>
+
+<h2>第二讲 一阶谓词逻辑表示法</h2>
+<h3>2.1 命题逻辑</h3>
+<h3>2.2 谓词逻辑</h3>
+<h3>2.3 一阶谓词逻辑知识表示法</h3>
+<p>第二讲 一阶谓词逻辑知识表示法单元测试</p>
+
+<h2>第三讲 产生式表示法和框架表示法</h2>
+<h3>3.1 产生式表示法</h3>
+<h3>3.2 框架表示法</h3>
+<p>第三讲 产生式表示法和框架表示法单元测试</p>
+
+<h2>第四讲 知识图谱及其应用</h2>
+<h3>4.1 知识图谱概述</h3>
+<h3>4.2 知识图谱的构建及应用</h3>
+<p>第四讲 知识图谱单元测试</p>
+<p>第四讲 知识图谱及其应用作业</p>
+
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% block style %}
+    <script src="../static/js/jquery.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f0f2f5;
+            overflow: hidden;
+        }
+
+        .left {
+            width: 200px;
+            background-color: #FFF;
+            position: fixed;
+            height: 100%;
+
+        }
+
+        ul li img {
+            width: 16px;
+            height: 16px;
+        }
+
+        ul li span {
+            margin-left: 6px;
+            font-size: 14px;
+        }
+
+        ul li {
+            color: rgba(0, 0, 0, .65);
+        }
+
+        .timu {
+            padding-left: 0;
+            margin-left: 24px;
+        }
+
+        .real_question {
+            padding-left: 0;
+        }
+
+        .real_question li {
+            height: 40px;
+            font-size: 14px;
+            line-height: 36px;
+            padding-left: 24px;
+            color: rgba(0, 0, 0, .65);
+            display: block;
+        }
+
+        .real_question li:hover {
+            cursor: pointer;
+        }
+
+        .question_active {
+            background-color: #e6f7ff;
+            border-right: 3px solid #1890ff;
+        }
+
+        .xuanzeti_info, .panduanti_info, .jiandati_info {
+            margin: 20px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+
+    <div class="left">
+        <div class="neirong">
+            <div class="xuanzeti">
+                <ul class="timu">
+                    <li><img src="../static/images/单选题.png"/><span>单选题（每题10分）</span><img src="../static/images/下拉.png"
+                                                                                         style="right:6px;position: absolute"/>
+                        <ul class="real_question danxuanti">
+                            {% for i in xuanzeti %}
+                                <li id="{{ i }}">题目 {{ forloop.counter }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><img src="../static/images/判断题.png"/><span>判断题（每题5分）</span><img src="../static/images/下拉.png"
+                                                                                        style="right:6px;position: absolute"/>
+                        <ul class="real_question">
+
+                            {% for i in panduanti %}
+                                <li id="{{ i }}">题目 {{ forloop.counter }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><img src="../static/images/简答题.png"/><span>简答题（每题25分）</span><img src="../static/images/下拉.png"
+                                                                                         style="right:6px;position: absolute"/>
+                        <ul class="real_question">
+
+                            {% for i in jiandati %}
+                                <li id="{{ i }}">题目 {{ forloop.counter }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="right" style="margin-left: 230px;width: 100%;height: 100%;background-color: #FFF;">
+        <div class="xuanzeti_info">
+
+            {% for i in xuanzeti_info %}
+                <div class="question{{ i.id }}" style="display: none">
+                    <p>单选题</p>
+                    <span>{{ i.title }}</span>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="A"/>A:{{ i.a }}</p>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="B"/>B:{{ i.b }}</p>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="C"/>C:{{ i.c }}</p>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="D"/>D:{{ i.d }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="panduanti_info">
+
+            {% for i in panduanti_info %}
+                <div class="question{{ i.id }}" style="display: none">
+                    <p>判断题</p>
+                    <span>{{ i.title }}</span>
+                    <p><input name="{{ i.id }}" class="pdt{{ forloop.counter }}" type="radio" value="对"/>正确</p>
+                    <p><input name="{{ i.id }}" class="pdt{{ forloop.counter }}" type="radio" value="错"/>错误</p>
+
+                </div>
+            {% endfor %}
+        </div>
+        <div class="jiandati_info">
+
+            {% for i in jiandati_info %}
+                <div class="question{{ i.id }}" style="display: none">
+                    <p>简答题</p>
+                    <p>{{ i.title }}</p>
+                    <textarea id="jianda" name="jianda" style="width: 500px;height: 300px"></textarea>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $('.real_question li').on('click', function () {
+            $(this).addClass('question_active')
+            $(this).siblings().removeClass('question_active')
+            $(this).parent().parent().siblings().children().children().removeClass('question_active')
+            var question_id = $(this).attr('id')
+            console.log(question_id)
+            $('.question' + question_id)[0].style.display = 'block'
+            $('.question' + question_id).siblings().css('display', 'none')
+            $('.question' + question_id).parent().siblings().children().siblings().css('display', 'none')
+            $('.question' + question_id).parent().siblings().children().css('display', 'none')
+        });
+        $('.danxuanti li:first-child').addClass('question_active');
+        $('.xuanzeti_info div:first-child')[0].style.display = 'block'
+        var shijian = 3600;
+        var time = null;
+
+        time = setInterval("count()", 1000);//返回值time只是为了需要暂停的时候clearInterval(time)清除时间间隔
+
+        function tijiao() {
+            var shijuan_id = {{ shijuan_id }}
+            var question1 = $('.xzt1:checked').val()
+            var question2 = $('.xzt2:checked').val()
+            var question3 = $('.xzt3:checked').val()
+            var question4 = $('.xzt4:checked').val()
+            var question5 = $('.xzt5:checked').val()
+            var question6 = $('.pdt1:checked').val()
+            var question7 = $('.pdt2:checked').val()
+            var question8 = $('.pdt3:checked').val()
+            var question9 = $('.pdt4:checked').val()
+            var question10 = $('.pdt5:checked').val()
+            var question11 = $('#jianda').val()
+            $.ajax({
+                url: '/inference',
+                method: 'post',
+                data: {
+                    "shijuan_id":shijuan_id,
+                    'question1': question1,
+                    'question2': question2,
+                    'question3': question3,
+                    'question4': question4,
+                    'question5': question5,
+                    'question6': question6,
+                    'question7': question7,
+                    'question8': question8,
+                    'question9': question9,
+                    'question10': question10,
+                    'question11': question11,
+                },
+                dataType: 'JSON',
+                success: function (res) {
+                      alert('交卷成功！')
+                },
+                error: function (res) {
+                      alert('交卷失败！')
+                }
+            });
+
+
+        }
+
+
+    </script>
+{% endblock %}

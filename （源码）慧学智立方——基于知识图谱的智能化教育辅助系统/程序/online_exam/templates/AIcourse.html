@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程列表页面</title>
+    <style>
+
+        body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #6da2c05e;
+}
+        .user-details {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            right: 20px;
+            top: 64px;
+            z-index: 999;
+        }
+        .user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info p {
+    margin-bottom: 5px;
+}
+
+.actions .favorite-btn {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.actions .favorite-btn:hover {
+    background-color: #0056b3;
+}
+        .top {
+            height: 64px;
+            width: 100%;
+            background: #41847d;
+            padding-left: 10%;
+        }
+
+
+        img {
+            vertical-align: middle;
+        }
+
+        em {
+            font-style: normal;
+        }
+
+        a img, :link img, :visited img {
+            border: 0;
+        }
+
+        a:link, a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover, a:focus {
+            color: #0573bd;
+            text-decoration: none;
+        }
+
+        ul, ul li {
+            list-style-type: none;
+        }
+
+
+        #top_bg {
+            height: 64px;
+            width: 100%;
+            background: #333;
+            box-shadow: 1px 1px 7px #999;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            border-bottom: #C6C6C6 solid 1px;
+        }
+
+        .top .logo_l {
+            width: 180px;
+            height: 64px;
+            color: #ffffff;
+            float: left;
+            line-height: 64px;
+        }
+
+        .nav_z {
+            width: auto !important;
+            height: 64px;
+            float: left;
+            position: relative;
+            z-index: 999;
+        }
+
+        #navul li {
+            float: left;
+            padding: 0 20px;
+            height: 64px;
+            position: relative;
+            text-align: center;
+            line-height: 64px;
+        }
+
+        #navul li a:link, #navul li a:visited {
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        #navul li a {
+            font-size: 14px;
+            color: #fff;
+        }
+
+        #navul li a:hover {
+            color: #FFF;
+        }
+
+        .login_out {
+            color: hsla(0, 0%, 100%, .65);
+            padding: 0 20px
+        }
+
+        .login_out:hover {
+            color: #FFF;
+        }
+
+        .active {
+            background-color: #1890ff;
+        }
+
+        .bottom {
+            padding-top: 64px;
+        }
+
+
+        .container {
+          max-width: 1200px;
+          margin: auto;
+        }
+
+        .navbar {
+          background-color: #fdf1df6b;
+          padding: 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .navbar a {
+          color: black;
+          text-decoration: none;
+          padding: 0 1rem;
+        }
+
+        .navbar a:hover {
+          text-decoration: underline;
+        }
+
+        .card-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        .card {
+  border: 4px solid #100000b0; /* 更粗的边框，颜色更柔和 */
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1); /* 调整阴影，使其更自然 */
+  padding: 2rem; /* 增加内边距，使内容更加宽敞 */
+  text-align: center;
+  background-color: #f9f9f9; /* 添加淡雅的背景色 */
+  border-radius: 8px; /* 添加圆角，使卡片看起来更友好 */
+  transition: all 0.3s ease; /* 添加过渡效果，使鼠标悬停时平滑变化 */
+   background-color: #7d895426;
+}
+
+/* 鼠标悬停时的效果 */
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 增加阴影，提升悬浮感 */
+  transform: translateY(-4px); /* 向上微小位移，增强动态效果 */
+}
+
+        .card img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+        }
+
+        .card h3 {
+          margin-top: 1rem;
+          font-size: 1.2rem;
+        }
+
+        .card p {
+          margin-bottom: 1rem;
+          font-size: 0.9rem;
+        }
+
+    </style>
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+<div class="children_body" style="height: 100%">
+    <div id="top_bg">
+        <div class="top">
+             <a class="logo_l" href="/" title="星火知立方">
+    <img src="/static/icons/logo1.png" alt="星火知立方 Logo" style="height: 218px; margin-left: -96px;margin-top: -88px;">
+</a>
+            <!--导航开始-->
+            <div class="nav_z">
+               <ul id="navul" class="cl" style="display: block;height: 100%;margin: 0">
+
+
+                   <li id="AIcourse">
+    <a href="/AIcourse" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/课程.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        课程学习
+    </a>
+</li>
+
+
+                    <li id="kaoshi">
+                        <!--                        <img src="../static/images/司法考试.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/test_paper" style="font-size: 14px; color: hsl(0deg 0% 100%); ">在线考试</a>-->
+
+
+                        <a href="/test_paper" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/考试.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        在线考试
+    </a>
+
+                    </li>
+                    {% if role == 2 %}
+<!--                    <li id="shiti">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/问题.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shiti">试题管理</a>-->
+<!--                    </li>-->
+<!--                    <li id="shijuan">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/试卷.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shijuan">试卷管理</a>-->
+<!--                    </li>-->
+                    {% endif %}
+<!--                    <li id="chengji">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/成绩查询.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/chengji">成绩管理</a>-->
+
+<!--                    </li>-->
+
+                    <!--                    <li id="user">-->
+                    <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+                    <!--                        <a href="/user/user">学生管理</a>-->
+
+                    <!--                    </li>-->
+                    <li id="individual chengji">
+                        <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/individual_chengji" style="font-size: 14px; color: hsl(0deg 0% 100%);">个人成绩管理</a>-->
+                        <a href="/individual_chengji" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/成绩管理.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        成绩管理
+    </a>
+
+                    </li>
+                    <li id="index">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/index" style="font-size: 14px; color: hsl(0deg 0% 100%);">学习小工具</a>-->
+                        <a href="/index" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/学习助手.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        学习工具
+    </a>
+
+
+
+                    </li>
+
+                    <!--可在此处直接添加导航-->
+                    <li id="ceshi">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/loudongjiance" style="font-size: 14px; color: hsl(0deg 0% 100%);">知识点漏洞检测</a>-->
+
+                         <a href="/loudongjiance" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/查漏补缺.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        查漏补缺
+    </a>
+
+                    </li>
+                    <li id="upexam">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/upexam" style="font-size: 14px; color: hsl(0deg 0% 100%);">提交试卷</a>-->
+
+                        <a href="/upexam" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/提交试卷.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        试卷提交
+    </a>
+
+                    </li>
+                    <!--可在此处直接添加导航-->
+                </ul>
+            </div><!--导航结束-->
+            <div id="welcome-div" style="color: #ffffff;line-height: 64px;font-size: 14px;right: 20px;display: block;width: 200px;position:absolute; margin-right: -42px;">
+                <span id="welcome-span">你好！{{ username }}</span>
+                <a href="/login_out" class="login_out">退出</a>
+            </div>
+           <div id="user-details" class="user-details">
+
+    <div class="user-info">
+        <p>姓名<span>{{ username }}</span></p>
+        <p>年级：<span>{{ '七年级' }}</span></p>
+        <p>班级：<span>{{ '七年二班' }}</span></p>
+        <p>年龄：<span>{{ '17' }}</span></p>
+        <p>邮箱：<span>1943027685@qq.com</span></p>
+        <p>家庭住址：<span>北京</span></p>
+        <p>已获得学分：<span>{{ '20' }}</span></p>
+
+    </div>
+    <div class="actions">
+        <button class="favorite-btn">收藏</button>
+        <button class="favorite-btn">点赞</button>
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom" style="height: 100%;display: block">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+<div class="container">
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <a href="#">精选</a>
+        <a href="#">全部</a>
+        <a href="#">大数据与人工智能</a>
+        <a href="#">程序设计与开发</a>
+        <a href="#">计算机基础与应用</a>
+        <a href="#">软件工程</a>
+        <a href="#">网络与安全技术</a>
+        <a href="#">硬软件系统及原理</a>
+    </nav>
+
+    <!-- 课程卡片 -->
+<div class="card-container">
+    {% for course in courses %}
+    <div class="card">
+        <a href="{{ course.detail_page_url }}">
+            <img src="{{ course.image_url }}" alt="Course Image">
+            <h2>{{ course.title }}</h2>
+            <p>{{ course.description }}</p>
+            <p>讲师: {{ course.instructor }}</p>
+        </a>
+            <a href="{{ course.video_url }}">Video Link</a>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</body>
+</html>

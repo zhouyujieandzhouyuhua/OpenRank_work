@@ -1,0 +1,593 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="../static/dist/css/layui.css"/>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/dist/layui.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        /*表格*/
+        .table {
+            width: 80%;
+            padding-top: 40px;
+        }
+
+        .table tr {
+            height: 40px;
+            align-items: center;
+            font-size: 14px;
+            font-family: Microsoft YaHei;
+            line-height: 40px;
+        }
+
+        .table tr td {
+            padding: 0 !important;
+        }
+
+        .layui-table-tool {
+            background-color: white;
+            font-size: 16px;
+            font-family: Microsoft YaHei;
+        }
+
+        .table tr:nth-child(even) {
+            background: #FAFAFA;
+        }
+
+        .layui-laypage-curr em {
+            background-color: #CDE1FF !important;
+        }
+
+        /*用户信息表单*/
+        #userInfo {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+
+        #userInfo .layui-form-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #userInfo .layui-form-label {
+            display: inline-block;
+            padding-left: 0;
+            padding-right: 0;
+            text-align: left;
+            width: 20%;
+        }
+
+        #userInfo .layui-input-block {
+            display: inline-block;
+            margin-left: 0;
+            width: 75%;
+        }
+
+        #userInfo .btn {
+            width: 100%;
+        }
+
+        #userInfo .btn .layui-input-block {
+            width: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        #userInfo .btn .layui-input-block .layui-btn {
+            background-color: #1E9FFF;
+        }
+
+        {#下拉列表#}
+        dd.layui-this {
+            background-color: #1E9FFF !important;
+
+        }
+
+        {#头部工具#}
+        .layui-table-tool {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .layui-table-tool .layui-table-tool-temp {
+            width: 100%;
+            padding-right: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        {#行内工具#}
+        #operateBtn {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 90%;
+            margin: 0 auto;
+            height: 100%;
+        }
+
+        #operateBtn a:hover {
+            color: #2671EE;
+        }
+
+        #operateBtn div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #operateBtn div img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        #operateBtn div li {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .layui-icon-set-sm:before {
+            content: "\e620";
+            text-align: center;
+            position: absolute;
+            display: block;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        #operateBtn div .text {
+            font-size: 14px;
+            font-weight: 400;
+
+        }
+
+
+        {#删除用户#}
+        .layui-layer-btn {
+            text-align: center !important;
+        }
+    </style>
+{% endblock %}
+{% block  content %}
+
+    <div class="templatemo-content col-1 light-gray-bg" style="padding: 20px 40px 20px 20px;margin-left: 10%">
+        <div class="templatemo-top-nav-container">
+            <div class="row">
+                <nav class="templatemo-top-nav col-lg-12 col-md-12">
+                    <span class="layui-breadcrumb"><a href="">首页</a>
+                     <a href="">试题管理</a>
+                    </span>
+
+                </nav>
+            </div>
+        </div>
+        <div class="templatemo-content-container">
+            <div class="children-body">
+
+                <div class="table">
+                    <table id="userTable" lay-size="sm" lay-filter="userTable"></table>
+                </div>
+            </div>
+            <!--新增用户表单-->
+            <div id="userInfo" style="display: none">
+                <form class="layui-form" method="post" lay-filter="userInfo" id="userForm">
+                    <div class="layui-form-item" style="display: none">
+                        <div class="layui-input-block">
+                            <input id="id" type="hidden" lay-verify="id" name="id" placeholder="请输入用户id"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">题&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp干:</label>
+                        <div class="layui-input-block">
+                            <input id="title" type="text" lay-verify="title" name="title" placeholder="请输入题干"
+                                   autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">题&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp型:</label>
+                        <div class="layui-input-block">
+                            <select id="question_type" lay-verify="required" lay-filter="question_type" name="question_type"
+                                    class="question_type">
+                                <option value="判断题">判断题</option>
+                                <option value="单选题">单选题</option>
+                                <option value="简答题">简答题</option>
+                            </select>
+                        </div>
+                    </div>
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">难&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp度:</label>
+                        <div class="layui-input-block">
+                            <select id="difficulty" lay-verify="required" lay-filter="difficulty"
+                                    class="difficulty">
+                                <option value="简单">简单</option>
+                                <option value="一般">一般</option>
+                                <option value="困难">困难</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">分&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp数:</label>
+                        <div class="layui-input-block">
+                            <input id="score" type="text" lay-verify="score" name="score" placeholder="请输入题目分数"
+                                   autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item" id="ques_a" style="display:none;">
+                        <label class="layui-form-label">选&nbsp&nbsp&nbsp项&nbsp&nbsp&nbspA:</label>
+                        <div class="layui-input-block">
+                            <input id="xxa" type="text" lay-verify="xxa" name="xxa" placeholder="请输入选项A"
+                                   autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" id="ques_b" style="display:none;">
+                        <label class="layui-form-label">选&nbsp&nbsp&nbsp项&nbsp&nbsp&nbspB:</label>
+                        <div class="layui-input-block">
+                            <input id="xxb" type="text" lay-verify="xxb" name="xxb" placeholder="请输入选项B"
+                                   autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" id="ques_c" style="display:none;">
+                        <label class="layui-form-label">选&nbsp&nbsp&nbsp项&nbsp&nbsp&nbspC:</label>
+                        <div class="layui-input-block">
+                            <input id="xxc" type="text" lay-verify="xxc" name="xxc" placeholder="请输入选项C"
+                                   autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" id="ques_d" style="display:none;">
+                        <label class="layui-form-label">选&nbsp&nbsp&nbsp项&nbsp&nbsp&nbspD:</label>
+                        <div class="layui-input-block">
+                            <input id="xxd" type="text" lay-verify="xxd" name="xxd" placeholder="请输入选项D"
+                                   autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">答&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp案:</label>
+                        <div class="layui-input-block">
+                            <input id="answer" type="text" lay-verify="answer" name="answer" placeholder="请输入答案"
+                                   autocomplete="off"
+                                   class="layui-input"
+                                   lay-verify="required">
+                        </div>
+                    </div>
+                    <div class="layui-form-item btn">
+                        <div class="layui-input-block">
+                            <button id="submitBtn" class="layui-btn" lay-submit lay-filter="add">确定</button>
+                            <button id="cancelBtn" class="layui-btn" lay-submit lay-filter="cancel">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        {#var csrftoken = "{{csrf_token()}}"#}
+        layui.use(['element', 'table', 'layer', 'form'], function () {
+            let element = layui.element;
+            let table = layui.table;
+            let form = layui.form;
+            let userInfoLayer = null;
+            //渲染表格
+            let userTable = table.render(
+                {
+                    elem: "#userTable",
+                    page: true,
+                    limit: 5,
+                    limits: [5, 10],
+                    url: '/get_questions',
+                    {#headers: {"X-CSRFToken": csrftoken},#}
+                    toolbar: 'default',
+                    method: 'GET',
+                    cols: [[
+                        {field: 'id', title: 'ID', align: 'center', width: '10%', fixed: 'left'},
+                        {field: 'title', title: '题干', align: 'center', width: '15%', fixed: 'left'},
+                        {field: 'course', title: '科目', align: 'center', width: '10%', fixed: 'left'},
+                        {field: 'owner', title: '出题人', align: 'center', width: '10%', fixed: 'left'},
+                        {field: 'score', title: '分数', align: 'center', width: '10%', fixed: 'left'},
+                        {field: 'question_type', title: '题型', align: 'center', width: '10%', fixed: 'left'},
+                        {field: 'difficulty', title: '难度', align: 'center', width: '10%', fixed: 'left'},
+                        {field: 'last_modify_time', title: '更新时间', align: 'center', width: '10%', fixed: 'left'},
+                        {
+                            field: 'operate',
+                            title: '操作',
+                            align: 'center',
+                            width: '15%',
+                            fixed: 'left',
+                            toolbar: '#operate'
+                        },
+                    ]],
+                    toolbar: '#toolbar',
+                    defaultToolbar: [],
+                    //表格渲染完执行
+                    done: function (res, curr, count) {
+                        $("[data-field='password']").css('display', 'none'); //隐藏密码
+                        $("[data-field='count']").css('display', 'none'); //隐藏密码
+                        //回车搜索
+                        $('#keyword').bind('keyup', function (event) {
+                            if (event.keyCode == '13') {
+                                searchUser()
+                            }
+                        })
+                    }
+                },
+            )
+            form.on('select(question_type)', function (data) {
+                var result = $('#question_type').val()
+                console.log(result)
+                if (result == '单选题') {
+                    console.log(22222)
+                    $('#ques_a')[0].style.display = ''
+                    $('#ques_b')[0].style.display = ''
+                    $('#ques_c')[0].style.display = ''
+                    $('#ques_d')[0].style.display = ''
+                } else {
+                    $('#ques_a')[0].style.display = 'none'
+                    $('#ques_b')[0].style.display = 'none'
+                    $('#ques_c')[0].style.display = 'none'
+                    $('#ques_d')[0].style.display = 'none'
+                }
+            })
+            // 监听行操作
+            table.on('tool(userTable)', function (obj) {
+                let user = obj.data
+                //修改操作
+                if (obj.event == "edit") {
+                    editUser(user)
+                }
+                //删除操作
+                else if (obj.event == "del") {
+                    console.log(user)
+                    delUser(user)
+                }
+            })
+            //监听头部工具--新增用户
+            table.on('toolbar(userTable)', function (obj) {
+                //新增
+                if (obj.event == 'add') {
+                    addUser()
+                }
+                //搜索
+                else if (obj.event == 'search') {
+                    searchUser();
+                }
+            })
+
+            //表单验证
+            form.verify({
+                username: [/^[\S]{2,12}$/, '用户名长度必须3到12位，且不能出现空格'],
+                password: [/^[\S]{3,12}$/, '密码必须3到12位，且不能出现空格'],
+                phone: function (value, item) {
+                    if (value.trim().length > 0) {
+                        var rule = /^1\d{10}$/;
+                        if (!rule.test(value)) {
+                            return '手机号码必须11位数字！'
+                        }
+                    }
+                }
+            })
+
+            //搜索
+            function searchUser() {
+                let keyword = $('#keyword').val().trim()
+                userTable.reload({
+                    method: 'GET',
+                    where: {
+                        'name': keyword,
+                        'position': 1
+                    },
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                })
+                $('#keyword').val(keyword)
+            }
+
+            //新增
+            function addUser() {
+                //清空表单
+                $('#userForm')[0].reset()
+                form.render()
+                userInfoLayer = layer.open({
+                    title: '新建试题',
+                    type: 1,
+                    shade: 0,
+                    area: ['600px', '700px'], //宽高
+                    content: $('#userInfo'),  //调到新增页面
+                    success: function () {
+                        $('#passwordContainer').show()
+                        $("#submitBtn").attr("lay-filter", "add")
+                    }
+                });
+                form.on('submit(add)', function (obj) {
+                                        console.log(obj.field)
+
+                    obj.field.question_type=$("#question_type").val()
+                    obj.field.difficulty = $("#difficulty").val()
+                    console.log(obj.field)
+                    $.ajax({
+                        url: '/add_question',
+                        method: 'post',
+                        {#headers: {"X-CSRFToken": csrftoken},#}
+                        data: obj.field,
+                        dataType: 'JSON',
+                        success: function (res) {
+
+                            layer.close(userInfoLayer)
+                            layer.msg('新增成功！',{icon:6});
+                            userTable.reload()
+                        },
+                        error: function (res) {
+                            layer.msg('新增失败！',{icon:5});
+                        }
+                    });
+                    //阻止表单跳转
+                    return false;
+                });
+                $('#cancelBtn').unbind('click').click(function () {
+                    layer.close(userInfoLayer)
+                    return false
+                })
+            }
+
+            //修改
+            function editUser(user) {
+                let userInfoLayer = layer.open({
+                    title: '查看并编辑试题信息',
+                    type: 1,
+                    shade: 0,
+                    area: ['600px', '700px'], //宽高
+                    content: $('#userInfo'),  //调到新增页面
+                    success: function () {
+                        $('#passwordContainer').hide()
+                        $("#submitBtn").attr("lay-filter", "edit")
+                    }
+                });
+                $("#id").val(user.id)
+                $("#title").val(user.title)
+                $("#courese").val(user.course)
+                $("#score").val(user.score)
+                $("#question_type").val(user.question_type)
+
+                $("#answer").val(user.answer)
+
+                $("#difficulty").val(user.difficulty)
+                if (user.question_type == '单选题') {
+                    console.log(22222)
+                    $('#ques_a')[0].style.display = ''
+                    $('#ques_b')[0].style.display = ''
+                    $('#ques_c')[0].style.display = ''
+                    $('#ques_d')[0].style.display = ''
+                    $("#xxa").val(user.A)
+                    $("#xxb").val(user.B)
+                    $("#xxc").val(user.C)
+                    $("#xxd").val(user.D)
+                } else {
+                    $('#ques_a')[0].style.display = 'none'
+                    $('#ques_b')[0].style.display = 'none'
+                    $('#ques_c')[0].style.display = 'none'
+                    $('#ques_d')[0].style.display = 'none'
+
+                }
+                form.on('submit(edit)', function (obj) {
+                    let user = obj.field
+                    user.difficulty = $("#difficulty").val()
+                    user.question_type = $('#question_type').val()
+                    console.log(user)
+                    $.ajax({
+                        url: '/edit_question',
+                        method: 'post',
+                        {#headers: {"X-CSRFToken": csrftoken},#}
+                        data: user,
+                        dataType: 'JSON',
+                        success: function (res) {
+                            //关闭弹出层
+                            layer.close(userInfoLayer)
+                            layer.msg('编辑成功', {icon: 6});
+                            userTable.reload()
+                        },
+                        error: function (res) {
+                            layer.msg('编辑失败！', {icon: 7});
+                        }
+                    });
+                    return false
+                })
+                $('#cancelBtn').unbind('click').click(function () {
+                    layer.close(userInfoLayer)
+                    return false
+                })
+            }
+
+            //删除
+            function delUser(user) {
+                layer.open({
+                    title: '删除试题',
+                    btn: ['确定', '取消'],
+                    shade: 0,
+                    content: '确定要删除该试题吗？对应的试卷将无法打开哦！',
+                    yes: function (index) {
+                        $.ajax({
+                            url: '/del_question',
+                            method: 'post',
+                            {#headers: {"X-CSRFToken": csrftoken},#}
+                            data: user,
+                            dataType: 'JSON',
+                            success: function (res) {
+                                //关闭弹出层
+
+                                layer.msg("删除成功");
+                                userTable.reload()
+
+                            },
+                            error: function (res) {
+                                layer.msg('删除用户信息失败！');
+                            }
+                        });
+                    }
+                })
+            }
+        });
+    </script>
+    <script type="text/html" id="operate">
+        <div id="operateBtn">
+            <div>
+                <a class="layui-btn text" lay-event="edit">编辑</a>
+            </div>
+            <div>
+                <a class="text layui-btn layui-btn-danger " lay-event="del">删除</a>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="toolbar">
+        <div id="search">
+            <div class="layui-inline">
+                <input id="keyword" class="layui-input" autocomplete="off" placeholder="请输入题干" style="font-size: 16px">
+            </div>
+            <button class="layui-btn" data-type="reload" style="font-size: 16px"
+                    lay-event="search">
+                搜索
+            </button>
+        </div>
+
+        <div id="addUser">
+
+            <a class="layui-btn" style="font-size: 16px;background-color:#009688 " lay-event="add">
+                 <img src="../static/images/新增.png" style="width: 14px;height: 14px"/>
+                <span style="padding-left: 5px">新建</span>
+            </a>
+        </div>
+    </script>
+    <script>
+
+    </script>
+{% endblock %}

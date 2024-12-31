@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% block style %}
+    <script src="../static/js/jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+        }
+        .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+/* 文本框样式 */
+textarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    border-color: #007bff;
+}
+
+/* 按钮样式 */
+#uploadFileInput {
+    display: none;
+}
+
+.upload-label {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.upload-label:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+        .left {
+            width: 200px;
+            background-color: #FFF;
+            position: fixed;
+            height: 100%;
+
+        }
+
+        ul li img {
+            width: 16px;
+            height: 16px;
+        }
+
+        ul li span {
+            margin-left: 6px;
+            font-size: 14px;
+        }
+
+        ul li {
+            color: rgba(0, 0, 0, .65);
+        }
+
+        .timu {
+            padding-left: 0;
+            margin-left: 24px;
+        }
+
+        .real_question {
+            padding-left: 0;
+        }
+
+        .real_question li {
+            height: 40px;
+            font-size: 14px;
+            line-height: 36px;
+            padding-left: 24px;
+            color: rgba(0, 0, 0, .65);
+            display: block;
+        }
+
+        .real_question li:hover {
+            cursor: pointer;
+        }
+
+        .question_active {
+            background-color: #e6f7ff;
+            border-right: 3px solid #1890ff;
+        }
+
+        .xuanzeti_info, .panduanti_info, .jiandati_info {
+            margin: 20px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+
+    <div class="left">
+        <div class="neirong">
+            <div class="xuanzeti">
+                <ul class="timu">
+                    <li><img src="../static/images/单选题.png"/><span>单选题（每题10分）</span><img src="../static/images/下拉.png"
+                                                                                         style="right:6px;position: absolute"/>
+                        <ul class="real_question danxuanti">
+                            {% for i in xuanzeti %}
+                                <li id="{{ i }}">题目 {{ forloop.counter }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><img src="../static/images/判断题.png"/><span>判断题（每题5分）</span><img src="../static/images/下拉.png"
+                                                                                        style="right:6px;position: absolute"/>
+                        <ul class="real_question">
+
+                            {% for i in panduanti %}
+                                <li id="{{ i }}">题目 {{ forloop.counter }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><img src="../static/images/简答题.png"/><span>简答题（每题25分）</span><img src="../static/images/下拉.png"
+                                                                                         style="right:6px;position: absolute"/>
+                        <ul class="real_question">
+
+                            {% for i in jiandati %}
+                                <li id="{{ i }}">题目 {{ forloop.counter }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div style="margin-top:80px;margin-left: 40px">
+            <span id="remainer_time">考试剩余时间：</span>
+        </div>
+    </div>
+    <div class="right" style="margin-left: 230px;width: 100%;height: 100%;background-color: #FFF;">
+        <div class="xuanzeti_info">
+
+            {% for i in xuanzeti_info %}
+                <div class="question{{ i.id }}" style="display: none">
+                    <p>单选题</p>
+                    <span>{{ i.title }}</span>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="A"/>A:{{ i.a }}</p>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="B"/>B:{{ i.b }}</p>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="C"/>C:{{ i.c }}</p>
+                    <p><input name="{{ i.id }}" class="xzt{{ forloop.counter }}" type="radio" value="D"/>D:{{ i.d }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="panduanti_info">
+
+            {% for i in panduanti_info %}
+                <div class="question{{ i.id }}" style="display: none">
+                    <p>判断题</p>
+                    <span>{{ i.title }}</span>
+                    <p><input name="{{ i.id }}" class="pdt{{ forloop.counter }}" type="radio" value="对"/>正确</p>
+                    <p><input name="{{ i.id }}" class="pdt{{ forloop.counter }}" type="radio" value="错"/>错误</p>
+
+                </div>
+            {% endfor %}
+        </div>
+        <div class="">
+    {% for i in jiandati_info %}
+        <div class="question{{ i.id }}" style="display: none">
+            <p>简答题</p>
+            <p>{{ i.title }}</p>
+            <textarea id="jianda" name="jianda" style="width: 100%;height: 200px;"></textarea>
+            <input type="file" id="uploadFileInput" accept="image/*" style="display: none;">
+            <label for="uploadFileInput" class="upload-label">上传作业照片</label>
+        </div>
+    {% endfor %}
+</div>
+        <button style="background-color: #1890ff;border: none;list-style: none;width: 120px;height: 40px;font-size: 18px;text-align: center;color: #FFF;position: absolute;right: 20px;bottom: 20px"
+                type="button" onclick="tijiao()">交卷
+        </button>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+
+
+
+        $('.real_question li').on('click', function () {
+            $(this).addClass('question_active')
+            $(this).siblings().removeClass('question_active')
+            $(this).parent().parent().siblings().children().children().removeClass('question_active')
+            var question_id = $(this).attr('id')
+            console.log(question_id)
+            $('.question' + question_id)[0].style.display = 'block'
+            $('.question' + question_id).siblings().css('display', 'none')
+            $('.question' + question_id).parent().siblings().children().siblings().css('display', 'none')
+            $('.question' + question_id).parent().siblings().children().css('display', 'none')
+        });
+        $('.danxuanti li:first-child').addClass('question_active');
+        $('.xuanzeti_info div:first-child')[0].style.display = 'block'
+        var shijian = {{ exam_time }};
+        var time = null;
+
+        time = setInterval("count()", 1000);//返回值time只是为了需要暂停的时候clearInterval(time)清除时间间隔
+
+        function tijiao() {
+            var shijuan_id = {{ shijuan_id }}
+            var question1 = $('.xzt1:checked').val()
+            var question2 = $('.xzt2:checked').val()
+            var question3 = $('.xzt3:checked').val()
+            var question4 = $('.xzt4:checked').val()
+            var question5 = $('.xzt5:checked').val()
+            var question6 = $('.pdt1:checked').val()
+            var question7 = $('.pdt2:checked').val()
+            var question8 = $('.pdt3:checked').val()
+            var question9 = $('.pdt4:checked').val()
+            var question10 = $('.pdt5:checked').val()
+            var question11 = $('#jianda').val()
+            $.ajax({
+                url: '/inference',
+                method: 'post',
+                data: {
+                    "shijuan_id":shijuan_id,
+                    'question1': question1,
+                    'question2': question2,
+                    'question3': question3,
+                    'question4': question4,
+                    'question5': question5,
+                    'question6': question6,
+                    'question7': question7,
+                    'question8': question8,
+                    'question9': question9,
+                    'question10': question10,
+                    'question11': question11,
+                },
+                dataType: 'JSON',
+                success: function (res) {
+                      alert('交卷成功！')
+                    window.location.href='/index'
+                },
+                error: function (res) {
+                      alert('交卷成功！')
+                }
+            });
+
+
+        }
+
+
+        function count() {
+            if (shijian < 0) {
+                tijiao();
+
+            } else {
+                $("#remainer_time").html("考试剩余时间:" + Math.floor(shijian / 60) + ":" + shijian % 60);//这里用到将毫秒转换到时分格式
+                shijian--;
+                console.info(time);
+            }
+        }
+<!--        ===============================写入文本框函数==================================================================-->
+$('#uploadFileInput').on('change', function(e) {
+        const file = this.files[0];
+        if (file) {
+            let formData = new FormData();
+            formData.append('file', file);
+
+            $.ajax({
+                url: 'uphomework/', // 确保这是正确的后端URL
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+
+                        $('#jianda').val(res.status); // 将返回的状态码填入文本框
+
+                },
+                error: function() {
+                    alert('文件上传失败！');
+                }
+            });
+        }
+    });
+    </script>
+{% endblock %}

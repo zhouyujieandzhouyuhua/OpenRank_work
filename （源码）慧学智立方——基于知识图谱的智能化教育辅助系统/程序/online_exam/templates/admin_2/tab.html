@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>后台管理系统 - HTML5后台管理系统</title>
+<meta name="keywords" content="设置关键词..." />
+<meta name="description" content="设置描述..." />
+<meta name="author" content="bootstrapMB" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" type="text/css" href="/static/admin_2/css/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<style>
+    .btn-info {
+        background: #ff0000;
+        border-color: #ff0000;
+        color: white;
+    }
+    .content-wrap {
+        margin-left: 0px; /* Adjust this value based on your sidebar width */
+    }
+    .side-logo strong {
+        font-size: 1.5rem;
+        color: #fff;
+    }
+    .side-logo .logo-ico i {
+        font-size: 2rem;
+        color: #fff;
+    }
+    .tab-nav li {
+        display: inline-block;
+        margin-right: 1rem;
+        cursor: pointer;
+    }
+    .tab-nav li.active {
+        font-weight: bold;
+    }
+    .tab-cont {
+        display: none;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+    .tab-cont.active {
+        display: block;
+    }
+    #map {
+        height: 400px;
+        width: 100%; /* Ensure the map takes full width of its container */
+    }
+    .btn-red {
+        background: #ff0000;
+        border-color: #ff0000;
+        color: white;
+    }
+
+    .custom-tab {
+        background-color: #007bff; /* 背景颜色 */
+        color: white; /* 字体颜色 */
+        border-radius: 0.5rem; /* 圆角 */
+        padding: 0.5rem 1rem; /* 内边距 */
+        transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
+    }
+
+    .custom-tab:hover, .custom-tab.active {
+        background-color: #0056b3; /* 悬停和激活时的背景颜色 */
+        color: white; /* 悬停和激活时的字体颜色 */
+    }
+
+    .nav-tabs {
+        border-bottom: none; /* 去掉底部边框 */
+    }
+
+    .nav-item {
+        margin-right: 0.5rem; /* 选项之间的间距 */
+    }
+
+    .warning-retreat {
+        color: darkred;
+    }
+    .warning-critical {
+        color: yellow;
+    }
+    .warning-fluctuation {
+        color: orange;
+    }
+    .warning-cheating {
+        color: red;
+    }
+
+</style>
+<script>
+$(document).ready(function() {
+    $('.tab-nav li').click(function() {
+        var index = $(this).index();
+        $('.tab-nav li').removeClass('active');
+        $(this).addClass('active');
+        $('.tab-cont').removeClass('active').eq(index).addClass('active');
+    });
+
+    // Initialize the map
+<!--    var map = L.map('map').setView([30.581738, 114.327685], 13); // 湖北大学武昌校区-->
+var map = L.map('map').setView([31.941567, 118.788469], 13); // 南京航空航天大学将军路校区
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+    }).addTo(map);
+
+    // Force redraw of the map when the tab is shown
+    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+        map.invalidateSize();
+    });
+
+    // Fetch violence data from the server
+    $.ajax({
+        url: '/get_violence_data/',
+        method: 'GET',
+        success: function(data) {
+            data.forEach(function(item) {
+                var marker = L.marker([item.lat, item.lon]).addTo(map); // 动态生成位置
+                marker.bindPopup(`<b>地点：</b>${item.location}<br><b>学生姓名：</b>${item.student_name}<br><b>评论内容：</b>${item.content}<br><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#violenceDetailModal" data-location="${item.location}" data-student="${item.student_name}" data-content="${item.content}">查看详情</button>`);
+            });
+        },
+        error: function(error) {
+            console.error('Error fetching violence data:', error);
+        }
+    });
+
+    $('#violenceDetailModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var location = button.data('location'); // Extract info from data-* attributes
+        var student = button.data('student');
+        var content = button.data('content');
+
+        var modal = $(this);
+        modal.find('.modal-body #location').text(location);
+        modal.find('.modal-body #student').text(student);
+        modal.find('.modal-body #content').text(content);
+        modal.find('.modal-body #violence-location').text("操场边的树林");
+        modal.find('.modal-body #people-involved').text("2");
+        modal.find('.modal-body #guardians').text("许晓东");
+        modal.find('.modal-body #teachers').text("李玲");
+
+        // 按钮点击事件
+        modal.find('.btn-send-guardian').click(function() {
+            sendAlert('guardian', student, content, location);
+        });
+        modal.find('.btn-send-teacher').click(function() {
+            sendAlert('teacher', student, content, location);
+        });
+    });
+
+    function sendAlert(type, student, content, location) {
+        $.ajax({
+            url: '/send_alert/',
+            method: 'POST',
+            data: {
+                'type': type,
+                'student': student,
+                'content': content,
+                'location': location,
+                'csrfmiddlewaretoken': '{{ csrf_token }}' // Django CSRF token
+            },
+            success: function(response) {
+                alert(response.message);
+            },
+            error: function(error) {
+                alert('发送失败');
+                console.error('Error sending alert:', error);
+            }
+        });
+    }
+});
+</script>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="side-nav">
+        <div class="side-logo">
+            <div class="logo">
+                <span class="logo-ico">
+                    <i class="i-l-1"></i>
+                    <i class="i-l-2"></i>
+                    <i class="i-l-3"></i>
+                </span>
+                <h8>讯飞教育平台管理系统</h8>
+            </div>
+        </div>
+        <nav class="side-menu content mCustomScrollbar" data-mcs-theme="minimal-dark">
+          <h2>
+				<a href="index.html" class="InitialPage"><i class="icon-dashboard"></i>学生数据概况</a>
+			</h2>
+			<ul>
+				<li>
+					<dl>
+						<dt>
+							<i class="icon-columns"></i>学生学习情况<i class="icon-angle-right"></i>
+						</dt>
+						<dd>
+							<a href="flex-layout.html">情况一览表</a>
+						</dd>
+
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>
+							<i class="icon-inbox"></i>学生问题答疑<i class="icon-angle-right"></i>
+						</dt>
+						<dd>
+							<a href="table.html">进入答疑</a>
+						</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>
+							<i class="icon-table"></i>试题/试卷管理<i class="icon-angle-right"></i>
+						</dt>
+						<dd>
+							<a href="button.html">试题管理</a>
+						</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>
+							<i class="icon-list-alt"></i>手动/智能组卷<i class="icon-angle-right"></i>
+						</dt>
+						<dd>
+							<a href="form.html">教师智能组卷</a>
+						</dd>
+					</dl>
+				</li>
+				<li>
+<!--					<dl>-->
+<!--						<dt>-->
+<!--							<i class="icon-bar-chart"></i>学生学习进度一览<i class="icon-angle-right"></i>-->
+<!--						</dt>-->
+<!--						<dd>-->
+<!--							<a href="echarts.html">echarts统计图表</a>-->
+<!--						</dd>-->
+<!--					</dl>-->
+				</li>
+
+				<li>
+					<dl>
+						<dt>
+							<i class="icon-tags"></i>学习/校园暴力预警<i class="icon-angle-right"></i>
+						</dt>
+						<dd>
+							<a href="tab.html">查看预警信息</a>
+						</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>
+							<i class="icon-star"></i>自动阅卷<i class="icon-angle-right"></i>
+						</dt>
+						<dd>
+							<a href="layer.html">批阅试卷</a>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+		</nav>
+        <footer class="side-footer">© 冲冲冲！团队版权所有</footer>
+
+	</div>
+	<div class="content-wrap">
+		<header class="top-hd">
+			<div class="hd-lt">
+				<a class="icon-reorder"></a>
+			</div>
+			<div class="hd-rt">
+				<ul>
+					<li>
+						<a href="#" target="_blank"><i class="icon-home"></i>前台访问</a>
+					</li>
+					<li>
+						<a><i class="icon-random"></i>清除缓存</a>
+					</li>
+					<li>
+						<a><i class="icon-user"></i>管理员:<em>李玲老师</em></a>
+					</li>
+					<li>
+						<a><i class="icon-bell-alt"></i>系统消息</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>安全退出</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+        <main class="main-cont content mCustomScrollbar">
+            <div class="page-wrap">
+                <section class="page-hd">
+                    <header>
+                        <h2 class="title">学习情况/校园暴力预警</h2>
+                        <p class="title-description">使用方法：点击左侧菜单栏中的“学习情况/校园暴力预警” 进入该页面，可查看学生学习情况、校园暴力预警、学生退步警告等信息。</p>
+                    </header>
+                    <hr>
+                </section>
+                <div class="panel panel-default">
+                    <div class="panel-bd">
+                        <div class="card">
+                            <div class="card-header">
+                               <ul class="nav nav-tabs tab-nav">
+
+                                <li class="nav-item">
+                                    <a class="nav-link active custom-tab" data-bs-toggle="tab" href="#progress-warning">学习进度预警</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link custom-tab" data-bs-toggle="tab" href="#violence-warning">校园暴力预警</a>
+                                </li>
+                               </ul>
+
+                            </div>
+                            <div class="tab-content">
+                                <div id="progress-warning" class="tab-cont active">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>学生姓名</th>
+                                                <th>当前分数</th>
+                                                <th>警告信息</th>
+                                                <th>操作</th> <!-- 新增操作列 -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for student in worst_students %}
+                                            <tr>
+                                                <td>{{ student.name }}</td>
+                                                <td>{{ student.grade }}</td>
+                                                <td>{{ student.warning_message | safe }}</td>
+                                                <td><button type="button" class="btn btn-info btn-sm">查看详情</button></td> <!-- 查看详情按钮 -->
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="violence-warning" class="tab-cont">
+                                    <div id="map"></div>
+                                    校园暴力预警界面
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="btm-ft">
+            <p class="clear">
+               <span class="fl">©Copyright 2024 <a href="#"  target="_blank">冲冲冲！团队！</a></span>
+                <span class="fr text-info">
+                    <em class="uppercase"><i class="icon-user"></i></em> |
+                    <em class="uppercase"><i class="icon-envelope-alt"></i><a href="Http://www.bootstrapmb.com" target="_blank">bootstrapmb</a></em>
+                </span>
+            </p>
+        </footer>
+    </div>
+</div>
+
+<!-- 校园暴力详情模态窗 -->
+<div class="modal fade" id="violenceDetailModal" tabindex="-1" aria-labelledby="violenceDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="violenceDetailModalLabel">校园暴力详情</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><b>地点：</b><span id="location"></span></p>
+                <p><b>学生姓名：</b><span id="student"></span></p>
+                <p><b>敏感信息：</b><span id="content"></span></p>
+                <p><b>暴力地点：</b><span id="violence-location"></span></p>
+                <p><b>涉及人数：</b><span id="people-involved"></span></p>
+                <p><b>监护人姓名：</b><span id="guardians"></span></p>
+                <p><b>教师姓名：</b><span id="teachers"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-red btn-send-guardian">向监护人发送预警邮件</button>
+                <button type="button" class="btn btn-red btn-send-teacher">向班主任发布预警邮件</button>
+                <button type="button" class="btn btn-red" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 退步学生弹窗 -->
+<div class="modal fade" id="regressionModal" tabindex="-1" aria-labelledby="regressionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regressionModalLabel">退步学生警告</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>以下学生的学习成绩出现退步：</p>
+                <ul id="regressingStudentList"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-red" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能测评系统</title>
+    <style>
+
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #8d6d6d91;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .user-details {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            right: 20px;
+            top: 64px;
+            z-index: 999;
+        }
+        .user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #fbb7b7;
+}
+.user-info p {
+    margin-bottom: 5px;
+}
+
+.actions .favorite-btn {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.actions .favorite-btn:hover {
+    background-color: #0056b3;
+}
+        .top {
+            height: 64px;
+            width: 100%;
+            background: #41847d;
+            padding-left: 10%;
+        }
+
+
+        img {
+            vertical-align: middle;
+        }
+
+        em {
+            font-style: normal;
+        }
+
+        a img, :link img, :visited img {
+            border: 0;
+        }
+
+        a:link, a:visited {
+            text-decoration: none;
+            color: #666666;
+        }
+
+        a:hover, a:focus {
+            color: #0573bd;
+            text-decoration: none;
+        }
+
+        ul, ul li {
+            list-style-type: none;
+        }
+
+
+        #top_bg {
+            height: 64px;
+            width: 100%;
+            background: #333;
+            box-shadow: 1px 1px 7px #999;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            border-bottom: #C6C6C6 solid 1px;
+        }
+
+        .top .logo_l {
+            width: 180px;
+            height: 64px;
+            color: #ffffff;
+            float: left;
+            line-height: 64px;
+        }
+
+        .nav_z {
+            width: auto !important;
+            height: 64px;
+            float: left;
+            position: relative;
+            z-index: 999;
+        }
+
+        #navul li {
+            float: left;
+            padding: 0 20px;
+            height: 64px;
+            position: relative;
+            text-align: center;
+            line-height: 64px;
+        }
+
+        #navul li a:link, #navul li a:visited {
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        #navul li a {
+            font-size: 14px;
+            color: hsla(0, 0%, 100%, .65);
+        }
+
+        #navul li a:hover {
+            color: #FFF;
+        }
+
+        .login_out {
+            color: hsla(0, 0%, 100%, .65);
+            padding: 0 20px
+        }
+
+        .login_out:hover {
+            color: #FFF;
+        }
+
+        .active {
+            background-color: #1890ff;
+        }
+
+        .bottom {
+            padding-top: 64px;
+        }
+
+
+        h1 {
+            color: #00BCD4;
+            margin-top: 66px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            bottom: 2px;
+        }
+
+#student-data {
+    width: 110%;
+    margin-top: 20px;
+    position: relative;
+    margin-left: -60px; /* 向左移动10px */
+}
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #004f5594;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        td {
+            color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #2A2A2A;
+        }
+
+        #course-selector {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: -13px;
+        }
+
+        #course-selector label {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        #course-selector select {
+            padding: 10px;
+            font-size: 1em;
+            background-color: #1E1E1E;
+            color: #ffffff;
+            border: 1px solid #00BCD4;
+            border-radius: 5px;
+            margin-left: -70px;
+            outline: none;
+        }
+
+        #course-selector select:hover {
+            background-color: #2A2A2A;
+        }
+
+        #course-selector select:focus {
+            border-color: #00E5FF;
+        }
+
+        .student-info {
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    /* 使用 transform 来微调位置 */
+    transform: translateX(318px); /* 根据需要调整数值 */
+}
+
+        .student-info span {
+            font-size: 1.2em;
+            color: #000000;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+              .analyze-button, .generate-button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px; /* 按钮之间的间距 */
+}
+
+.analyze-button {
+    background-color: #4CAF50;
+}
+
+.generate-button {
+    background-color: #008CBA;
+}
+
+.analyze-button:hover {
+    background-color: #45a049;
+}
+
+.generate-button:hover {
+    background-color: #007BBA;
+}
+        .detailed-data {
+            display: none;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 1000;
+            width: 80%;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            color: red;
+            font-size: 1.2em;
+        }
+
+
+    </style>
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+<div class="children_body" style="height: 100%">
+    <div id="top_bg">
+        <div class="top">
+             <a class="logo_l" href="/" title="星火知立方">
+                    <img src="/static/icons/logo1.png" alt="星火知立方 Logo" style="height: 218px; margin-left: -96px;margin-top: -88px;">
+
+</a>
+            <!--导航开始-->
+            <div class="nav_z">
+               <ul id="navul" class="cl" style="display: block;height: 100%;margin: 0">
+
+
+                   <li id="AIcourse">
+    <a href="/AIcourse" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/课程.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        课程学习
+    </a>
+</li>
+
+
+                    <li id="kaoshi">
+                        <!--                        <img src="../static/images/司法考试.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/test_paper" style="font-size: 14px; color: hsl(0deg 0% 100%); ">在线考试</a>-->
+
+
+                        <a href="/test_paper" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/考试.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        在线考试
+    </a>
+
+                    </li>
+                    {% if role == 2 %}
+<!--                    <li id="shiti">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/问题.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shiti">试题管理</a>-->
+<!--                    </li>-->
+<!--                    <li id="shijuan">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/试卷.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shijuan">试卷管理</a>-->
+<!--                    </li>-->
+                    {% endif %}
+<!--                    <li id="chengji">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/成绩查询.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/chengji">成绩管理</a>-->
+
+<!--                    </li>-->
+
+                    <!--                    <li id="user">-->
+                    <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+                    <!--                        <a href="/user/user">学生管理</a>-->
+
+                    <!--                    </li>-->
+                    <li id="individual chengji">
+                        <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/individual_chengji" style="font-size: 14px; color: hsl(0deg 0% 100%);">个人成绩管理</a>-->
+                        <a href="/individual_chengji" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/成绩管理.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        成绩管理
+    </a>
+
+                    </li>
+                    <li id="index">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/index" style="font-size: 14px; color: hsl(0deg 0% 100%);">学习小工具</a>-->
+                        <a href="/index" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/学习助手.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        学习工具
+    </a>
+
+
+
+                    </li>
+
+                    <!--可在此处直接添加导航-->
+                    <li id="ceshi">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/loudongjiance" style="font-size: 14px; color: hsl(0deg 0% 100%);">知识点漏洞检测</a>-->
+
+                         <a href="/loudongjiance" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/查漏补缺.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        查漏补缺
+    </a>
+
+                    </li>
+                    <li id="upexam">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/upexam" style="font-size: 14px; color: hsl(0deg 0% 100%);">提交试卷</a>-->
+
+                        <a href="/upexam" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/提交试卷.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        试卷提交
+    </a>
+
+                    </li>
+                    <!--可在此处直接添加导航-->
+                </ul>
+            </div><!--导航结束-->
+            <div id="welcome-div" style="color: #ffffff;line-height: 64px;font-size: 14px;right: 20px;display: block;width: 200px;position:absolute; margin-right: -42px;">
+                <span id="welcome-span">你好！{{ username }}</span>
+                <a href="/login_out" class="login_out">退出</a>
+            </div>
+           <div id="user-details" class="user-details">
+
+    <div class="user-info">
+        <p>姓名<span>{{ username }}</span></p>
+        <p>年级：<span>{{ '七年级' }}</span></p>
+        <p>班级：<span>{{ '七年二班' }}</span></p>
+        <p>年龄：<span>{{ '17' }}</span></p>
+        <p>邮箱：<span>1943027685@qq.com</span></p>
+        <p>家庭住址：<span>北京</span></p>
+        <p>已获得学分：<span>{{ '20' }}</span></p>
+
+    </div>
+    <div class="actions">
+        <button class="favorite-btn">收藏</button>
+        <button class="favorite-btn">点赞</button>
+    </div>
+</div>
+
+        </div>
+    </div>
+    <div class="bottom" style="height: 100%;display: block">
+        {% block content %}
+        {% endblock %}
+    </div>
+<!--     <h1>{{ course.title }} - Student Data</h1>-->
+
+    <div class="table-header">
+        <div id="course-selector">
+            <label for="courseSelect"></label>
+            <select id="courseSelect">
+                {% for crs in all_courses %}
+                    <option value="{{ crs.id }}" {% if crs.id == course.id %}selected{% endif %}>{{ crs.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="student-info">
+            <span>学生姓名: {{ username }}</span>
+        </div>
+    </div>
+
+    <div id="student-data">
+        <div style="display: flex; align-items: center;">
+            <button class="analyze-button" onclick="analyzeScores()">智能分析数据</button>
+<!--            <button class="generate-button" onclick="generatePersonalizedPaper()">生成个性化试卷</button>-->
+        </div>
+        <table>
+            <tr>
+                <th>课程名</th>
+                <th>视频号</th>
+                <th>点赞</th>
+                <th>收藏</th>
+                <th>观看进度</th>
+                <th>评论</th>
+                <th>测试卷号</th>
+                <th>得分</th>
+            </tr>
+            {% for course_data in student_data %}
+                {% for video in course_data.videos %}
+                <tr>
+                    {% if forloop.first %}
+                        <td rowspan="{{ course_data.rowspan }}">{{ course_data.course_name }}</td>
+                    {% endif %}
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ video.liked }}</td>
+                    <td>{{ video.favorited }}</td>
+                    <td>{{ video.progress }}</td>
+                    <td>{{ video.comment }}</td>
+
+                    {% if forloop.first %}
+                        <td rowspan="{{ course_data.rowspan }}">
+                            {% for test_score in course_data.test_scores %}
+                                <div>{{ test_score.test_id }}</div>
+                            {% endfor %}
+                        </td>
+                        <td rowspan="{{ course_data.rowspan }}">
+                            {% for test_score in course_data.test_scores %}
+                                <div>{{ test_score.score }}</div>
+                            {% endfor %}
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            {% endfor %}
+
+
+
+
+        </table>
+<!--        <button class="analyze-button" onclick="analyzeScores()">分析成绩</button>-->
+<!--        <button class="generate-button" onclick="generatePersonalizedPaper()">生成个性化试卷</button>-->
+                <ul>
+                    {% for course_title, count in topic_counts.items %}
+                        <li>《{{ course_title }}》: 已经发布{{ count }} 个话题</li>
+                    {% endfor %}
+                </ul>
+    </div>
+</div>
+
+ <div id="detailed-data" class="detailed-data">
+        <span class="close-btn" onclick="closeDetailedData()">关闭</span>
+        <h2>详细数据展示</h2>
+        <div id="detailed-data-content">
+            <!-- 详细数据将在这里加载 -->
+        </div>
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+
+<script>
+
+     document.getElementById("courseSelect").addEventListener("change", function() {
+            var courseId = this.value;
+            window.location.href = '?course_id=' + courseId;
+        });
+
+       function analyzeScores() {
+    window.location.href = 'http://127.0.0.1:8000/analyzeScores';
+}
+
+function closeDetailedData() {
+    var detailedData = document.getElementById('detailed-data');
+    detailedData.style.display = 'none';
+}
+
+        function generatePersonalizedPaper() {
+            // Add your personalized paper generation logic here
+            alert("生成个性化试卷功能尚未实现，可以在此处添加具体的生成逻辑。");
+        }
+
+
+    document.getElementById('welcome-span').addEventListener('click', function() {
+        var userDetails = document.getElementById('user-details');
+        if (userDetails.style.display === "none") {
+            userDetails.style.display = "block";
+        } else {
+            userDetails.style.display = "none";
+        }
+    });
+    let currentElemt = window.location.pathname;
+    console.log(currentElemt)
+    // nav菜单选择
+    if (currentElemt.indexOf('user') > -1) {
+        currentElemt = 'user'
+    } else if (currentElemt.indexOf('chengji') > -1) {
+        currentElemt = 'chengji'
+    } else if (currentElemt.indexOf('shijuan') > -1) {
+        currentElemt = 'shijuan'
+    } else if (currentElemt.indexOf('shiti') > -1) {
+        currentElemt = 'shiti'
+    } else if (currentElemt.indexOf('index') > -1) {
+        currentElemt = 'index'
+    } else {
+        currentElemt = 'kaoshi'
+    }
+    $('#' + currentElemt).addClass('active');
+</script>
+{% block script %}
+{% endblock %}
+</html>

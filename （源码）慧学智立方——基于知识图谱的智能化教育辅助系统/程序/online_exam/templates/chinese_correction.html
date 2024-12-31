@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>语文作文批改</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form id="uploadForm">
+        <textarea id="text1" placeholder="上传结果将显示在这里"></textarea>
+        <textarea id="text2"></textarea>
+        <input type="file" name="file" id="fileInput">
+        <button type="button" id="uploadButton">上传作文照片</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#uploadButton").click(function() {
+                var formData = new FormData($("#uploadForm")[0]);
+                $.ajax({
+                    url: "/upChinese",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $("#text1").val(response);
+                    },
+                    error: function() {
+                        alert("文件上传失败");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

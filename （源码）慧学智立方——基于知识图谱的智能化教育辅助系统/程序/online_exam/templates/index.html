@@ -1,0 +1,2873 @@
+{% extends 'base.html' %}
+{% block title %}学习工具页面{% endblock %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="../static/css/admin.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400&display=swap"
+      rel="stylesheet">
+<script src="../static/js/jquery.min.js"></script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<style>
+    body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-image: url('https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00113-3871.jpg'); /* 替换为你想要的图片路径 */
+background-size: cover; /* 确保图片覆盖整个背景 */
+background-position: center; /* 图片居中对齐 */
+background-repeat: no-repeat; /* 防止图片重复 */
+background-attachment: fixed; /* 背景图片固定，不随页面滚动 */
+color: #333; /* 文字颜色 */
+}
+
+.comment-area {
+    background-color: #f9f9f9; /* 背景颜色 */
+    border: 2px solid #ccc; /* 边框 */
+    border-radius: 10px; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影 */
+    padding: 20px; /* 内边距 */
+    margin: 20px 0; /* 外边距 */
+    width: 100%; /* 宽度 */
+     // max-width: 800px; /* 最大宽度限制 */
+    transition: all 0.3s ease; /* 过渡动画 */
+}
+
+#comment {
+    font-size: 18px; /* 字体大小 */
+    color: #333; /* 文字颜色 */
+    line-height: 1.6; /* 行高 */
+    font-family: 'Arial', sans-serif; /* 字体 */
+}
+
+/* 鼠标悬停效果 */
+.comment-area:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 更大的阴影 */
+    transform: translateY(-4px); /* 向上移动 */
+}
+
+/* 如果你想添加一个标题 */
+.comment-area h3 {
+    margin-top: 0;
+    color: #555;
+    font-size: 22px;
+}
+ .practice-modal .modal-dialog {
+            max-width: 600px;
+        }
+        .practice-modal .modal-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .practice-modal .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .practice-modal .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .practice-modal .btn-pronounce {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+        }
+        .practice-modal .btn-pronounce:hover {
+            background-color: #218838;
+        }
+        .level-buttons {
+            margin-top: 15px;
+        }
+        .word-list {
+            margin-top: 20px;
+        }
+        .sentence-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .sentence-row button {
+            margin-left: 20px;
+        }
+        .comment-area {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+#chatWindow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; /* 增加宽度 */
+    height: 500px; /* 增加高度 */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+
+     display: flex;
+    flex-direction: column;
+}
+.button-container {
+    display: flex; /* 使用Flex布局 */
+    justify-content: flex-start; /* 水平对齐方式 */
+    align-items: center; /* 垂直对齐方式 */
+}
+.daohang_button-container {
+    display: flex; /* 使用Flex布局 */
+    justify-content: flex-start; /* 水平对齐方式 */
+    align-items: center; /* 垂直对齐方式 */
+}
+
+.language-selector {
+    font-size: 1rem;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #4CAF50; /* 深绿色背景 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+    display: inline-flex; /* 使用Flex布局以正确对齐图标和文本 */
+    align-items: center; /* 垂直居中文本和图标 */
+    gap: 5px; /* 图标和文本之间的间距 */
+}
+
+/* 鼠标悬停效果 */
+.language-selector:hover {
+    background-color: #3e8e41; /* 悬停时更深的绿色 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.15); /* 添加轻微阴影 */
+}
+
+/* 按下按钮时的效果 */
+.language-selector:active {
+    transform: translateY(1px); /* 模拟按下效果 */
+    box-shadow: 0 1px 5px rgba(0,0,0,0.15); /* 减小阴影 */
+}
+
+/* 自定义Font Awesome图标的颜色 */
+.language-selector i {
+    color: #fff;
+}
+.chat-header {
+    background-color: #7773c1;
+    color: #fff;
+    top:0;
+    left:0;
+    text-align: center;
+    padding: 20px; /* 增加内边距 */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.chat-body {
+    height: 350px; /* 增加高度 */
+    overflow-y: auto;
+    padding: 15px; /* 增加内边距 */
+
+    flex-grow: 1; /* 占据剩余空间 */
+
+}
+
+.chat-message {
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    max-width: 70%;
+    border-radius: 5px;
+    clear: both;
+}
+
+.chat-message.outgoing {
+    background-color: #007bff;
+    color: white;
+    float: right;
+    text-align: right;
+}
+
+.chat-message.incoming {   //ai回答
+    background-color: #bada55;
+    color: black;
+    float: left;
+    text-align: left;
+}
+
+
+.chat-message.user {
+    float: right;
+    background-color: #FFC0CB; /* 用户消息背景色 */
+    text-align: left;
+    margin-left: 10px;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+.chat-message.ai {
+    float: left;
+    background-color: #bada55; /* AI消息背景色 */
+    text-align: left;
+    margin-left: auto;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+}
+
+
+
+
+.chat-footer {
+    display: flex; /* 使用Flexbox布局 */
+    align-items: center; /* 垂直居中对齐 */
+    justify-content: space-between; /* 水平方向上两端对齐，中间留有空间 */
+    background-color: #f5f5f5;
+    padding: 1px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    flex-shrink: 0; /* 确保footer不会缩小 */
+    display: flex; /* 使用Flexbox布局 */
+}
+
+#chatInput {
+    flex-grow: 1; /* 输入框占据剩余空间 */
+    margin-right: 10px; /* 给按钮留出空间 */
+    padding: 19px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#sendButton {
+    width: 83px; /* 增加宽度 */
+    padding: 11px; /* 增加内边距 */
+    border: none;
+    border-radius: 4px;
+    background-color: #5B54E1;
+    color: #fff;
+    cursor: pointer;
+}
+#uploadPhotoButton {
+    background-color: #7ac42b;
+    border: none;
+
+    color: white;
+    padding: 30px 55px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+#uploadPhotoButton:hover {
+    background-color: #34b652; /* 鼠标悬停时的颜色变化 */
+}
+
+#uploadPhotoButton i {
+    margin-right: 10px; /* 图标与文本之间的间距 */
+}
+
+#firstTextBox, #secondTextBox {
+    width: 420%;
+    height: 220px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc; /* 较粗的灰色边框 */
+    border-radius: 8px; /* 圆角边框 */
+    padding: 10px; /* 内边距，使文本离边框有一定距离 */
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* 轻微的阴影效果 */
+    transition: all 0.3s ease; /* 平滑的过渡效果 */
+    background-color: #E6F9E6; /* 淡淡的背景色 */
+    color: #333; /* 文本颜色 */
+    outline: none; /* 移除焦点时的轮廓线 */
+}
+
+#firstTextBox:focus, #secondTextBox:focus {
+    border-color: #007bff; /* 获得焦点时，边框变为蓝色 */
+    box-shadow: 0 0 8px rgba(0,123,255,0.5); /* 获得焦点时，更明显的阴影效果 */
+}
+#firstTextBox {
+    margin-top: 60px; /* 下移20px */
+}
+#startButton {
+    background: linear-gradient(to right, #0062cc, #007bff); /* 渐变背景 */
+    border: none;
+    color: white;
+    padding: 15px 70px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition: all 0.4s ease; /* 过渡动画 */
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 添加阴影 */
+}
+
+#startButton:hover {
+    transform: translateY(-2px); /* 鼠标悬停时稍微上移 */
+    box-shadow: 0 6px 8px rgba(0,0,0,0.2); /* 鼠标悬停时更深的阴影 */
+    background: linear-gradient(to right, #005cbf, #0062cc); /* 更深的渐变背景 */
+}
+
+#startButton:active {
+    transform: translateY(2px); /* 按下时稍微下移 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 按下时更浅的阴影 */
+}
+
+#startButton i {
+    margin-right: 8px; /* 如果有图标，与文本之间留些间距 */
+}
+
+<!--====================第二个按钮样式=================-->
+#start_2_Button {
+    background: linear-gradient(to right, #0062cc, #007bff); /* 渐变背景 */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition: all 0.4s ease; /* 过渡动画 */
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 添加阴影 */
+}
+.form-control {
+    width: 110%;
+    height: auto; /* 自动高度 */
+    padding: 10px; /* 内边距 */
+    border: 2px solid #DBF; /* 边框 */
+    resize: vertical; /* 允许用户调整高度 */
+}
+
+#start_2_Button:hover {
+    transform: translateY(-2px); /* 鼠标悬停时稍微上移 */
+    box-shadow: 0 6px 8px rgba(0,0,0,0.2); /* 鼠标悬停时更深的阴影 */
+    background: linear-gradient(to right, #005cbf, #0062cc); /* 更深的渐变背景 */
+}
+
+#start_2_Button:active {
+    transform: translateY(2px); /* 按下时稍微下移 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 按下时更浅的阴影 */
+}
+
+#start_2_Button i {
+    margin-right: 8px; /* 如果有图标，与文本之间留些间距 */
+}
+
+    .container_wp{
+        width:1200px;
+        margin:0 auto;
+        overflow:hidden;
+        padding-top:75px;
+    }
+    .container_wp .left{
+    width:220px;
+    border:0px solid #000000;
+    }
+    .container_wp .right{
+    width:960px;
+    border:2px solid #000000;
+    float:right;
+    margin-top:-42px;
+
+    }
+
+    .ul_menu li{
+        margin-top:20px;
+    }
+    .ul_menu button{
+    color:#fff;
+        border-radius:26px;
+        width:190px;
+        text-align:center;
+        height:76px;
+        background-image: linear-gradient(to bottom right, #003472, #00a8ff);
+        border:none;
+        line-height:40px;
+         line-height: 76px; /* 修改这一行，以匹配按钮的高度，确保文本垂直居中 */
+        font-size: 16px; /* 添加这一行 */
+
+    }
+    .ul_menu button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+    background: linear-gradient(to right, #005cbf, #0062cc);
+}
+    .box_r{
+    float:right;
+    width:404px;
+    height:border:1px solid #ccc;
+    padding:30px;
+    box-sizing:border-box;
+    margin-right:30px;
+    }
+    .box_l{
+    float:left;
+    height:300px;
+    width:404px;
+    height:border:1px solid #ccc;
+    padding:30px;
+    box-sizing:border-box;
+    }
+    .content textarea{
+    border-radius:10px;
+    padding-left:10px;
+    box-sizing:border-box;
+    margin-bottom:30px;
+    }
+    #uploadPhotoButton{
+        display:block;
+        margin:0 auto;
+        padding:12px 20px;
+        background:#299541;
+    }
+    .dn{
+    display:none}
+
+    #ai_box{
+    height:520px;
+    }
+
+    #chatWindow{
+        position:relative;
+        left:0;
+        top:0;
+        transform:none;
+        width:760px;
+        float:left;
+        height: 650px;
+    }
+    .btn_menu,.btn-pronounce{
+    height:40px;
+    text-align:center;
+    line-height:40px;
+    background:#7773c1;
+    color:#fff;
+    border-radius:5px;
+    border:none;
+    margin-left:20px;
+    }
+    .sentence-row{
+    line-height:28px;
+    padding-left:20px;
+    }
+    .autoheight{
+    height:600px;
+    position:relative;
+    }
+    .comment-area{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:959px;
+    box-sizing:border-box;
+    margin-bottom:0;
+    }
+
+
+    .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #F9C;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #65c233;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+.switch-labels {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+     color: #000000;
+     margin-top: 22px;
+}
+.switch-labels span {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.modal {
+display: none;
+position: fixed;
+z-index: 1;
+padding-top: 60px;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgb(0,0,0);
+background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+.history-messages {
+    margin-top: 20px;
+}
+
+.message-history {
+    list-style-type: none;
+
+
+    padding: 0;
+}
+
+.message-history li {
+    margin-bottom: 5px;
+    background:#2890b6
+}
+
+
+
+
+
+
+    #voiceChat {
+    margin-top: 20px;
+}
+.chat-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+
+
+
+.message {
+    margin-bottom: 1em;
+}
+
+.user-message {
+    float: right;
+
+}
+
+.bot-message {
+    float: left;
+}
+
+#chatModeSelection {
+    display: none;
+}
+
+#chatModeSelect {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.dialog_btn{
+width:195px;
+height:58px;
+line-height:60px;
+text-align:center;
+color:#fff;
+background:#7773c1;
+border:none;
+}
+.dialog_btn1{
+height:68px;
+line-height:72px;
+}
+.message-history li{
+width:195px;
+height:60px;
+line-height:60px;
+text-align:center;
+color:#5b54e1;
+background: #ffffff;
+border:none;
+margin-bottom:5px;
+}
+
+
+#newConversationButton {
+    border-radius: 20px; /* 这里的数值可以根据你的喜好调整 */
+}
+
+
+
+
+
+
+
+
+ * {
+        margin: 0;
+        padding: 0;
+      }
+      .voice_box {
+        width: 960px;
+        position: relative;
+         margin-top: -20px;
+      }
+      .voice_title {
+        height: 82px;
+        line-height: 82px;
+        text-align: center;
+        background: #39329d82;
+        font-size: 26px;
+        color: white;
+      }
+      .voice_box .voice_content {
+        height: 500px;
+        border: 2px solid #5B54E1;
+        box-sizing: border-box;
+         background-color: #d0e8f2; /* 更改背景颜色为柔和的蓝色 */
+      }
+      .voice_bottom {
+        height: 70px;
+        display: flex;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .voice_left {
+        flex: 1;
+        position: relative;
+      }
+      .voice_center {
+        flex: 4;
+      }
+      .voice_right {
+        position: relative;
+        flex: 1;
+      }
+      .voice_bottom button {
+        display: block;
+        width: 100%;
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        border: none;
+        background: #1c185d8c;
+        font-size: 20px;
+        border-radius: 20px;
+        color: white;
+      }
+
+      .voice_msg {
+        border-radius: 5px;
+        margin-top: 12px;
+      }
+      .voice_msg span {
+        display: inline-block;
+        width: 200px;
+        height: 35px;
+        line-height: 35px;
+        color: #fff;
+        font-size: 14px;
+        padding-left: 10px;
+        background: #0b96c4;
+        text-align: left;
+      }
+      .voice_msg:nth-child(2n) {
+        margin-left: 10px;
+        text-align: left;
+      }
+      .voice_msg:nth-child(2n + 1) {
+        text-align: right;
+        margin-right: 10px;
+      }
+      ul,
+      ul li {
+        list-style: none;
+      }
+      .choose_language {
+        position: absolute;
+        width: 100%;
+        border: 1px solid #0b96c4;
+        left: 0;
+        bottom: 70px;
+        display: none;
+      }
+      .choose_language .ul_language li span {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        display: block;
+        font-size: 14px;
+      }
+      .voice_right:hover .choose_language {
+        display: block;
+      }
+      .second_l {
+        position: absolute;
+        width: 150px;
+        right: 100%;
+        bottom: 0;
+        border: 1px solid #5B54E1;
+        display: none;
+      }
+      .second_l dd {
+        border: 1px solid #5B54E1;
+      }
+      .ul_language li.li_1:hover .second_l {
+        display: block;
+      }
+      .ul_language li.li_2:hover .second_l1 {
+        display: block;
+      }
+      .ul_choosems {
+        position: absolute;
+        display: none;
+        left: 0;
+        bottom: 70px;
+        width: 120px;
+        border: 1px solid #5B54E1;
+      }
+      .ul_choosems li {
+        height: 30px;
+        display: flex; /* 添加这一行 */
+        align-items: center; /* 添加这一行，用于垂直居中 */
+        justify-content: center; /* 添加这一行，用于水平居中 */
+        border-bottom: 5px solid #5B54E1;
+
+      }
+      .voice_left:hover .ul_choosems {
+        display: block;
+      }
+
+
+
+
+
+    .user-audio {
+    background-color: #c6e7df;
+    border-radius: 10px; /* 圆角 */
+    padding: 18px; /* 内边距 */
+    margin-bottom: 10px; /* 底部外边距 */
+    width: fit-content; /* 自适应宽度 */
+    max-width: 80%; /* 最大宽度限制 */
+    float: right; /* 靠右浮动 */
+    clear: both; /* 清除浮动 */
+}
+
+
+    .bot-audio {
+    background-color: #3cd372; /* 浅黄色背景 */
+    border-radius: 10px; /* 圆角 */
+    padding: 18px; /* 内边距 */
+    margin-bottom: 10px; /* 底部外边距 */
+    width: fit-content; /* 自适应宽度 */
+    max-width: 80%; /* 最大宽度限制 */
+    float: left; /* 靠左浮动 */
+    clear: both; /* 清除浮动 */
+}
+
+.modal {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgb(0,0,0);
+background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+background-color: #fefefe;
+margin: 15% auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
+}
+
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+
+
+
+/* 公共样式 */
+.custom-button {
+padding: 10px 20px; /* 内边距 */
+font-size: 16px; /* 字体大小 */
+text-align: center; /* 文本居中 */
+cursor: pointer; /* 鼠标指针样式 */
+outline: none; /* 移除默认轮廓 */
+color: #fff; /* 文字颜色 */
+border: none; /* 边框 */
+border-radius: 5px; /* 圆角 */
+background-color: #4CAF50; /* 背景颜色 */
+transition: all 0.3s ease; /* 平滑过渡 */
+}
+
+/* 鼠标悬停样式 */
+.custom-button:hover {
+background-color: #45a049; /* 更深的背景色 */
+}
+
+/* 按钮激活样式 */
+.custom-button:active {
+transform: translateY(1px); /* 向下移动1像素 */
+box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* 添加阴影 */
+}
+
+
+
+
+.modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        text-align: center;
+    }
+    .custom-button {
+        display: block;
+        margin: 10px auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+
+
+
+
+
+
+
+.voice_content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.voice_msg {
+    display: flex;
+    align-items: center;
+}
+
+.voice_content_right {
+    justify-content: flex-end;
+}
+
+.voice_content_left {
+    justify-content: flex-start;
+}
+
+.voice_msg_right, .voice_msg_left {
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.voice_msg_right {
+    background-color: #dcf8c6;
+    margin-left: auto;
+}
+
+.voice_msg_left {
+    background-color: #ffffff;
+    margin-right: auto;
+    border: 1px solid #ddd;
+}
+
+
+
+
+
+
+
+.play-icon {
+    width: 20px;
+    height: 20px;
+    background: url('static/icons/yy2.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* 用户的播放图标样式 */
+.user-play-icon {
+width: 20px;
+height: 20px;
+background: url('static/icons/语音.png') no-repeat center center;
+background-size: contain;
+cursor: pointer;
+margin-right: 10px;
+margin-bottom: -9px;
+}
+
+/* AI 的播放图标样式 */
+.ai-play-icon {
+width: 41px;
+height: 20px;
+background: url(static/icons/语音.png);
+background-size: contain;
+cursor: pointer;
+margin-right: 10px;
+margin-bottom: -9px;
+margin-left: 225px;
+}
+
+
+
+
+.audio-length {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.user-audio {
+background-color: #f0b838; /* 用户背景颜色 */
+border-radius: 10px; /* 圆角 */
+padding: 20px; /* 内边距 */
+margin-bottom: 10px; /* 底部外边距 */
+width: fit-content; /* 自适应宽度 */
+max-width: 70%; /* 最大宽度 */
+min-width: 30%; /* 最小宽度 */
+position: relative;
+margin-right: -15px;
+
+}
+
+
+
+.bot-audio {
+background-color: #20bc58; /* 用户背景颜色 */
+border-radius: 10px; /* 圆角 */
+padding: 20px; /* 内边距 */
+margin-bottom: 10px; /* 底部外边距 */
+width: fit-content; /* 自适应宽度 */
+max-width: 70%; /* 最大宽度 */
+min-width: 30%; /* 最小宽度 */
+position: relative;
+margin-left: -15px;
+}
+
+
+.custom-textarea {
+width: 100%;
+height: 457px;
+padding: 15px;
+font-size: 16px;
+border: 1px solid #D1D1D1;
+border-radius: 8px;
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease-in-out;
+background-color: #FAFAFA;
+resize: vertical;
+line-height: 1.6;
+}
+
+.custom-textarea:focus {
+border-color: #007BFF;
+box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.25);
+outline: none;
+background-color: #FFFFFF;
+}
+
+.custom-button {
+background-color: #007BFF;
+color: #FFFFFF;
+border: none;
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 8px;
+transition: background-color 0.3s ease;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-button:hover {
+background-color: #0056b3;
+}
+
+.custom-button i {
+margin-right: 8px;
+}
+
+label {
+font-family: 'Arial', sans-serif;
+}
+
+.button-container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#firstTextBox, #secondTextBox {
+width: 100%;
+height: auto;
+font-size: 16px;
+margin-bottom: 20px;
+border: 2px solid #ccc; /* 较粗的灰色边框 */
+border-radius: 8px; /* 圆角边框 */
+padding: 10px; /* 内边距，使文本离边框有一定距离 */
+box-shadow: 2px 2px 8px rgba(0,0,0,0.15); /* 轻微的阴影效果 */
+transition: all 0.3s ease; /* 平滑的过渡效果 */
+background-color: #E6F9E6; /* 淡淡的背景色 */
+color: #333; /* 文本颜色 */
+outline: none; /* 移除焦点时的轮廓线 */
+}
+
+#firstTextBox:focus, #secondTextBox:focus {
+border-color: #007bff; /* 获得焦点时，边框变为蓝色 */
+box-shadow: 0 0 12px rgba(0,123,255,0.5); /* 获得焦点时，更明显的阴影效果 */
+}
+
+
+
+
+.ul_menu {
+    background-image: url('https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00113-3871.jpg'); /* 替换为实际的木制背景图片路径 */
+    background-size: cover;
+    padding: 20px;
+    border-radius: 10px; /* 圆角边框 */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+}
+
+   .ul_menu .btn {
+    background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202008%2F29%2F20200829225005_3Z3zK.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1726662089&t=9c2f024389893679d041f2d8b8818e22'); /* 替换为实际的木制纹理图片路径 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: black; /* 白色字体 */
+    border: none; /* 无边框 */
+    padding: 3px 25px; /* 内边距 */
+    margin: 10px 0; /* 按钮之间的间距 */
+    font-size: 27px; /* 字体大小 */
+    border-radius: 8px; /* 圆角 */
+    cursor: pointer; /* 鼠标指针 */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* 轻微阴影 */
+    transition: all 0.3s ease; /* 平滑过渡 */
+    font-family: 'Georgia', serif; /* 适合木制风格的字体 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 字体阴影 */
+}
+
+/* 鼠标悬停效果 */
+.ul_menu .btn:hover {
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.4); /* 增强阴影效果 */
+    transform: translateY(-2px); /* 微微上移 */
+    opacity: 0.9; /* 悬停时略微透明 */
+}
+
+/* 按钮激活状态 */
+.ul_menu .btn.active {
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.4); /* 内嵌阴影产生凹陷效果 */
+    transform: translateY(2px); /* 轻微下移产生凹陷感 */
+    opacity: 1; /* 激活时恢复不透明 */
+}
+
+/* 按钮按下时的效果 */
+.ul_menu .btn:active {
+    box-shadow: inset 0px 5px 7px rgba(0, 0, 0, 0.5); /* 加深内嵌阴影 */
+    transform: translateY(4px); /* 进一步下移，增加按下效果 */
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="container_wp">
+    <div class="right">
+        <div class="content tab" style="display: flex; justify-content: space-around; padding: 20px;">
+           <div class="box_r" style="text-align: center; width: 45%;">
+    <div style="display: inline-block; text-align: center; width: 100%;">
+        <label for="originalText" style="
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            display: block;
+            color: #2C3E50;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+        ">
+            你的原文
+        </label>
+        <textarea class="form-control custom-textarea" id="originalText" placeholder="你的原文" rows="15"
+                  cols="60" style="
+                  background-image: url('https://pic.616pic.com/bg_w1180/00/00/02/3WLTnrN6gM.jpg'); /* 替换为实际的背景图片路径 */
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  background-position: center;
+                  color: #2C3E50; /* 文字颜色 */
+                  padding: 10px; /* 内边距 */
+                  border: 2px solid #ccc; /* 边框 */
+                  border-radius: 8px; /* 圆角 */
+                  font-size: 16px; /* 字体大小 */
+                  font-family: 'Arial', sans-serif; /* 字体 */
+        "></textarea>
+    </div>
+    <div class="button-container" style="margin-top: 20px;">
+        <button id="uploadPhotoButton" class="btn btn-primary custom-button">
+            <i class="fas fa-camera"></i> 上传手写作文照片
+        </button>
+    </div>
+    <input type="file" id="photoInput" style="display:none;">
+    <p id="uploadResult"></p>
+</div>
+<div class="box_l" style="text-align: center; width: 45%;">
+    <div style="display: inline-block; text-align: center; width: 100%;">
+        <label for="dianpingText" style="
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            display: block;
+            color: #2C3E50;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+        ">
+            批改建议
+        </label>
+        <textarea class="form-control custom-textarea" id="dianpingText" placeholder="批改内容" rows="15"
+                  cols="60" style="
+                  background-image: url('https://pic.616pic.com/bg_w1180/00/00/02/3WLTnrN6gM.jpg'); /* 替换为实际的背景图片路径 */
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  background-position: center;
+                  color: #2C3E50; /* 文字颜色 */
+                  padding: 10px; /* 内边距 */
+                  border: 2px solid #ccc; /* 边框 */
+                  border-radius: 8px; /* 圆角 */
+                  font-size: 16px; /* 字体大小 */
+                  font-family: 'Arial', sans-serif; /* 字体 */
+        "></textarea>
+                </div>
+
+
+                <div class="switch-container">
+                          <span class="switch-labels">
+        <span class="off" style="color: white;">中文</span>
+
+        </span>
+                    <label class="switch">
+                        <input type="checkbox" id="language-switch">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-labels">
+
+        <span class="on" style="color: white;">英文</span>
+                    </span>
+                    <p id="activationPrompt" style="display: block; margin-left: 20px;color: white;">
+                        首次使用拨动开关激活</p>
+
+                </div>
+            </div>
+        </div>
+        <!--            第二个-->
+        <div class="content tab dn">
+            <div id="ai_box">
+                <div style="width:195px;float:right">
+                    <!-- 历史消息列表 -->
+
+                    <!-- 新建对话按钮 -->
+                    <button id="newConversationButton" class="btn dialog_btn dialog_btn1 btn-secondary"
+                            style="display: none;">新建对话
+                    </button>
+
+                    <div id="historyMessages" class="history-messages">
+                        <button id="newConversationButton_1" class="btn dialog_btn btn-secondary">历史记录</button>
+
+                        <ul id="messageHistoryList" class="message-history"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="documentModal" tabindex="-1" role="dialog" aria-labelledby="documentModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="documentModalLabel">Generated Document</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <iframe id="documentFrame" style="width:100%; height:500px;" frameborder="0"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                            <a id="downloadLink" href="#" class="btn btn-primary" download>Download Document</a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var chatWindowHTML = `
+                    <div id="chatWindow">
+                        <div class="chat-header">
+                            <h3>智能小助手</h3>
+                        </div>
+                        <div class="chat-body" style="background-image: url('https://pic.rmb.bdstatic.com/bjh/news/5f10e94bd10aca67afbbd46aac03c73f.jpeg'); background-size: cover; background-position: center;">
+    <!-- 聊天记录将在这里显示 -->
+                    </div>
+                        <div class="chat-footer">
+                            <input type="text" id="chatInput" placeholder="请在这里向小助手对话哦，/command+help 唤起命令模式" />
+                            <button id="sendButton" type="submit">发送</button>
+                        </div>
+                    </div>
+                `;
+
+                // 将聊天窗口插入DOM
+                $('#ai_box').append(chatWindowHTML);
+            </script>
+
+        </div>
+        <div class="content tab dn autoheight">
+            <div id="practiceContainer">
+                <div class="level-buttons">
+                    <button class="btn btn_menu btn-secondary" onclick="showPractice('cet4')">英语四级口语练习</button>
+                    <button class="btn btn_menu  btn-secondary" onclick="showPractice('cet6')">英语六级口语练习</button>
+                    <button class="btn btn_menu btn-secondary" onclick="showPractice('business')">商务英语口语练习
+                    </button>
+                </div>
+                <div class="word-list" id="wordList">
+                    <!-- 英语句子将在这里显示 -->
+                </div>
+                <div class="comment-area" id="commentArea">
+                    <p id="comment">评语区</p>
+                </div>
+            </div>
+        </div>
+
+        <!--============================================语音聊天界面===============================================================-->
+        <div class="content tab" id="voiceChat" style="display: none;">
+            <div id="voiceChatBox"></div>
+
+            <div id="languageTabs" style="display: none;">
+                <div class="languageTab" data-language="Chinese">
+                    <h3>中文</h3>
+                    <!-- 中文方言选项卡容器 -->
+                    <div id="chineseDialects" style="display: none;">
+                        <!-- 标准普通话 -->
+                        <div class="dialectTab" data-dialect="StandardMandarin">
+                            <h4>标准普通话</h4>
+                        </div>
+                        <!-- 甘肃话 -->
+                        <div class="dialectTab" data-dialect="Gansu">
+                            <h4>甘肃话</h4>
+                        </div>
+                        <!-- 河南话 -->
+                        <div class="dialectTab" data-dialect="Henan">
+                            <h4>河南话</h4>
+                        </div>
+                        <!-- 四川话 -->
+                        <div class="dialectTab" data-dialect="Sichuan">
+                            <h4>四川话</h4>
+                        </div>
+                        <!-- 武汉话 -->
+                        <div class="dialectTab" data-dialect="Wuhan">
+                            <h4>武汉话</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 英语选项卡 -->
+                <div class="languageTab" data-language="English">
+                    <h3>英语</h3>
+                </div>
+
+                <!-- 法语选项卡 -->
+                <div class="languageTab" data-language="French">
+                    <h3>法语</h3>
+                </div>
+
+                <!-- 日语选项卡 -->
+                <div class="languageTab" data-language="Japanese">
+                    <h3>日语</h3>
+                </div>
+
+                <!-- 俄语选项卡 -->
+                <div class="languageTab" data-language="Russian">
+                    <h3>俄语</h3>
+                </div>
+            </div>
+
+            <div id="outputLanguageTabs" style="display: none;">
+
+                <div id="chineseOutputDialects" style="display: none;">
+                    <div class="outputDialectTab" data-output-dialect="StandardChinese">
+                        <h4>标准中文</h4>
+                    </div>
+                    <!-- 东北话 -->
+                    <div class="outputDialectTab" data-output-dialect="Northeastern">
+                        <h4>东北话</h4>
+                    </div>
+                    <!-- 安徽话 -->
+                    <div class="outputDialectTab" data-output-dialect="Anhui">
+                        <h4>安徽话</h4>
+                    </div>
+                    <!-- 广东话 -->
+                    <div class="outputDialectTab" data-output-dialect="Guangdong">
+                        <h4>广东话</h4>
+                    </div>
+                    <!-- 山东话 -->
+                    <div class="outputDialectTab" data-output-dialect="Shandong">
+                        <h4>山东话</h4>
+                    </div>
+                    <!-- 粤语 -->
+                    <div class="outputDialectTab" data-output-dialect="Cantonese">
+                        <h4>粤语</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!--            <button id="selectChatModeBtn">选择聊天模式</button>-->
+            <!-- 创建隐藏的聊天模式选择容器 -->
+            <div id="chatModeSelection">
+                <label for="chatModeSelect">选择聊天模式:</label>
+                <select id="chatModeSelect" name="chatModeSelect">
+                    <option value="1">口语练习模式</option>
+                    <option value="0">闲聊对话模式</option>
+                </select>
+            </div>
+
+            <!--=================================================================-->
+
+            <div class="voice_box">
+                <div class="voice_title">语音对话</div>
+
+                <div class="voice_content"
+                     style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg3.doubanio.com%2Fview%2Fgroup_topic%2Fl%2Fpublic%2Fp265801311.jpg&refer=http%3A%2F%2Fimg3.doubanio.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1726657497&t=f1fddcc551eaa287a9865cd8cf592c19'); background-size: cover; background-position: center;">
+
+                </div>
+                <div class="voice_bottom">
+                    <div class="voice_left">
+                        <button>选择模式</button>
+                        <ul class="ul_choosems">
+                            <li>口语练习模式</li>
+                            <li>闲聊对话模式</li>
+                        </ul>
+
+
+                    </div>
+                    <div class="voice_center">
+                        <button id="startRecordingBtn">按住说话</button>
+                    </div>
+                    <!--
+                        中文（标准中文，东北话，安徽话，广东话，山东话，粤语），英语，法语，日语
+                    -->
+                    <div class="voice_right">
+                        <button>选择语言</button>
+
+                        <div class="choose_language">
+                            <ul class="ul_language">
+                                <li class="li_2">
+                                    <span>选择输出语言</span>
+                                    <div class="second_l second_l1">
+                                        <dl>
+                                            <dd data-output-language="Chinese" data-output-dialect="StandardChinese">
+                                                中文标准中文
+                                            </dd>
+                                            <dd data-output-language="Chinese" data-output-dialect="Northeastern">
+                                                中文东北话
+                                            </dd>
+                                            <dd data-output-language="Chinese" data-output-dialect="Anhui">中文安徽话
+                                            </dd>
+                                            <dd data-output-language="Chinese" data-output-dialect="Guangdong">
+                                                中文广东话
+                                            </dd>
+                                            <dd data-output-language="Chinese" data-output-dialect="Shandong">
+                                                中文山东话
+                                            </dd>
+                                            <dd data-output-language="Chinese" data-output-dialect="Cantonese">
+                                                中文粤语
+                                            </dd>
+                                            <dd data-output-language="English">英语</dd>
+                                            <dd data-output-language="French">法语</dd>
+                                            <dd data-output-language="Japanese">日语</dd>
+                                        </dl>
+                                    </div>
+                                </li>
+
+
+                                <li class="li_1">
+                                    <!--                                                                        <span>选择输入语言</span>-->
+                                    <div class="second_l">
+                                        <dl>
+                                            <!--                                                                                        <dd>中文标准普通话</dd>-->
+                                            <!--                                                                                        <dd>中文甘肃话</dd>-->
+                                            <!--                                                                                        <dd>中文河南话</dd>-->
+                                            <!--                                                                                        <dd>中文四川话</dd>-->
+                                            <!--                                                                                        <dd>中文武汉话</dd>-->
+                                            <!--                                                                                        <dd>英语</dd>-->
+                                            <!--                                                                                        <dd>法语</dd>-->
+                                            <!--                                                                                        <dd>日语</dd>-->
+                                            <!--                                                                                        <dd>俄语</dd>-->
+                                        </dl>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="vrModal" class="modal">
+            <div class="modal-content">
+                <h2>VR 学习</h2>
+                <button id="nanking-massacre-btn" class="custom-button">南京大屠杀博物馆</button>
+                <button id="second-museum-btn" class="custom-button">禁毒博物馆</button>
+                <button id="virtual-lab-btn" class="custom-button">虚拟实验室</button>
+                <button id="closeModalBtn" class="custom-button">关闭</button>
+            </div>
+        </div>
+    </div>
+    <div class="left">
+        <ul class="ul_menu TAB" id=".tab">
+            <li>
+                <button class="btn btn-primary" data-function="essayCorrection">作文批改</button>
+            </li>
+            <li>
+                <button id="start_2_Button" class="btn btn-primary" data-function="aiAssistant">智能小助手</button>
+            </li>
+            <li>
+                <button id="start_3_Button" class="btn btn-primary" data-function="oralPractice">口语练习</button>
+            </li>
+            <li>
+                <button id="start_4_Button" class="btn btn-primary" data-function="vrLearning">情景对话</button>
+            </li>
+            <li>
+                <button id="vr_Button" class="btn btn-primary" data-function="aiCourses">VR学习</button>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+{% endblock %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.10.0"></script>
+<script src="/static/js/recorder.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>-->
+<!--<script src="static/js/swfobject.js"></script>-->
+
+<script>
+
+    const switchElement = document.getElementById('language-switch');
+    const promptElement = document.getElementById('activationPrompt');
+
+    // 监听开关状态改变
+    switchElement.addEventListener('change', function() {
+        // 当开关状态改变时，隐藏提示信息
+        promptElement.style.display = 'none';
+    });
+        <!--===============================================下面是作文批改===================================================================-->
+            var isUploadContainerShown = false; // 新增变量用于跟踪上传容器的显示状态
+            var isChatWindowShown = false;
+            var conversations = [];
+
+
+
+
+
+                $(document).ready(function(){
+
+                    $(".TAB li").click(function(){
+                        var $vv=$(this).parent(".TAB").attr("id");
+                          $($vv).hide();
+                          $(this).parent(".TAB").find("li").removeClass("hover");
+                          var xx=$(this).parent(".TAB").find("li").index(this);
+                          $($vv).eq(xx).show();
+                          $(this).addClass("hover");
+                      });
+
+                // 点击上传作文照片按钮触发文件输入
+                $('#uploadPhotoButton').click(function(){
+                    $('#photoInput').click();
+                });
+
+                // 处理文件输入变化事件
+                $('#photoInput').change(function(){
+                    var formData = new FormData();
+                    formData.append('photo', $('#photoInput')[0].files[0]);
+
+                    $.ajax({
+                        url: '/upload_zuowen_photo/',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response){
+                            $('#originalText').val(response.message);//接受到原文并且填入第二个文本框
+
+
+                            $('#dianpingText').val(response.message_2);  //此处接收到批改后的文字，放进第一个文本框
+
+
+                        },
+                        error: function(response){
+                            $('#uploadResult').text('上传照片出错。');
+                        }
+                    });
+                });
+            });
+
+
+
+        <!--=======================================智能小助手功能=======================================================================-->
+    <!--下面是好的代码哦-->
+    <!--    $(document).ready(function() {-->
+    <!--        // 获取所有功能按钮和要控制显示的元素-->
+    <!--        var buttons = $('.ul_menu .btn');-->
+    <!--        var historyMessages = $('#historyMessages');-->
+    <!--        var newConversationButton = $('#newConversationButton');-->
+
+    <!--        // 监听所有功能按钮的点击事件-->
+    <!--        buttons.on('click', function() {-->
+    <!--            // 获取当前点击按钮的功能类型-->
+    <!--            var functionType = $(this).data('function');-->
+
+    <!--            // 根据功能类型显示或隐藏相关元素-->
+    <!--            if (functionType === 'aiAssistant') {-->
+    <!--                historyMessages.show();-->
+    <!--                newConversationButton.show();-->
+    <!--            } else {-->
+    <!--                historyMessages.hide();-->
+    <!--                newConversationButton.hide();-->
+    <!--            }-->
+    <!--        });-->
+
+    <!--        // 初始化：隐藏“新建对话”和“历史消息”-->
+    <!--        historyMessages.hide();-->
+    <!--        newConversationButton.hide();-->
+    <!--    });-->
+
+
+    <!--        $(document).ready(function() {-->
+    <!--            // 创建聊天窗口的HTML结构-->
+    <!--            // 发送消息的处理逻辑-->
+    <!--            $('#sendButton').click(function() {-->
+    <!--                var question = $('#chatInput').val();-->
+    <!--                $('#chatInput').val('');-->
+
+    <!--                // 在聊天记录中添加用户的提问-->
+    <!--                $('.chat-body').append(`<p class="chat-message outgoing">${question}</p>`);-->
+
+    <!--                // 使用Ajax发送问题到后端-->
+    <!--                $.ajax({-->
+    <!--                    url: '/ai_answer/', // 这里的URL应该指向你的后端处理函数-->
+    <!--                    type: 'POST',-->
+    <!--                    data: { question: question }, // 发送问题作为POST数据-->
+    <!--                    success: function(response) {-->
+    <!--                        $('.chat-body').append(`<p class="chat-message incoming">${response.response}</p>`);-->
+
+
+    <!--                        // 滚动到底部显示最新消息-->
+    <!--                        $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);-->
+    <!--                    },-->
+    <!--                    error: function(error) {-->
+    <!--                        console.error('Error sending the question:', error);-->
+    <!--                    }-->
+    <!--                });-->
+
+    <!--                // 确保聊天窗口可见-->
+    <!--                $('#chatWindow').show();-->
+    <!--            });-->
+
+
+    <!--            $('#newConversationButton').click(function() {-->
+    <!--        // 生成对话名称-->
+    <!--        var conversationName = "对话" + (conversations.length + 1);-->
+
+    <!--        // 保存当前会话-->
+    <!--        saveCurrentConversation(conversationName);-->
+
+    <!--        // 重新加载历史消息列表-->
+    <!--        loadHistoryMessages();-->
+    <!--    });-->
+    <!--    &lt;!&ndash;    $('#sendButton').click(function() {&ndash;&gt;-->
+    <!--    &lt;!&ndash;        // ... 其他代码 ...&ndash;&gt;-->
+    <!--    &lt;!&ndash;        $('#newConversationButton').show();&ndash;&gt;-->
+    <!--    &lt;!&ndash;    });&ndash;&gt;-->
+
+    <!--        // 加载历史消息-->
+    <!--        loadHistoryMessages();-->
+
+    <!--        function saveCurrentConversation(conversationName) {-->
+    <!--        // 获取当前聊天记录-->
+    <!--       var messages = $('.chat-body').children().map(function() {-->
+    <!--            return $(this).text();-->
+    <!--        }).get();-->
+
+
+    <!--        // 保存对话-->
+    <!--        conversations.push({-->
+    <!--            name: conversationName,-->
+    <!--            messages: messages-->
+    <!--        });-->
+
+    <!--        // 清空聊天记录-->
+    <!--        $('.chat-body').empty();-->
+    <!--    }-->
+
+    <!--        function loadHistoryMessages() {-->
+    <!--        $('#messageHistoryList').empty(); // 清空历史消息列表-->
+    <!--        conversations.forEach(function(conversation, index) {-->
+    <!--            var listItem = $('<li></li>').text(conversation.name);-->
+    <!--            listItem.click(function() {-->
+    <!--                loadConversation(index);-->
+    <!--            });-->
+    <!--            $('#messageHistoryList').append(listItem);-->
+    <!--        });-->
+    <!--    }-->
+
+    <!--    function loadConversation(index) {-->
+    <!--        var conversation = conversations[index];-->
+    <!--        $('.chat-body').empty(); // 清空当前聊天记录-->
+    <!--        conversation.messages.forEach(function(message, i) {-->
+    <!--            var messageClass = i % 2 === 0 ? 'user' : 'ai';-->
+    <!--            $('.chat-body').append(`<p class="chat-message ${messageClass}">${message}</p>`);-->
+    <!--        });-->
+    <!--        $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight); // 滚动到底部-->
+    <!--    }-->
+
+
+
+    <!--        });-->
+
+
+
+
+    <!--$(document).ready(function() {-->
+    <!--    var buttons = $('.ul_menu .btn');-->
+    <!--    var historyMessages = $('#historyMessages');-->
+    <!--    var newConversationButton = $('#newConversationButton');-->
+
+    <!--    buttons.on('click', function() {-->
+    <!--        var functionType = $(this).data('function');-->
+    <!--        if (functionType === 'aiAssistant') {-->
+    <!--            historyMessages.show();-->
+    <!--            newConversationButton.show();-->
+    <!--        } else {-->
+    <!--            historyMessages.hide();-->
+    <!--            newConversationButton.hide();-->
+    <!--        }-->
+    <!--    });-->
+
+    <!--    historyMessages.hide();-->
+    <!--    newConversationButton.hide();-->
+
+    <!--    $('#sendButton').click(function() {-->
+    <!--        var question = $('#chatInput').val();-->
+    <!--        $('#chatInput').val('');-->
+    <!--        $('.chat-body').append(`<p class="chat-message outgoing">${question}</p>`);-->
+
+    <!--       $.ajax({-->
+    <!--        url: '/ai_answer/',-->
+    <!--        type: 'POST',-->
+    <!--        data: { question: question },-->
+    <!--        success: function(response) {-->
+    <!--            // 检查是否为命令模式，只有命令模式下输出提示消息-->
+    <!--            if (question.startsWith('/command')) {-->
+    <!--                $('.chat-body').append('<p class="chat-message incoming">小助手收到！正在为你组卷哦~</p>');-->
+    <!--            }-->
+
+    <!--            // 延迟2秒后处理生成试卷的消息-->
+    <!--            setTimeout(function() {-->
+    <!--                if (response.message && response.download_url) {-->
+    <!--                    var incomingMessage = `<p class="chat-message incoming">${response.message} <a href="${response.download_url}" target="_blank">点击此链接下载！</a></p>`;-->
+    <!--                    $('.chat-body').append(incomingMessage);-->
+    <!--                } else {-->
+    <!--                    var incomingMessage = `<p class="chat-message incoming">${response.response}</p>`;-->
+    <!--                    $('.chat-body').append(incomingMessage);-->
+    <!--                }-->
+    <!--                $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);-->
+    <!--            }, 3000); // 延迟2秒执行-->
+    <!--        },-->
+    <!--        error: function(error) {-->
+    <!--            console.error('Error sending the question:', error);-->
+    <!--        }-->
+    <!--    });-->
+
+
+
+
+
+
+    <!--        $('#chatWindow').show();-->
+    <!--    });-->
+
+    <!--    $('#newConversationButton').click(function() {-->
+    <!--        var conversationName = "对话" + (conversations.length + 1);-->
+    <!--        saveCurrentConversation(conversationName);-->
+    <!--        loadHistoryMessages();-->
+    <!--    });-->
+
+    <!--    function saveCurrentConversation(conversationName) {-->
+    <!--        var messages = $('.chat-body').children().map(function() {-->
+    <!--            return $(this).text();-->
+    <!--        }).get();-->
+
+    <!--        conversations.push({-->
+    <!--            name: conversationName,-->
+    <!--            messages: messages-->
+    <!--        });-->
+
+    <!--        $('.chat-body').empty();-->
+    <!--    }-->
+
+    <!--    function loadHistoryMessages() {-->
+    <!--        $('#messageHistoryList').empty();-->
+    <!--        conversations.forEach(function(conversation, index) {-->
+    <!--            var listItem = $('<li></li>').text(conversation.name);-->
+    <!--            listItem.click(function() {-->
+    <!--                loadConversation(index);-->
+    <!--            });-->
+    <!--            $('#messageHistoryList').append(listItem);-->
+    <!--        });-->
+    <!--    }-->
+
+    <!--    function loadConversation(index) {-->
+    <!--        var conversation = conversations[index];-->
+    <!--        $('.chat-body').empty();-->
+    <!--        conversation.messages.forEach(function(message, i) {-->
+    <!--            var messageClass = i % 2 === 0 ? 'user' : 'ai';-->
+    <!--            $('.chat-body').append(`<p class="chat-message ${messageClass}">${message}</p>`);-->
+    <!--        });-->
+    <!--        $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);-->
+    <!--    }-->
+    <!--});-->
+
+    $(document).ready(function() {
+        var buttons = $('.ul_menu .btn');
+        var historyMessages = $('#historyMessages');
+        var newConversationButton = $('#newConversationButton');
+
+        buttons.on('click', function() {
+            var functionType = $(this).data('function');
+            if (functionType === 'aiAssistant') {
+                historyMessages.show();
+                newConversationButton.show();
+            } else {
+                historyMessages.hide();
+                newConversationButton.hide();
+            }
+        });
+
+        historyMessages.hide();
+        newConversationButton.hide();
+
+        $('#sendButton').click(function() {
+            sendMessage();
+        });
+
+        $('#chatInput').keypress(function(event) {
+            if (event.which === 13) { // 检查是否按下回车键
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            var question = $('#chatInput').val();
+            $('#chatInput').val('');
+            $('.chat-body').append(`<p class="chat-message outgoing">${question}</p>`);
+
+        var thinkingMessage = $('<p class="chat-message incoming">稍等，小助手正在思考哦<span id="ellipsis"></span></p>');
+        $('.chat-body').append(thinkingMessage);
+        $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);
+
+        var ellipsis = $('#ellipsis');
+        var dots = 0;
+        var maxDots = 3;
+
+        // 定时器每500毫秒更新一次省略号
+        var thinkingInterval = setInterval(function() {
+            dots = (dots + 1) % (maxDots + 1);
+            var ellipsisText = '●'.repeat(dots);
+            ellipsis.text(ellipsisText);
+        }, 500);
+
+
+            $.ajax({
+                url: '/ai_answer/',
+                type: 'POST',
+                data: { question: question },
+                success: function(response) {
+
+                clearInterval(thinkingInterval); // 收到响应时清除定时器
+                thinkingMessage.remove(); // 移除提示消息
+                    // 检查是否为命令模式，只有命令模式下输出提示消息
+                    if (question.startsWith('/command+智能组卷')) {
+
+                        $('.chat-body').append('<p class="chat-message incoming">小助手收到！正在为你组卷哦~</p>');
+                    }
+
+                    // 延迟2秒后处理生成试卷的消息
+                    setTimeout(function() {
+                        if (response.message && response.download_url) {
+                            var incomingMessage = `<p class="chat-message incoming">${response.message} <a href="${response.download_url}" target="_blank" style="color: blue;">点击此处下载！</a></p>`;
+                            $('.chat-body').append(incomingMessage);
+                        } else {
+                            var incomingMessage = `<p class="chat-message incoming">${response.response}</p>`;
+                            $('.chat-body').append(incomingMessage);
+                        }
+                        $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);
+                    }, 3000); // 延迟3秒执行
+                },
+               error: function(error) {
+                clearInterval(thinkingInterval); // 错误时也清除定时器
+                thinkingMessage.remove(); // 移除提示消息
+                console.error('Error sending the question:', error);
+            }
+            });
+
+            $('#chatWindow').show();
+        }
+
+        $('#newConversationButton').click(function() {
+            var conversationName = "对话" + (conversations.length + 1);
+            saveCurrentConversation(conversationName);
+            loadHistoryMessages();
+        });
+
+        function saveCurrentConversation(conversationName) {
+            var messages = $('.chat-body').children().map(function() {
+                return $(this).text();
+            }).get();
+
+            conversations.push({
+                name: conversationName,
+                messages: messages
+            });
+
+            $('.chat-body').empty();
+        }
+
+        function loadHistoryMessages() {
+            $('#messageHistoryList').empty();
+            conversations.forEach(function(conversation, index) {
+                var listItem = $('<li></li>').text(conversation.name);
+                listItem.click(function() {
+                    loadConversation(index);
+                });
+                $('#messageHistoryList').append(listItem);
+            });
+        }
+
+        function loadConversation(index) {
+            var conversation = conversations[index];
+            $('.chat-body').empty();
+            conversation.messages.forEach(function(message, i) {
+                var messageClass = i % 2 === 0 ? 'user' : 'ai';
+                $('.chat-body').append(`<p class="chat-message ${messageClass}">${message}</p>`);
+            });
+            $('.chat-body').scrollTop($('.chat-body')[0].scrollHeight);
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+            <!--==================================口语练习按钮功能=============================================================-->
+
+    <!-- 下面注释的内容是好哦的       -->
+
+                    var currentPractice = '';
+                    var isRecording = false;
+                    var mediaRecorder;
+                    var audioChunks = [];
+
+
+                    function showPractice(level) {
+                        currentPractice = level;
+                        var sentences = {
+                            cet4: [
+                                "Like almost everybody else, I believe that learning English can open many doors in life.",
+                                "In my opinion, it's crucial to maintain a balance between work and personal life.",
+                                 "I just don’t get excited over the idea of spending all day indoors when the weather is so nice outside.",
+                                "As for me, I am on the latter part of the argument. The reasons are as follows.",
+                                "I think it’s important for students to participate in extracurricular activities.",
+                                "When it comes to choosing a career, I would suggest considering your passion and interests first.",
+                                "If I were given the opportunity to travel anywhere in the world, I would choose to visit Japan .",
+                                "It is often said that experience is the best teacher, and I couldn't agree more.",
+                                "The weather today is quite unpredictable; it was sunny this morning, but now it's getting cloudy.",
+                                "I don't like to spend time indoors, but I also don't want to miss out on the beautiful scenery.",
+                                "My favorite place in town is the city library. It has a large collection of books on various subjects,",
+                                "I don't have a lot of time to study, so I would like to take advantage of the free time I have.",
+                                "I don't like to read books, but I do enjoy listening to audiobooks.",
+                                "Maintaining a healthy lifestyle is important to me. I try to eat balanced meals.",
+
+
+
+                            ],
+
+
+
+
+                            cet6: [
+                                "The economic impact of the policy was not immediately apparent.",
+                                "Technological advancements have significantly transformed modern industry.",
+                                "Environmental sustainability is a key concern for future development.",
+
+                                "The policy has been implemented in a way that is beneficial to the economy and societies.",
+                                "Technology has greatly influenced our lives. For example, smartphones have made communication.",
+
+
+                                "With the rise of AI and automation, many jobs are becoming obsolete. ",
+                                "I believe that failure is an essential part of learning and growing. ",
+
+                                "The recent publication on climate change impacts suggests that urgent action is needed to mitigate further damage. ",
+
+                                "I believe that education is a crucial component of sustainable development. ",
+                                "Should there be more emphasis on practical skills and creativity in schools? ",
+
+
+                            ],
+                            business: [
+                                "The quarterly financial report exceeded all expectations.",
+                                "Our primary goal is to enhance customer satisfaction through quality service.",
+                                "Effective communication is essential in achieving business objectives.",
+                                "It is often said that experience is the best teacher, and I couldn't agree more.",
+                                "The weather today is quite unpredictable; it was sunny this morning, but now it's getting cloudy.",
+                                "I don't like to spend time indoors, but I also don't want to miss out on the beautiful scenery.",
+                                "My favorite place in town is the city library. It has a large collection of books on various subjects,",
+                                "I don't have a lot of time to study, so I would like to take advantage of the free time I have.",
+                                "I don't like to read books, but I do enjoy listening to audiobooks.",
+                                "Maintaining a healthy lifestyle is important to me. I try to eat balanced meals.",
+                                "I don't have a lot of money, so I would like to save up for a vacation.",
+                            ]
+                        };
+
+
+                        var sentenceList = sentences[level] || [];
+                        var wordListDiv = document.getElementById('wordList');
+                        wordListDiv.innerHTML = '';
+                        sentenceList.forEach((sentence, index) => {
+                            var sentenceRow = document.createElement('div');
+                            sentenceRow.className = 'sentence-row';
+                            sentenceRow.innerHTML = `
+                                <span>句子${index + 1}: ${sentence}</span>
+                                 <button class="btn btn-pronounce" data-sentence="${sentence}" onclick="toggleRecording(this, ${index + 1})">跟读</button>
+                    `;
+                            wordListDiv.appendChild(sentenceRow);
+                        });
+                        document.getElementById('practiceContainer').style.display = 'block';
+                    }
+
+                    function toggleRecording(button, sentenceIndex) {
+                        if (isRecording) {
+                            stopRecording(button, sentenceIndex);
+                        } else {
+                            startRecording(button);
+                        }
+                    }
+
+                    function startRecording(button) {
+                        isRecording = true;
+                        button.textContent = '停止';
+                        navigator.mediaDevices.getUserMedia({ audio: true })
+                            .then(stream => {
+                                mediaRecorder = new MediaRecorder(stream);
+                                mediaRecorder.start();
+                                mediaRecorder.ondataavailable = event => {
+                                    audioChunks.push(event.data);
+                                };
+                            });
+                    }
+
+                    function stopRecording(button, sentenceIndex) {
+                        isRecording = false;
+                        button.textContent = '跟读';
+                        mediaRecorder.stop();
+                        mediaRecorder.onstop = () => {
+                            var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                            audioChunks = [];
+                            var formData = new FormData();
+                            formData.append('audio', audioBlob, 'recording.wav');
+                            formData.append('sentenceIndex', sentenceIndex);
+                            formData.append('practiceLevel', currentPractice);
+                            var sentence = button.dataset.sentence;
+                            formData.append('sentence', sentence);
+
+
+                            $.ajax({
+                                url: '/gendu/',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(response) {
+                                    document.getElementById('comment').textContent = response.comment;
+                                },
+                                error: function(response) {
+                                    document.getElementById('comment').textContent = '录音上传失败。';
+                                }
+                            });
+                        };
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    $(document).ready(function() {
+        <!--                $('#start_3_Button').click(function() {-->
+        <!--                    $('#practiceContainer').toggle();-->
+        <!--                });-->
+                    });
+
+
+        <!--==========================================作文批改语言类型按钮选择==========================================================-->
+            $(document).ready(function() {
+            $('#language-switch').change(function() {
+                var isChecked = $(this).is(':checked');
+                var language = isChecked ? 'en' : 'cn';
+                $.ajax({
+                    url: '/your_endpoint/', // 替换为你的视图函数URL
+                    type: 'POST',
+                    data: {
+                        'csrfmiddlewaretoken': getCookie('csrftoken'),
+                        'language': language,
+                    },
+                    success: function(response) {
+                        console.log('Language changed to: ', language);
+                    },
+                    error: function(error) {
+                        console.error('Error changing language: ', error);
+                    }
+                });
+            });
+
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+        <!--============================================人工智能课程选择===================================================================-->
+
+        $(document).ready(function() {
+            // 获取所有功能按钮
+            var buttons = $('.ul_menu .btn');
+
+            // 获取要控制显示的元素
+            var aiCoursesElements = $('#videoListContainer'); // 假设这是你要显示的元素ID
+            var aiCoursesList = $('#videoList'); // 假设这是你要显示的元素ID
+
+
+            // 监听所有功能按钮的点击事件
+            buttons.on('click', function() {
+                // 获取当前点击按钮的功能类型
+                var functionType = $(this).data('function');
+
+                // 清除所有元素的显示状态，防止重叠显示
+                aiCoursesElements.hide();
+                aiCoursesList.hide();
+
+
+                // 检查功能类型是否为“人工智能课程教学”
+                if (functionType === 'aiCourses') {
+                    // 如果是，则显示与人工智能课程相关的元素
+                    aiCoursesElements.show();
+                    aiCoursesList.show();
+
+                }
+            });
+
+            // 初始化：隐藏所有与按钮相关的初始元素
+            aiCoursesElements.hide();
+            aiCoursesList.hide();
+
+        });
+
+
+        $(document).ready(function() {
+            // 当点击“人工智能课程教学”按钮时
+            $('#loadVideos').click(function() {
+                // 显示视频课程列表容器
+                $('#videoListContainer').show();
+
+                // 生成视频课程列表
+                generateVideoList();
+            });
+
+            function generateVideoList() {
+                var videoData = [
+                    { title: '机器学习基础1',
+                    url: 'http://localhost:8000/class_video/1.mp4',
+                    thumbnail: 'http://localhost/class_video/1.jpg'
+                    },
+                    { title: '机器学习2',
+                    url: 'http://localhost:8000/class_video/2.mp4',
+                    thumbnail: 'http://localhost/class_video/2.jpg'
+                    },
+                    { title: '机器学习基础3',
+                    url: 'http://localhost:8000/class_video/3.mp4',
+                    thumbnail: 'http://localhost/class_video/3.jpg'
+                    },
+                    { title: '机器学习基础4',
+                    url: 'http://localhost:8000/class_video/4.mp4',
+                    thumbnail: 'http://localhost/class_video/4.jpg'
+                    },
+
+                ];
+
+                var videoList = $('#videoList');
+                videoData.forEach(function(video) {
+                    var item = $('<div></div>').addClass('video-item');
+                    var thumbnail = $('<img>').attr('src', video.thumbnail).addClass('video-thumbnail');
+                    var title = $('<h3></h3>').text(video.title);
+
+                    thumbnail.click(function() {
+                        playVideo(video.url);
+                    });
+
+                    item.append(thumbnail);
+                    item.append(title);
+                    videoList.append(item);
+                });
+            }
+
+            function playVideo(url) {
+                // 创建视频播放器并插入到页面中
+                var videoPlayer = $('<video controls width="640"><source src="' + url + '" type="video/mp4"></video>');
+                $('#videoList').append(videoPlayer);
+                videoPlayer[0].play(); // 开始播放视频
+            }
+        });
+
+        <!--============================================情景对话======================================================-->
+
+
+    <!--    下面注释的内容是好的-->
+
+    <!--        $(document).ready(function() {-->
+    <!--        $('#start_4_Button').click(function() {-->
+    <!--            $('.content.tab').addClass('dn');-->
+    <!--            $('#voiceChat').removeClass('dn');-->
+    <!--        });-->
+
+    <!--        let recorder;-->
+    <!--        let audioChunks = [];-->
+
+
+    <!--        // 按住开始录音-->
+    <!--        $('#startRecordingBtn').on('mousedown', async function() {-->
+    <!--           try {-->
+    <!--            $(this).text('正在录音...');-->
+    <!--            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });-->
+    <!--            recorder = new MediaRecorder(stream);-->
+    <!--            recorder.start();-->
+
+    <!--            recorder.ondataavailable = event => {-->
+    <!--                audioChunks.push(event.data);-->
+    <!--            };-->
+    <!--        } catch (error) {-->
+    <!--            console.error('Error accessing media devices.', error);-->
+    <!--        }-->
+    <!--    });-->
+
+    <!--        // 松开结束录音并上传音频-->
+    <!--        $('#startRecordingBtn').on('mouseup', function() {-->
+    <!--        $(this).text('按住说话');-->
+    <!--        if (recorder) {-->
+    <!--            recorder.stop();-->
+    <!--            recorder.onstop = async () => {-->
+    <!--                if (audioChunks.length > 0) {-->
+    <!--                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });-->
+    <!--                    const formData = new FormData();-->
+    <!--                    formData.append('audio', audioBlob, 'recording.wav');-->
+
+    <!--                    const chatContainer = $('.voice_content');-->
+    <!--                    if (chatContainer.length) {-->
+    <!--                        // 生成用户音频URL-->
+    <!--                        const userAudioUrl = URL.createObjectURL(audioBlob);-->
+
+    <!--                        $.ajax({-->
+    <!--                            url: '/dialogue/',-->
+    <!--                            type: 'POST',-->
+    <!--                            data: formData,-->
+    <!--                            processData: false,-->
+    <!--                            contentType: false,-->
+    <!--                            success: function(data) {-->
+    <!--                                // 用户的语音消息-->
+    <!--                                chatContainer.find('.voice_content_right').append(`-->
+    <!--                                    <div class="user-audio">-->
+    <!--                                        <audio controls>-->
+    <!--                                            <source src="${userAudioUrl}" type="audio/wav">-->
+    <!--                                        </audio>-->
+    <!--                                    </div>-->
+    <!--                                `);-->
+
+    <!--                                // 转换Base64字符串为Blob对象-->
+    <!--                                const botAudioData = atob(data.replyAudio); // 解码Base64字符串-->
+    <!--                                let audioArray = new Uint8Array(botAudioData.length);-->
+    <!--                                for (let i = 0; i < botAudioData.length; i++) {-->
+    <!--                                    audioArray[i] = botAudioData.charCodeAt(i);-->
+    <!--                                }-->
+    <!--                                const botAudioBlob = new Blob([audioArray], { type: 'audio/wav' });-->
+
+    <!--                                // 生成机器人回复的音频URL-->
+    <!--                                const botAudioUrl = URL.createObjectURL(botAudioBlob);-->
+
+    <!--                                // AI的语音消息-->
+    <!--                                chatContainer.find('.voice_content_left').append(`-->
+    <!--                                    <div class="bot-audio">-->
+    <!--                                        <audio controls>-->
+    <!--                                            <source src="${botAudioUrl}" type="audio/wav">-->
+    <!--                                        </audio>-->
+    <!--                                    </div>-->
+    <!--                                `);-->
+
+    <!--                                chatContainer.scrollTop(chatContainer[0].scrollHeight);-->
+    <!--                                audioChunks = [];-->
+    <!--                            },-->
+    <!--                            error: function(error) {-->
+    <!--                                console.error('Error uploading audio:', error);-->
+    <!--                            }-->
+    <!--                        });-->
+    <!--                    } else {-->
+    <!--                        console.error('Chat container not found.');-->
+    <!--                    }-->
+    <!--                } else {-->
+    <!--                    console.error('No audio data available.');-->
+    <!--                }-->
+    <!--            };-->
+    <!--        } else {-->
+    <!--            console.error('Recorder not initialized.');-->
+    <!--        }-->
+    <!--    });-->
+    <!--});-->
+
+
+
+
+    $(document).ready(function() {
+        $('#start_4_Button').click(function() {
+            $('.content.tab').addClass('dn');
+            $('#voiceChat').removeClass('dn');
+        });
+
+        let recorder;
+        let audioChunks = [];
+
+        // 按住开始录音
+        $('#startRecordingBtn').on('mousedown', async function() {
+            try {
+                $(this).text('正在录音...');
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recorder = new MediaRecorder(stream);
+                recorder.start();
+
+                recorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+            } catch (error) {
+                console.error('Error accessing media devices.', error);
+            }
+        });
+
+        // 松开结束录音并上传音频
+        $('#startRecordingBtn').on('mouseup', function() {
+            $(this).text('按住说话');
+            if (recorder) {
+                recorder.stop();
+                recorder.onstop = async () => {
+                    if (audioChunks.length > 0) {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const formData = new FormData();
+                        formData.append('audio', audioBlob, 'recording.wav');
+
+                        const chatContainer = $('.voice_content');
+                        if (chatContainer.length) {
+                            // 生成用户音频URL
+                            const userAudioUrl = URL.createObjectURL(audioBlob);
+
+                            // 创建音频对象检查音频时长
+                            const audio = new Audio(userAudioUrl);
+                            audio.onloadedmetadata = function() {
+                                if (audio.duration > 0) {
+                                    // 用户的语音消息添加到右侧
+                                    const userMessage = $(`
+                                        <div class="voice_content_right voice_msg">
+                                            <div class="user-audio">
+                                                <div class="user-play-icon" data-audio="${userAudioUrl}"></div>
+    <!--                                            <div class="audio-length">${formatTime(audio.duration)}</div>-->
+                                            </div>
+                                        </div>
+                                    `);
+                                    chatContainer.append(userMessage);
+
+                                    // 初始化播放功能
+                                    initializePlayFunctionality(userMessage);
+                                } else {
+                                    console.error('Audio duration is zero.');
+                                }
+                            };
+
+                            $.ajax({
+                                url: '/dialogue/',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(data) {
+                                    // 转换Base64字符串为Blob对象
+                                    const botAudioData = atob(data.replyAudio); // 解码Base64字符串
+                                    let audioArray = new Uint8Array(botAudioData.length);
+                                    for (let i = 0; i < botAudioData.length; i++) {
+                                        audioArray[i] = botAudioData.charCodeAt(i);
+                                    }
+                                    const botAudioBlob = new Blob([audioArray], { type: 'audio/wav' });
+
+                                    // 生成机器人回复的音频URL
+                                    const botAudioUrl = URL.createObjectURL(botAudioBlob);
+
+                                    // AI的语音消息添加到左侧
+                                    const botMessage = $(`
+                                        <div class="voice_content_left voice_msg">
+                                            <div class="bot-audio">
+                                                <div class="ai-play-icon" data-audio="${botAudioUrl}"></div>
+
+                                            </div>
+                                        </div>
+                                    `);
+                                    chatContainer.append(botMessage);
+
+                                    // 初始化播放功能
+                                    initializePlayFunctionality(botMessage);
+
+                                    chatContainer.scrollTop(chatContainer[0].scrollHeight);
+                                    audioChunks = [];
+                                },
+                                error: function(error) {
+                                    console.error('Error uploading audio:', error);
+                                }
+                            });
+                        } else {
+                            console.error('Chat container not found.');
+                        }
+                    } else {
+                        console.error('No audio data available.');
+                    }
+                };
+            } else {
+                console.error('Recorder not initialized.');
+            }
+        });
+
+        function initializePlayFunctionality(messageElement) {
+            messageElement.find('.user-play-icon, .ai-play-icon').on('click', function() {
+                const audioUrl = $(this).data('audio');
+                const audio = new Audio(audioUrl);
+
+                // 更新音频长度显示
+                 audio.onloadedmetadata = function() {
+                let duration = formatTime(audio.duration);
+                if (isNaN(duration) || !isFinite(audio.duration)) {
+
+                }
+                $(messageElement).find('.audio-length').text(duration);
+            };
+                // 播放音频
+                audio.play();
+            });
+        }
+
+        function formatTime(seconds) {
+
+        if (!isFinite(seconds) || isNaN(seconds)) {
+
+        }
+            const minutes = Math.floor(seconds / 60);
+            const secondsLeft = Math.floor(seconds % 60);
+            return `${minutes}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
+        }
+    });
+
+
+
+
+
+
+        <!--       =====================选择输入语言小按钮========================-->
+
+    let languageTabsHidden = true;
+    $('.ul_language li.li_1').on('mouseenter', function() {
+      if (languageTabsHidden) {
+        $('.second_l').show();
+        languageTabsHidden = false;
+      }
+    });
+    $('.ul_language li.li_2').on('mouseenter', function() {
+      if (languageTabsHidden) {
+        $('#outputLanguageTabs').show();
+        languageTabsHidden = false;
+      }
+    });
+
+
+
+
+    $(document).ready(function() {
+        // 选择输入语言按钮点击事件
+        $('#selectLanguageBtn').on('click', function() {
+            $('.ul_language').show(); // 显示语言选项卡
+        });
+
+        // 为输入语言的所有选项绑定点击事件
+        $('.ul_language li dl dd').on('click', function() {
+            const languageText = $(this).text().trim();
+            handleInputLanguageSelection(languageText);
+        });
+
+        // 处理输入语言选择
+        function handleInputLanguageSelection(languageText) {
+            if (isChineseDialectInput(languageText)) {
+                const dialectData = getInputChineseDialectCode(languageText);
+                sendInputLanguageSelection(dialectData[0], dialectData[1]);
+            } else {
+                const languageCode = getInputLanguageCode(languageText);
+                sendInputLanguageSelection(languageCode, 'mandarin');
+            }
+        }
+
+        // 判断是否为中文方言输入
+        function isChineseDialectInput(text) {
+            const chineseDialects = [
+                '中文标准普通话', '中文甘肃话', '中文河南话', '中文四川话', '中文武汉话'
+            ];
+            return chineseDialects.includes(text);
+        }
+
+        // 获取输入语言的代码
+        function getInputLanguageCode(language) {
+            const languageMapping = {
+                '英语': 'en_us',
+                '法语': 'fr_fr',
+                '日语': 'ja_jp',
+                '俄语': 'ru_ru'
+            };
+            return languageMapping[language] || '';
+        }
+
+        // 获取输入中文方言的代码
+        function getInputChineseDialectCode(dialect) {
+            const dialectMapping = {
+                '中文标准普通话': ['zh_cn', 'mandarin'],
+                '中文甘肃话': ['zh_cn', 'gansunese'],
+                '中文河南话': ['zh_cn', 'henanese'],
+                '中文四川话': ['zh_cn', 'lmz'],
+                '中文武汉话': ['zh_cn', 'wuhanese']
+            };
+            return dialectMapping[dialect] || ['', ''];
+        }
+
+        // 发送输入语言选择至后端
+        function sendInputLanguageSelection(languageCode, dialectCode) {
+            let inputUrl = '';
+           if ((languageCode === 'zh_cn' && dialectCode === 'mandarin') || languageCode === 'en_us') {
+                inputUrl = 'wss://ws-api.xfyun.cn/v2/iat';
+            }
+            else if (
+                (languageCode === 'zh_cn' && dialectCode !== 'mandarin') ||
+                ['fr_fr', 'ja_jp', 'ru_ru'].includes(languageCode)
+            ) {
+                inputUrl = 'wss://iat-niche-api.xfyun.cn/v2/iat';
+            }
+            else {
+                // 可以在此处添加其他逻辑，或保持默认URL
+                inputUrl = 'wss://iat-niche-api.xfyun.cn/v2/iat';
+            }
+            $.ajax({
+                url: '/setUserLanguage/', // 后端API端点
+                type: 'POST',
+                data: {
+                    language: languageCode,
+                    dialect: dialectCode,
+                    input_url: inputUrl
+                },
+                success: function(response) {
+                    console.log('Input language selection successful:', response);
+     $('.second_l').hide();
+        languageTabsHidden = true;
+                },
+                error: function(error) {
+                    console.error('Error sending input language selection:', error);
+                }
+            });
+        }
+    <!--========================================出==========================================================================-->
+        // 选择输出语言按钮点击事件
+        $(document).ready(function() {
+
+      $('#selectOutputLanguageBtn').on('click', function() {
+        $('#outputLanguageTabs').toggle(); // 显示或隐藏语言选项
+      });
+
+      // 为所有输出语言选项绑定点击事件
+      $('.second_l1 dl dd').on('click', function() {
+        const selectedOutputLanguage = $(this).data('output-language');
+        const selectedOutputDialect = $(this).data('output-dialect');
+
+        if (selectedOutputLanguage === 'Chinese') {
+          if (selectedOutputDialect) {
+            sendOutputLanguageSelection(0, getVcnForChineseDialect(selectedOutputDialect));
+          } else {
+            // 如果没有具体方言，发送默认的中文设置
+            sendOutputLanguageSelection(0, 'x4_lingxiaowan_en');
+          }
+        } else {
+          sendNonChineseLanguageSelection(selectedOutputLanguage);
+        }
+      });
+
+      // 根据中文方言返回对应的vcn值
+      function getVcnForChineseDialect(dialect) {
+        const dialectMapping = {
+          StandardChinese: 'x4_lingxiaowan_en',
+          Northeastern: 'x4_xiaobei',
+          Anhui: 'x2_xiaofei',
+          Guangdong: 'x_xiaomei',
+          Shandong: 'x2_xiaodong',
+          Cantonese: 'x3_xiaoyue'
+        };
+        return dialectMapping[dialect] || 'x4_lingxiaowan_en'; // 默认值
+      }
+
+            sendOutputLanguageSelection(xiaoyuzhong, vcn);
+        });
+
+        // 对于非中文的语言，设置对应的xiaoyuzhong和vcn值
+        function sendNonChineseLanguageSelection(language) {
+            let xiaoyuzhong = 0; // 默认值为0
+            let vcn = '';
+
+            switch (language) {
+                case 'English':
+                    vcn = 'x4_enus_luna_assist';
+                    break;
+                case 'French':
+                    xiaoyuzhong = 1;
+                    vcn = 'x2_FrRgM_Lisa';
+                    break;
+                case 'Japanese':
+                    xiaoyuzhong = 1;
+                    vcn = 'qianhui';
+                    break;
+                default:
+                    vcn = 'x4_lingxiaowan_en'; // 默认值
+            }
+
+            // 确保xiaoyuzhong是一个整数
+            xiaoyuzhong = parseInt(xiaoyuzhong, 10);
+
+            sendOutputLanguageSelection(xiaoyuzhong, vcn);
+        }
+
+        // 发送输出语言选择至后端
+        function sendOutputLanguageSelection(xiaoyuzhong, vcn) {
+            $.ajax({
+                url: '/setAiLanguage/',
+                type: 'POST',
+                data: {
+                    xiaoyuzhong: xiaoyuzhong,
+                    vcn: vcn
+                },
+                success: function(response) {
+                    console.log('Output language selection successful:', response);
+                    $('#outputLanguageTabs').hide();
+                },
+                error: function(error) {
+                    console.error('Error sending output language selection:', error);
+                }
+            });
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $(document).ready(function() {
+
+        // 当点击选择模式按钮时
+        $('.voice_left button').on('click', function(e) {
+            e.preventDefault(); // 阻止默认行为
+            // 显示模式选择列表
+            $('.ul_choosems').toggle();
+        });
+
+        // 监听ul元素的 click 事件，以便在点击列表项时进行操作
+        $('.ul_choosems').on('click', 'li', function() {
+            // 获取被点击的模式文本
+            var modeText = $(this).text();
+    <!--        var mode = (modeText === '口语练习模式') ? 1 : 0; // 根据模式文本转换为数字-->
+     var mode = (modeText === '口语练习模式') ? 1 : (modeText === '闲聊对话模式') ? 0 : 2; // 根据模式文本转换为数字
+
+            // 发送AJAX请求到服务器
+            $.ajax({
+                url: '/set_chat_mode/',
+                type: 'POST',
+                data: { mode: mode },
+                success: function(response) {
+                    // 根据服务器响应处理结果
+                    console.log('Chat mode set to:', modeText);
+
+                },
+                error: function(error) {
+                    // 处理错误情况
+                    console.error('Failed to set chat mode:', error);
+                }
+            });
+
+            // 隐藏模式选择列表
+            $('.ul_choosems').hide();
+        });
+
+        // 当点击文档其他地方时隐藏模式选择列表
+        $(document).on('click', function(event) {
+            if (!$(event.target).closest('.voice_left').length) {
+                $('.ul_choosems').hide();
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+    <!--    document.getElementById('vr-learning').addEventListener('click', function() {-->
+    <!--    document.getElementById('museums-buttons').style.display = 'block';-->
+    <!--});-->
+
+    <!--// 设置按钮点击事件-->
+    <!--document.getElementById('nanking-massacre-btn').addEventListener('click', function() {-->
+    <!--    window.location.href = 'https://mshare.vrnewg.com/?nz30+Y0PuyQiht9Tvis0QmgjPwX4B1xJCC/ZVPejJvk=';-->
+    <!--});-->
+
+    <!--// 假设其他两个按钮也有类似的处理-->
+    <!--document.getElementById('second-museum-btn').addEventListener('click', function() {-->
+    <!--    window.location.href = 'https://mshare.vrnewg.com/?Dbh+wuhwFieFmIalYexRdRTFrgY/GmsBga4YHjE/K3w=';-->
+    <!--});-->
+
+    <!--document.getElementById('virtual-lab-btn').addEventListener('click', function() {-->
+    <!--   window.location.href = 'https://mshare.vrnewg.com/?nz30+Y0PuyQiht9Tvis0QmgjPwX4B1xJCC/ZVPejJvk=';-->
+    <!--});-->
+
+
+
+    var modal = document.getElementById('vrModal');
+        var vrButton = document.getElementById('vr_Button');
+        var closeModalBtn = document.getElementById('closeModalBtn');
+
+        // 点击“VR学习”按钮显示模态窗口
+        vrButton.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+
+        // 点击模态窗口内的按钮跳转到指定 URL
+        document.getElementById('nanking-massacre-btn').addEventListener('click', function() {
+            window.location.href = 'https://mshare.vrnewg.com/?nz30+Y0PuyQiht9Tvis0QmgjPwX4B1xJCC/ZVPejJvk=';
+        });
+
+        document.getElementById('second-museum-btn').addEventListener('click', function() {
+            window.location.href = 'https://mshare.vrnewg.com/?Dbh+wuhwFieFmIalYexRdRTFrgY/GmsBga4YHjE/K3w=';
+        });
+
+        document.getElementById('virtual-lab-btn').addEventListener('click', function() {
+            window.location.href = 'https://mshare.vrnewg.com/?nz30+Y0PuyQiht9Tvis0QmgjPwX4B1xJCC/ZVPejJvk=';
+        });
+
+        // 点击关闭按钮关闭模态窗口
+        closeModalBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // 点击模态窗口外部区域关闭模态窗口（如果需要）
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+    var buttons = document.querySelectorAll('.ul_menu .btn');
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // 移除所有按钮的 active 类
+            buttons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+
+            // 为点击的按钮添加 active 类
+            this.classList.add('active');
+        });
+    });
+});
+
+
+</script>
+{% endblock %}

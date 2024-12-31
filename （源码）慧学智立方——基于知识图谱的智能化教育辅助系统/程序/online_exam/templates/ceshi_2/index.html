@@ -1,0 +1,1353 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>知识点漏洞检测</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.min.js"></script>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <link href="/static/ceshi_2/risk_test.css" rel="stylesheet"/>
+    <style>
+
+        html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: #1c1641d6;  /* 图谱背景色 */
+
+    }
+
+.wrapper {
+width: 100%;
+margin: 0 auto;
+margin-top: -862px;
+mragin-left: 200px;
+}
+.card_wrap {
+width: 400px;
+height: 575px;
+position: relative;
+overflow: hidden;
+display: none;
+}
+
+
+
+
+
+    .user-details {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 300px;
+        right: 20px;
+        top: 64px;
+        z-index: 999;
+    }
+    .user-avatar img {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+object-fit: cover;
+}
+
+.user-info p {
+margin-bottom: 5px;
+}
+
+.actions .favorite-btn {
+padding: 5px 10px;
+background-color: #007BFF;
+color: white;
+border: none;
+cursor: pointer;
+border-radius: 3px;
+}
+
+.actions .favorite-btn:hover {
+background-color: #0056b3;
+}
+    .top {
+        height: 64px;
+        width: 100%;
+        background: #41847d;
+        padding-left: 10%;
+    }
+
+
+    img {
+        vertical-align: middle;
+    }
+
+    em {
+        font-style: normal;
+    }
+
+    a img, :link img, :visited img {
+        border: 0;
+    }
+
+    a:link, a:visited {
+        text-decoration: none;
+        color: #666666;
+    }
+
+    a:hover, a:focus {
+        color: #0573bd;
+        text-decoration: none;
+    }
+
+    ul, ul li {
+        list-style-type: none;
+    }
+
+
+    #top_bg {
+        height: 64px;
+        width: 100%;
+        background: #333;
+        box-shadow: 1px 1px 7px #999;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        border-bottom: #C6C6C6 solid 1px;
+    }
+
+    .top .logo_l {
+        width: 180px;
+        height: 64px;
+        color: #ffffff;
+        float: left;
+        line-height: 64px;
+    }
+
+    .nav_z {
+        width: auto !important;
+        height: 64px;
+        float: left;
+        position: relative;
+        z-index: 999;
+    }
+
+    #navul li {
+        float: left;
+        padding: 0 20px;
+        height: 64px;
+        position: relative;
+        text-align: center;
+        line-height: 64px;
+    }
+
+    #navul li a:link, #navul li a:visited {
+        font-weight: 500;
+        letter-spacing: 2px;
+    }
+
+    #navul li a {
+        font-size: 14px;
+        color: hsla(0, 0%, 100%, .65);
+    }
+
+    #navul li a:hover {
+        color: #FFF;
+    }
+
+    .login_out {
+        color: hsla(0, 0%, 100%, .65);
+        padding: 0 20px
+    }
+
+    .login_out:hover {
+        color: #FFF;
+    }
+
+    .active {
+        background-color: #1890ff;
+    }
+
+    .bottom {
+        padding-top: 64px;
+    }
+
+
+
+
+
+    .card_wrap {
+width: 400px;
+height: 600px;
+
+position: relative;
+overflow: hidden;
+display: none;
+}
+
+
+
+    .card_wrap {
+width: 400px;
+height: 575px;
+position: relative;
+overflow: hidden;
+display: none;
+}
+
+
+
+    #viz {
+        width: 100%;
+        height: 600px;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+    }
+
+
+
+
+    element.style {
+width: 154%;
+height: 800px;
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+
+    .modal-content {
+background-color: #2c3e50;
+color: white;
+margin: 10% auto;
+padding: 30px;
+border-radius: 8px;
+width: 90%;
+max-width: 1200px; /* 增加最大宽度 */
+height: 80%;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+overflow-y: auto;
+}
+
+.modal {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.8);
+}
+
+#modal-cy {
+width: 100%;
+height: 100%;
+}
+
+
+
+
+
+         #submit-quiz:hover {
+        background-color: #0056b3;
+    }
+
+    #view-details:hover {
+        background-color: #218838;
+    }
+
+    #zoom-in:hover {
+        background-color: #e0a800;
+    }
+
+    #zoom-out:hover {
+        background-color: #c82333;
+    }
+
+
+
+
+        #loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    flex-direction: column;
+}
+
+.loading-spinner {
+    border: 12px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 12px solid #3498db;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+    </style>
+
+</head>
+
+<body style="background-color:rgb(58 77 116)">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<div class="children_body" style="height: 100%">
+    <div id="top_bg">
+        <div class="top">
+             <a class="logo_l" href="/" title="星火知立方">
+                    <img src="/static/icons/logo1.png" alt="星火知立方 Logo" style="height: 218px; margin-left: -96px;margin-top: -88px;">
+
+</a>
+            <!--导航开始-->
+            <div class="nav_z">
+               <ul id="navul" class="cl" style="display: block;height: 100%;margin: 0">
+
+
+                   <li id="AIcourse">
+    <a href="/AIcourse" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/课程.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        课程学习
+    </a>
+</li>
+
+
+                    <li id="kaoshi">
+                        <!--                        <img src="../static/images/司法考试.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/test_paper" style="font-size: 14px; color: hsl(0deg 0% 100%); ">在线考试</a>-->
+
+
+                        <a href="/test_paper" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/考试.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        在线考试
+    </a>
+
+                    </li>
+                    {% if role == 2 %}
+<!--                    <li id="shiti">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/问题.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shiti">试题管理</a>-->
+<!--                    </li>-->
+<!--                    <li id="shijuan">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/试卷.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/shijuan">试卷管理</a>-->
+<!--                    </li>-->
+                    {% endif %}
+<!--                    <li id="chengji">-->
+<!--                        &lt;!&ndash;                        <img src="../static/images/成绩查询.png" style="width:14px;height: 14px"/>&ndash;&gt;-->
+<!--                        <a href="/chengji">成绩管理</a>-->
+
+<!--                    </li>-->
+
+                    <!--                    <li id="user">-->
+                    <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+                    <!--                        <a href="/user/user">学生管理</a>-->
+
+                    <!--                    </li>-->
+                    <li id="individual chengji">
+                        <!--                        <img src="../static/images/用户.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/individual_chengji" style="font-size: 14px; color: hsl(0deg 0% 100%);">个人成绩管理</a>-->
+                        <a href="/individual_chengji" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/成绩管理.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        成绩管理
+    </a>
+
+                    </li>
+                    <li id="index">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/index" style="font-size: 14px; color: hsl(0deg 0% 100%);">学习小工具</a>-->
+                        <a href="/index" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/学习助手.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        学习工具
+    </a>
+
+
+
+                    </li>
+
+                    <!--可在此处直接添加导航-->
+                    <li id="ceshi">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/loudongjiance" style="font-size: 14px; color: hsl(0deg 0% 100%);">知识点漏洞检测</a>-->
+
+                         <a href="/loudongjiance" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/查漏补缺.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        查漏补缺
+    </a>
+
+                    </li>
+                    <li id="upexam">
+                        <!--                        <img src="../static/images/首页-首页.png" style="width:14px;height: 14px"/>-->
+<!--                        <a href="/upexam" style="font-size: 14px; color: hsl(0deg 0% 100%);">提交试卷</a>-->
+
+                        <a href="/upexam" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+        <img src="/static/icons/提交试卷.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+        试卷提交
+    </a>
+
+                    </li>
+                    <!--可在此处直接添加导航-->
+                </ul>
+            </div><!--导航结束-->
+            <div id="welcome-div" style="color: #ffffff;line-height: 64px;font-size: 14px;right: 20px;display: block;width: 200px;position:absolute; margin-right: -42px;">
+                <span id="welcome-span">你好！周涛</span>
+                <a href="/login_out" class="login_out">退出</a>
+            </div>
+           <div id="user-details" class="user-details">
+
+    <div class="user-info">
+        <p>姓名<span>{{ username }}</span></p>
+        <p>年级：<span>{{ '七年级' }}</span></p>
+        <p>班级：<span>{{ '七年二班' }}</span></p>
+        <p>年龄：<span>{{ '17' }}</span></p>
+        <p>邮箱：<span>1943027685@qq.com</span></p>
+        <p>家庭住址：<span>北京</span></p>
+        <p>已获得学分：<span>{{ '20' }}</span></p>
+
+    </div>
+    <div class="actions">
+        <button class="favorite-btn">收藏</button>
+        <button class="favorite-btn">点赞</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="bottom" style="height: 100%;display: block">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</div>
+
+
+<div id="loading-overlay" style="display: none;">
+    <div class="loading-spinner"></div>
+    <p style="color: #ffffff; font-size: 18px; margin-top: 10px;">正在检测知识漏洞...</p>
+</div>
+
+
+<div id="cy" style="width: 300%; height: 1000px; margin-left:100%;margin-top: -900px"></div>
+<div id="modal-details" class="modal">
+    <div class="modal-content">
+        <h2 style="text-align: center; color: white; margin-bottom: 20px;">漏洞知识图谱</h2>
+        <span class="close">&times;</span>
+        <div id="modal-cy" style="width: 100%; height: 400px;"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    // 使用 fetch 动态获取数据
+   var cy;
+    var wrongKnowledgePoints = [];  // 用来存储错误知识点
+
+    // 使用 fetch 动态获取数据
+    fetch('/api/get-graph-data/')
+        .then(response => response.json())
+        .then(data => {
+            // 初始时只显示根节点到四级节点，过滤掉知识点节点（叶子节点）
+            var initialNodes = data.nodes.filter(node => !/^\d+\.\d+\.\d+$/.test(node.name)); // 只保留非知识点节点
+            var initialEdges = data.links.filter(link => {
+                // 仅保留与非知识点节点相关的边
+                const targetNode = data.nodes.find(node => node.id === link.target);
+                return targetNode && !/^\d+\.\d+\.\d+$/.test(targetNode.name);
+            });
+
+            // 初始化 Cytoscape
+cy = cytoscape({
+    container: document.getElementById('cy'),
+    elements: [...initialNodes.map(node => ({ data: node })), ...initialEdges.map(edge => ({ data: edge }))],
+    style: [
+        {
+            selector: 'node',
+            style: {
+                'label': 'data(name)',
+                'text-valign': 'center',
+                'color': '#ffffff',
+                'font-size': '40px',
+                'width': function(node) {
+                    const name = node.data('name');
+                    if (name === '人工智能基础课程') {
+                        return '800px'; // 根节点
+                    } else if (['云计算', '机器学习', '数据结构', '计算机组成原理', '操作系统', '计算机网络', '深度学习'].includes(name)) {
+                        return '500px'; // 二级节点
+                    } else if (/^第\d+章/.test(name)) {
+                        return '380px'; // 三级节点
+                    } else if (/^\d+\.\d+/.test(name)) {
+                        return '290px'; // 四级节点
+                    } else {
+                        return '190px'; // 知识点节点
+                    }
+                },
+                'height': function(node) {
+                    const name = node.data('name');
+                    if (name === '人工智能基础课程') {
+                        return '800px'; // 根节点
+                    } else if (['云计算', '机器学习', '数据结构', '计算机组成原理', '操作系统', '计算机网络', '深度学习'].includes(name)) {
+                        return '500px'; // 二级节点
+                    } else if (/^第\d+章/.test(name)) {
+                        return '380px'; // 三级节点
+                    } else if (/^\d+\.\d+/.test(name)) {
+                        return '290px'; // 四级节点
+                    } else {
+                        return '190px'; // 知识点节点
+                    }
+                },
+                'background-color': function(node) {
+                    const name = node.data('name');
+                    if (name === '人工智能基础课程') {
+                        return '#1f77b4'; // 根节点蓝色
+                    } else if (['云计算', '机器学习', '数据结构', '计算机组成原理', '操作系统', '计算机网络', '深度学习'].includes(name)) {
+                        return '#ff7f0e'; // 二级节点橙色
+                    } else if (/^第\d+章/.test(name)) {
+                        return '#2ca02c'; // 三级节点绿色
+                    } else if (/^\d+\.\d+/.test(name)) {
+                        return '#00dcff'; // 四级节点红色
+                    } else {
+                        return '#30b385'; // 知识点节点紫色
+                    }
+                },
+                'border-width': '4px',
+                'border-color': '#ffffff',
+                'shape': 'ellipse',
+                'padding': '15px'
+            }
+        },
+        {
+            selector: 'edge',
+            style: {
+                'width': 5,
+                'line-color': '#1b121294', // 将线条颜色改为淡白色
+                'target-arrow-color': '#1b121294', // 将箭头颜色改为淡白色
+                'target-arrow-shape': 'triangle',
+                'arrow-scale': 2,
+                'curve-style': 'bezier',
+                'label': 'data(label)',
+                'font-size': '10px',
+                'color': '#ffffff',
+                'text-background-color': '#FF6F61',
+                'text-background-opacity': 0.6,
+                'text-background-padding': '6px'
+            }
+        }
+    ],
+     layout: {
+                name: 'cose',
+                directed: true,
+                padding: 10,
+                spacingFactor: 1.75,
+                nodeOverlap: 50,  // 控制节点之间的重叠，数值越大，节点之间的距离越大
+                nodeRepulsion: 9000, // 控制节点之间的排斥力，数值越大，节点之间的距离越大
+                idealEdgeLength: 150, // 控制边的理想长度
+                edgeElasticity: 150, // 控制边的弹性，数值越大，边的长度越接近理想长度
+                gravity: 0.05, // 控制整体图的重心力，数值越大，图越紧凑
+                animate: true, // 使用动画布局
+                animationDuration: 1000 // 动画持续时间
+            }
+});
+
+$('#submit-quiz').click(function() {
+    // 显示加载动画
+    $('#loading-overlay').show();
+
+    const userAnswers = Array.from(document.querySelectorAll('.question input[type=radio]:checked')).map(input => input.value);
+
+    $.ajax({
+        url: '/check-answers/',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify({ answers: userAnswers }),
+        contentType: 'application/json',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        success: function(responseData) {
+            // 延迟隐藏加载动画
+            setTimeout(function() {
+                $('#loading-overlay').hide();
+            }, 2000); // 延迟2秒后隐藏动画，可以根据需要调整时间
+
+            // 处理响应数据
+            console.log('下面是错误的知识点');
+            console.log(responseData);
+
+            if (responseData.wrong_knowledge_points) {
+                wrongKnowledgePoints = [...new Set(responseData.wrong_knowledge_points)]; // 存储错误知识点
+
+                wrongKnowledgePoints.forEach(knowledgePoint => {
+                    let found = false;
+
+                    cy.nodes().forEach(node => {
+                        if (node.isNode() && node.data('name') === knowledgePoint) {
+                            found = true;
+
+                            // 放大节点
+                            node.style({
+                                'width': '400px',
+                                'height': '400px'
+                            });
+
+                            let originalColor = node.style('background-color');
+                            let isOriginalColor = true;
+
+                            // 每隔一秒在白色和原色之间闪烁
+                            setInterval(() => {
+                                node.style('background-color', isOriginalColor ? '#FFD700' : originalColor);
+                                isOriginalColor = !isOriginalColor;
+                            }, 1000);
+
+                            console.log(`知识点 "${knowledgePoint}" 找到了，并开始放大和闪烁。`);
+                        }
+                    });
+
+                    if (!found) {
+                        console.log(`知识点 "${knowledgePoint}" 未在图谱中找到。`);
+                    }
+                });
+            } else if (responseData.error) {
+                console.error(responseData.error);
+            }
+        },
+        error: function(error) {
+            // 延迟隐藏加载动画
+            setTimeout(function() {
+                $('#loading-overlay').hide();
+            }, 2000); // 延迟2秒后隐藏动画，可以根据需要调整时间
+
+            console.error('Error:', error);
+        }
+    });
+});
+
+
+
+
+
+
+<!--$('#view-details').click(function() {-->
+<!--    // 先显示模态框-->
+<!--    $('#modal-details').css('display', 'block');-->
+
+<!--    // 确保 DOM 更新后再初始化 Cytoscape-->
+<!--    setTimeout(function() {-->
+<!--        let elements = [];-->
+
+<!--        // 遍历错误的知识点，找到相关的节点和边-->
+<!--        wrongKnowledgePoints.forEach(knowledgePoint => {-->
+<!--            cy.nodes().forEach(node => {-->
+<!--                if (node.isNode() && node.data('name') === knowledgePoint) {-->
+<!--                    const incomingEdges = node.incomers('edge');-->
+<!--                    const outgoingEdges = node.outgoers('edge');-->
+
+<!--                    elements.push({ data: { id: node.id(), label: node.data('name') } });-->
+
+<!--                    // 处理指向错误知识点的上级节点 (关系为 PART_OF)-->
+<!--                    incomingEdges.forEach(edge => {-->
+<!--                        if (edge.data('relationship') === 'PART_OF') {-->
+<!--                            let sourceNode = edge.source();-->
+<!--                            elements.push({ data: { id: sourceNode.id(), label: sourceNode.data('name') } });-->
+<!--                            elements.push({-->
+<!--                                data: {-->
+<!--                                    id: `${sourceNode.id()}-${node.id()}`,-->
+<!--                                    source: sourceNode.id(),-->
+<!--                                    target: node.id(),-->
+<!--                                    label: '包含'-->
+<!--                                },-->
+<!--                                classes: 'include'-->
+<!--                            });-->
+<!--                        }-->
+<!--                    });-->
+
+<!--                    // 处理与错误知识点直接相连的前向节点 (关系为 前向)-->
+<!--                    incomingEdges.forEach(edge => {-->
+<!--                        if (edge.data('relationship') === '前向') {-->
+<!--                            let sourceNode = edge.source();-->
+<!--                            elements.push({ data: { id: sourceNode.id(), label: sourceNode.data('name') } });-->
+<!--                            elements.push({-->
+<!--                                data: {-->
+<!--                                    id: `${sourceNode.id()}-${node.id()}`,-->
+<!--                                    source: sourceNode.id(),-->
+<!--                                    target: node.id(),-->
+<!--                                    label: '前置知识点'-->
+<!--                                },-->
+<!--                                classes: 'preceding'-->
+<!--                            });-->
+
+<!--                            // 找出前置知识点节点直接相关的节点，并标记关系-->
+<!--                            sourceNode.connectedEdges().forEach(relatedEdge => {-->
+<!--                                let relatedNode = relatedEdge.target();-->
+<!--                                if (relatedNode.id() !== node.id()) {-->
+<!--                                    elements.push({ data: { id: relatedNode.id(), label: relatedNode.data('name') } });-->
+<!--                                    elements.push({-->
+<!--                                        data: {-->
+<!--                                            id: `${sourceNode.id()}-${relatedNode.id()}`,-->
+<!--                                            source: sourceNode.id(),-->
+<!--                                            target: relatedNode.id(),-->
+<!--                                            label: relatedEdge.data('relationship') || '相关关系'-->
+<!--                                        },-->
+<!--                                        classes: relatedEdge.data('relationship')-->
+<!--                                    });-->
+<!--                                }-->
+<!--                            });-->
+<!--                        }-->
+<!--                    });-->
+
+<!--                    // 处理从错误知识点出发的后续节点-->
+<!--                    outgoingEdges.forEach(edge => {-->
+<!--                        let targetNode = edge.target();-->
+<!--                        elements.push({ data: { id: targetNode.id(), label: targetNode.data('name') } });-->
+<!--                        elements.push({-->
+<!--                            data: {-->
+<!--                                id: `${node.id()}-${targetNode.id()}`,-->
+<!--                                source: node.id(),-->
+<!--                                target: targetNode.id(),-->
+<!--                                label: edge.data('relationship') || '后续知识点'-->
+<!--                            },-->
+<!--                            classes: edge.data('relationship')-->
+<!--                        });-->
+
+<!--                        // 查找与这个后续节点直接关联的“包含”关系的节点，并确保连接到正确的节点-->
+<!--                        let targetIncomingEdges = targetNode.incomers('edge');-->
+<!--                        targetIncomingEdges.forEach(targetEdge => {-->
+<!--                            if (targetEdge.data('relationship') === 'PART_OF') {-->
+<!--                                let relatedSourceNode = targetEdge.source();-->
+
+<!--                                // 确保 relatedSourceNode 不是根节点，而是 targetNode 的父节点-->
+<!--                                if (relatedSourceNode.id() !== node.id()) {-->
+<!--                                    elements.push({ data: { id: relatedSourceNode.id(), label: relatedSourceNode.data('name') } });-->
+<!--                                    elements.push({-->
+<!--                                        data: {-->
+<!--                                            id: `${relatedSourceNode.id()}-${targetNode.id()}`,-->
+<!--                                            source: relatedSourceNode.id(),-->
+<!--                                            target: targetNode.id(),-->
+<!--                                            label: '包含'-->
+<!--                                        },-->
+<!--                                        classes: 'include'-->
+<!--                                    });-->
+<!--                                }-->
+<!--                            }-->
+<!--                        });-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+
+<!--        // 输出 elements 数据以检查其格式是否正确-->
+<!--        console.log(elements);-->
+
+<!--        // 确保模态框中的容器可见且存在-->
+<!--        const modalCyContainer = document.getElementById('modal-cy');-->
+<!--        if (modalCyContainer) {-->
+<!--            cytoscape({-->
+<!--                container: modalCyContainer,-->
+<!--                elements: elements,-->
+<!--                style: [-->
+<!--                    {-->
+<!--                        selector: 'node[label]',-->
+<!--                        style: {-->
+<!--                            'label': 'data(label)',-->
+<!--                            'text-valign': 'center',-->
+<!--                            'color': '#ffffff',-->
+<!--                            'font-size': '18px',-->
+<!--                            'width': '100px',-->
+<!--                            'height': '100px',-->
+<!--                            'background-color': '#4A90E2',-->
+<!--                            'border-width': '4px',-->
+<!--                            'border-color': '#ffffff'-->
+<!--                        }-->
+<!--                    },-->
+<!--                    {-->
+<!--                        selector: 'edge[label]',-->
+<!--                        style: {-->
+<!--                            'width': 5,-->
+<!--                            'line-color': '#FF6F61',-->
+<!--                            'target-arrow-color': '#FF6F61',-->
+<!--                            'target-arrow-shape': 'triangle',-->
+<!--                            'arrow-scale': 2,-->
+<!--                            'curve-style': 'bezier',-->
+<!--                            'label': 'data(label)',-->
+<!--                            'font-size': '12px',-->
+<!--                            'text-background-opacity': 1,-->
+<!--                            'text-background-color': '#4A90E2',-->
+<!--                            'text-background-padding': 3,-->
+<!--                            'text-valign': 'center',-->
+<!--                            'color': '#ffffff',-->
+<!--                            'text-margin-y': '-10px', // 调整标签的垂直位置，避免与箭头重叠-->
+<!--                            'edge-text-rotation': 'autorotate' // 使标签随着边旋转-->
+<!--                        }-->
+<!--                    },-->
+<!--                    {-->
+<!--                        selector: '.include',-->
+<!--                        style: {-->
+<!--                            'line-color': '#1E90FF',-->
+<!--                            'target-arrow-color': '#1E90FF'-->
+<!--                        }-->
+<!--                    },-->
+<!--                    {-->
+<!--                        selector: '.preceding',-->
+<!--                        style: {-->
+<!--                            'line-color': '#32CD32',-->
+<!--                            'target-arrow-color': '#32CD32'-->
+<!--                        }-->
+<!--                    }-->
+<!--                ],-->
+<!--                layout: {-->
+<!--                    name: 'grid',-->
+<!--                    directed: true,-->
+<!--                    padding: 20,-->
+<!--                    spacingFactor: 1.75-->
+<!--                }-->
+<!--            });-->
+<!--        } else {-->
+<!--            console.error('Modal container #modal-cy not found!');-->
+<!--        }-->
+<!--    }, 100); // 延迟以确保 DOM 完全更新-->
+<!--});-->
+
+
+
+$('#view-details').click(function() {
+    // 先显示模态框
+    $('#modal-details').css('display', 'block');
+
+    // 确保 DOM 更新后再初始化 Cytoscape
+    setTimeout(function() {
+        let elements = [];
+
+        // 遍历错误的知识点，找到相关的节点和边
+        wrongKnowledgePoints.forEach(knowledgePoint => {
+            cy.nodes().forEach(node => {
+                if (node.isNode() && node.data('name') === knowledgePoint) {
+                    // 添加根节点
+                    elements.push({ data: { id: node.id(), label: node.data('name') } });
+
+                    // 获取与根节点直接相连的二级节点
+                    const outgoingEdges = node.outgoers('edge');
+                    outgoingEdges.forEach(edge => {
+                        let targetNode = edge.target();
+                        // 添加二级节点及其与根节点的连接
+                        elements.push({ data: { id: targetNode.id(), label: targetNode.data('name') } });
+                        elements.push({
+                            data: {
+                                id: `${node.id()}-${targetNode.id()}`,
+                                source: node.id(),
+                                target: targetNode.id(),
+                                label: edge.data('relationship') || '知识缺失'
+                            }
+                        });
+
+                        // 保持原有连接方式：查找与目标节点相关的所有连接
+                        const connectedEdges = targetNode.connectedEdges('edge');
+                        connectedEdges.forEach(connectedEdge => {
+                            let connectedNode = connectedEdge.target();
+                            if (connectedNode.id() !== node.id()) { // 避免循环连接
+                                elements.push({ data: { id: connectedNode.id(), label: connectedNode.data('name') } });
+                                elements.push({
+                                    data: {
+                                        id: `${targetNode.id()}-${connectedNode.id()}`,
+                                        source: targetNode.id(),
+                                        target: connectedNode.id(),
+                                        label: connectedEdge.data('relationship') || '选学知识'
+                                    }
+                                });
+                            }
+                        });
+
+                        // 获取二级节点直接相连的三级节点
+                        const secondaryOutgoingEdges = targetNode.outgoers('edge');
+                        secondaryOutgoingEdges.forEach(secondaryEdge => {
+                            let secondaryTargetNode = secondaryEdge.target();
+                            // 添加三级节点及其与二级节点的连接
+                            elements.push({ data: { id: secondaryTargetNode.id(), label: secondaryTargetNode.data('name') } });
+                            elements.push({
+                                data: {
+                                    id: `${targetNode.id()}-${secondaryTargetNode.id()}`,
+                                    source: targetNode.id(),
+                                    target: secondaryTargetNode.id(),
+                                    label: secondaryEdge.data('relationship') || '三级关系'
+                                }
+                            });
+                        });
+                    });
+                }
+            });
+        });
+
+        // 输出 elements 数据以检查其格式是否正确
+        console.log(elements);
+
+        // 确保模态框中的容器可见且存在
+        const modalCyContainer = document.getElementById('modal-cy');
+        if (modalCyContainer) {
+            cytoscape({
+                container: modalCyContainer,
+                elements: elements,
+                style: [
+                    {
+                        selector: 'node[label]',
+                        style: {
+                            'label': 'data(label)',
+                            'text-valign': 'center',
+                            'color': '#ffffff',
+                            'font-size': '18px',
+                            'width': '100px',
+                            'height': '100px',
+                            'background-color': '#4A90E2',
+                            'border-width': '4px',
+                            'border-color': '#ffffff'
+                        }
+                    },
+                    {
+                        selector: 'edge[label]',
+                        style: {
+                            'width': 5,
+                            'line-color': '#FF6F61',
+                            'target-arrow-color': '#FF6F61',
+                            'target-arrow-shape': 'triangle',
+                            'arrow-scale': 2,
+                            'curve-style': 'bezier',
+                            'label': 'data(label)',
+                            'font-size': '12px',
+                            'text-background-opacity': 1,
+                            'text-background-color': '#4A90E2',
+                            'text-background-padding': 3,
+                            'text-valign': 'center',
+                            'color': '#ffffff',
+                            'text-margin-y': '-10px', // 调整标签的垂直位置，避免与箭头重叠
+                            'edge-text-rotation': 'autorotate' // 使标签随着边旋转
+                        }
+                    }
+                ],
+                layout: {
+                    name: 'grid',
+                    directed: true,
+                    padding: 20,
+                    spacingFactor: 1.75
+                }
+            });
+        } else {
+            console.error('Modal container #modal-cy not found!');
+        }
+
+     // 将数据发送到后端保存
+        $.ajax({
+            type: "POST",
+            url: "/save_elements/",  // 后端处理数据的URL
+            data: JSON.stringify(elements),
+            contentType: "application/json",
+            success: function(response) {
+                console.log("Elements saved successfully:", response);
+            },
+            error: function(error) {
+                console.error("Error saving elements:", error);
+            }
+        });
+    }, 100); // 延迟以确保 DOM 完全更新
+});
+
+
+
+
+
+
+
+
+            $('.close').click(function() {
+                $('#modal-details').css('display', 'none');
+            });
+
+            $(window).click(function(event) {
+                if (event.target == document.getElementById('modal-details')) {
+                    $('#modal-details').css('display', 'none');
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+</script>
+
+<div class="wrapper">
+   <h2 style="
+    text-align: center;
+    color: #ffffff;
+    font-size: 42px;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    margin-bottom: 4px;
+    letter-spacing: 6px;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 40%);
+    background: linear-gradient(to right, #ffffff, #fcefa7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+">
+    知识点漏洞检查
+</h2>
+    <div id="answer" class="card_wrap">
+        {% for question in questions %}
+        <div class="card_cont card{{ forloop.counter }}">
+            <div class="card">
+                <p class="question"><span>Q{{ forloop.counter }}、</span>{{ question.question_text }}</p>
+                <ul class="select">
+                    <li><input id="q{{ forloop.counter }}_1" type="radio" name="r-group-{{ forloop.counter }}"><label
+                            for="q{{ forloop.counter }}_1">{{ question.option_a }}</label></li>
+                    <li><input id="q{{ forloop.counter }}_2" type="radio" name="r-group-{{ forloop.counter }}"><label
+                            for="q{{ forloop.counter }}_2">{{ question.option_b }}</label></li>
+                    <li><input id="q{{ forloop.counter }}_3" type="radio" name="r-group-{{ forloop.counter }}"><label
+                            for="q{{ forloop.counter }}_3">{{ question.option_c }}</label></li>
+                    <li><input id="q{{ forloop.counter }}_4" type="radio" name="r-group-{{ forloop.counter }}"><label
+                            for="q{{ forloop.counter }}_4">{{ question.option_d }}</label></li>
+                </ul>
+                <div class="card_bottom">
+                    {% if not forloop.first %}
+                    <a class="prev">上一题</a>
+                    {% endif %}
+                    <span><b>{{ forloop.counter }}</b>/{{ total_questions }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+<div style="margin-top: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <button id="submit-quiz" style="
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-left: 10px;
+    ">
+        提交答案
+    </button>
+    <button id="view-details" style="
+        padding: 10px 20px;
+        background-color: #28A745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-left: 10px;
+    ">
+        查看知识漏洞
+    </button>
+
+    <!-- 新增的生成试题按钮 -->
+    <button id="generate-question" style="
+        padding: 10px 20px;
+        background-color: #FFC107;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 10px;
+    ">
+        推荐资源
+    </button>
+
+
+    <div style="margin-top: 20px; display: flex; align-items: center;">
+        <input type="text" id="node-search" placeholder="搜索节点..." style="
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        ">
+        <button id="zoom-in" style="
+            padding: 5px 20px;
+            background-color: #FFC107;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        ">
+            ➕
+        </button>
+        <button id="zoom-out" style="
+            padding: 5px 20px;
+            background-color: #DC3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        ">
+            ➖
+        </button>
+    </div>
+</div>
+
+<div id="questionModal" class="modal" style="
+    display: none;
+    position: fixed;
+    z-index: 1000; /* 这个值可以调整为比页面上其他元素的 z-index 更高 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 18px;">
+    <div class="modal-content" style="
+     color: #000;
+        z-index: 1001;
+        background-color: #fefefe;
+        margin: 2% auto; /* Reduced margin to allow more content space */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 85%; /* Increased the width */
+        height: 85%; /* Added height to fill more of the screen */
+        border-radius: 10px;
+        overflow-y: auto;">
+        <span class="close" style="
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;">&times;</span>
+<h2 style="text-align: center; color: #333; font-family: 'Arial', sans-serif; margin-bottom: 20px;">查漏补缺！</h2>
+
+<div style="width: 80%; margin: 0 auto; background-color: #fcfdfd; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h3 style="color: #000; font-family: 'Arial', sans-serif; text-align: center;">漏洞知识点视频</h3>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th style="background-color: #4CAF50; color: white; padding: 10px; border: 1px solid #ddd; text-align: center; font-family: 'Arial', sans-serif;">漏洞知识点视频</th>
+                <th style="background-color: #4CAF50; color: white; padding: 10px; border: 1px solid #ddd; text-align: center; font-family: 'Arial', sans-serif;">偏好分类</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for video_url, preference in video_preferences %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                    <video controls style="width: 80%; height: 255px; border-radius: 8px;">
+                        <source src="{{ video_url }}" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-family: 'Arial', sans-serif; color: #000000;">
+                    {{ preference }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 style="color: #000; font-family: 'Arial', sans-serif; text-align: center; margin-top: 40px;">漏洞知识点练习题</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th style="background-color: #4CAF50; color: white; padding: 10px; border: 1px solid #ddd; text-align: center; font-family: 'Arial', sans-serif;">练习题URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                    <a href="quiz-url-1" target="_blank" style="color: #4CAF50; text-decoration: none; font-family: 'Arial', sans-serif;">练习题1</a>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+                    <a href="quiz-url-2" target="_blank" style="color: #4CAF50; text-decoration: none; font-family: 'Arial', sans-serif;">练习题2</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 style="color: #000; font-family: 'Arial', sans-serif; text-align: center; margin-top: 40px;">漏洞知识为：</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th style="background-color: #4CAF50; color: white; padding: 10px; border: 1px solid #ddd; text-align: center; font-family: 'Arial', sans-serif;">知识点</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for point in uncorrect_knowledge_points %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-family: 'Arial', sans-serif; color: #ff3800;">
+                    {{ point }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    </div>
+</div>
+
+
+</div>
+</div>
+
+
+<script src="/static/ceshi_2/jquery-1.8.3.min.js"></script>
+<script src="/static/ceshi_2/answer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/neovis.js@2.0.1/dist/neovis.js"></script>
+<script type="text/javascript">
+    const config = {
+       container_id: "viz",
+       server_url: "bolt://localhost:7687",
+       server_user: "neo4j",
+       server_password: "password",
+       labels: {
+           "Person": {
+               "caption": "name",
+               "size": "pagerank",
+               "community": "community"
+           }
+       },
+       relationships: {
+           "KNOWS": {
+               "thickness": "weight",
+               "caption": false
+           }
+       },
+       initial_cypher: "MATCH (n)-[r]->(m) RETURN n,r,m LIMIT 25"
+   };
+
+   const viz = new NeoVis.default(config);
+   viz.render();
+
+
+</script>
+<script>
+    $(function(){
+        $("#answer").answerSheet({});
+    })
+
+
+        // 搜索框功能
+        $('#node-search').on('input', function() {
+            var searchTerm = $(this).val().toLowerCase();
+            cy.nodes().forEach(function(node) {
+                var nodeName = node.data('name').toLowerCase();
+                if (nodeName.includes(searchTerm)) {
+                    node.style('background-color', '#FFAA00'); // 高亮显示
+                } else {
+                    node.style('background-color', ''); // 恢复原样
+                }
+            });
+        });
+
+        // 放大缩小功能
+        $('#zoom-in').click(function() {
+            cy.zoom(cy.zoom() * 1.2);
+        });
+
+        $('#zoom-out').click(function() {
+            cy.zoom(cy.zoom() / 1.2);
+        });
+
+
+
+  document.getElementById('generate-question').addEventListener('click', function() {
+    var modal = document.getElementById("questionModal");
+    modal.style.display = "block";
+});
+
+// 点击关闭按钮时，关闭模态窗口
+var closeBtn = document.getElementsByClassName("close")[0];
+closeBtn.onclick = function() {
+    var modal = document.getElementById("questionModal");
+    modal.style.display = "none";
+}
+
+// 点击窗口外部时关闭模态窗口
+window.onclick = function(event) {
+    var modal = document.getElementById("questionModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var videos = document.querySelectorAll('video');
+        videos.forEach(function(video) {
+            video.currentTime = 1;  // 跳到视频的第一秒
+            video.pause();  // 暂停视频
+        });
+    });
+
+</script>
+
+
+</body>
+</html>
+

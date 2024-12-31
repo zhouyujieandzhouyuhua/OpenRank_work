@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+{% block style %}
+<link href="../static/css/bootstrap.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="../static/css/admin.css"/>
+<script src="../static/js/jquery.min.js"></script>
+
+<style>
+    html, body {
+          height: 100%;
+          width: 100%;
+<!--            overflow: hidden;-->
+  background-color: #282C34;
+      }
+      .box {
+          width: 75%;
+          height: 70%;
+          margin: 30px auto;
+          padding: 20px;
+          display: block;
+      }
+
+      .box .head span {
+          font-size: 18px;
+          color: #333;
+      }
+
+      .box .head {
+          margin-bottom: 20px;
+      }
+
+      .box .head a {
+          text-decoration: none;
+          float: right;
+          font-size: 15px;
+          color: #333;
+      }
+
+      .box .head a:hover {
+          color: #F00;
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+      }
+
+      .box ul .li {
+          width: 31%;
+          height: 240px;
+          list-style: none;
+          position: relative;
+          float: left;
+          margin-left: 20px;
+          margin-bottom: 20px;
+          overflow: hidden;
+      }
+
+      .bottom {
+          background-color: #f0f2f5;
+      }
+
+      .box ul li .deatil {
+          width: 100%;
+          height: 240px;
+          background: #FFF;
+          position: relative;
+      }
+
+      .box ul li .deatil h2 {
+          font-size: 18px;
+          color: black;
+          text-align: center;
+          padding-top: 30px;
+      }
+
+      .box ul li .deatil p {
+          font-size: 16px;
+          text-align: center;
+          margin: 30px;
+          color: black;
+      }
+
+      .box ul li .deatil a {
+          font-size: 15px;
+          display: block;
+          color: black;
+          text-decoration: none;
+          width: 100px;
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          margin: 0 auto;
+      }
+
+      .card-avatar[data-v-501a0b62] {
+          width: 48px;
+          height: 48px;
+          border-radius: 48px;
+      }
+
+      .ant-avatar > img {
+          width: 100%;
+          height: 100%;
+          display: block;
+      }
+
+      .ant-avatar {
+          display: inline-block;
+          overflow: hidden;
+      }
+
+      .ant-card-meta-avatar {
+          float: left;
+      }
+  .ant-card-actions{
+  font-size: 14px;
+  width: 100%;
+      height: 48px;
+  line-height: 1.5;
+  color: rgba(0,0,0,.65);
+  cursor: pointer;
+  margin-bottom: inherit!important;
+  border-top: 1px solid #e8e8e8;
+  background: #fafafa;
+  zoom: 1;
+      bottom: 10px;
+  list-style: none;
+  box-sizing: border-box;
+  outline: none;
+      position: absolute;
+  }
+
+
+.pagination {
+color: #007bff; /* 确保这个颜色没有被其他样式覆盖 */
+    background-color: #fff; /* 确保背景色和文字颜色对比明显 */
+    border: 1px solid #ddd;
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination a {
+    color: #007bff;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+    line-height: 20px;
+    min-width: 40px; /* 设置最小宽度，确保按钮不太窄 */
+    text-align: center;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+    color: #007bff;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+
+
+
+</style>
+<script src="../static/js/jquery.min.js"></script>
+{% endblock %}
+{% block content %}
+
+
+<div class="wrap-container welcome-container">
+    <div class="row">
+        <div class="welcome-left-container col-lg-12">
+            <div class="data-show">
+                <ul class="clearfix">
+                    <li class="col-sm-12 col-md-3 col-xs-12">
+
+                        <a href="javascript:;" class="clearfix">
+                            <div class="icon-bg bg-org f-l">
+                                <span class="iconfont">&#xe606;</span>
+                            </div>
+                            <div class="right-text-con">
+                                <p class="name">试题数量</p>
+                                <!--                                    <p><span class="color-org">{{ questions }}</span>道</p>-->
+                                <p><span class="color-org">{{ 500 }}</span>道</p>
+
+                            </div>
+                        </a>
+                    </li>
+                    <li class="col-sm-12 col-md-3 col-xs-12">
+                        <a href="javascript:;" class="clearfix">
+                            <div class="icon-bg bg-blue f-l">
+                                <span class="iconfont">&#xe602;</span>
+                            </div>
+                            <div class="right-text-con">
+                                <p class="name">试卷数量</p>
+                                <!--                                    <p><span class="color-blue">{{ shijuans }}</span>份</p>-->
+                                <p><span class="color-blue">{{ 50 }}</span>份</p>
+
+                            </div>
+                        </a>
+                    </li>
+                    <li class="col-sm-12 col-md-3 col-xs-12">
+                        <a href="javascript:;" class="clearfix">
+                            <div class="icon-bg bg-green f-l">
+                                <span class="iconfont">&#xe605;</span>
+                            </div>
+                            <div class="right-text-con">
+                                <p class="name">考试范围</p>
+                                <p><span class="color-green">综合</span>不限</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="col-sm-12 col-md-3 col-xs-12">
+                        <a href="javascript:;" class="clearfix">
+                            <div class="icon-bg bg-org f-l">
+                                <span class="iconfont">&#xe603;</span>
+                            </div>
+                            <div class="right-text-con">
+                                <p class="name">当前年份</p>
+                                <p><span class="color-green">2024</span>年</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box">
+                <div style="height: 100%;">
+                    <ul>
+                        {% for emp in shijuan_querylist %}
+                        <li class="li" id="{{ emp.id }}">
+                            <div class="deatil">
+                                <div style="padding: 24px">
+                                    <div class="ant-card-meta-avatar"><span data-v-501a0b62=""
+                                                                            class="card-avatar ant-avatar ant-avatar-lg ant-avatar-circle ant-avatar-image"><img
+                                            src=
+                                                    "
+https://wanx.alicdn.com/wanx/1642411170879487/text_to_image/4d75820b979542fa96041e369cf1a359_0.png?x-oss-process=image/watermark,image_d2FueC93YXRlcm1hcmsvcWlhbndlbl93YXRlcm1hcmsucG5n,t_80,g_se,x_30,y_30/format,webp"                                    >
+                                    </span>
+                                    </div>
+                                    <div style="margin-left: 66px">
+                                        <!--                                <span style="font-size: 18px">{{ '英语语法' }}</span>-->
+
+                                        <span style="font-size: 18px">{{ emp.title }}</span>
+                                        <br>
+<!--                                        <small style="padding-top: 30px;position: absolute">出卷人:{{ emp.owner-->
+<!--                                            }}</small>-->
+                                    </div>
+                                </div>
+                                <ul class="ant-card-actions">
+                                    <li style="width: 50%; outline: none; float: left;text-align: center;margin: 12px 0;color: rgba(0,0,0,.45);width: 50%;border-right: 1px solid #e8e8e8">
+                                        <span>满分:100分</span></li>
+                                    <li style="width: 50%; outline: none; float: right;text-align: center;margin: 12px 0;color: rgba(0,0,0,.45);width: 50%;">
+                                        <span>限时:{{ emp.time }}分钟</span></li>
+                                </ul>
+
+                            </div>
+
+                        </li>
+
+                        {% endfor %}
+                    </ul>
+                </div>
+                <hr>
+                <div>
+<!--                    <span class="text-center">{{ page_obj.page_html|safe }}</span>-->
+<!--                    <div class="pagination">-->
+<!--    <a href="#">首页</a>-->
+<!--    <a href="#">上一页</a>-->
+<!--    <a href="#" class="active">1</a>-->
+<!--    <a href="#">2</a>-->
+<!--    <a href="#">下一页</a>-->
+<!--    <a href="#">尾页</a>-->
+<!--</div>-->
+
+                </div>
+            </div>
+            {% endblock %}
+            {% block script %}
+            <script>
+                $('.li').on('click',function () {
+                    var shijuan_id = $(this).attr('id')
+                    window.location.href='/to_test_paper/' + shijuan_id
+                })
+            </script>
+            {% endblock %}

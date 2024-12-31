@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <title>智能测评系统</title>
+
+    <style>
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+
+        }
+        .user-details {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            right: 20px;
+            top: 64px;
+            z-index: 999;
+        }
+        .user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info p {
+    margin-bottom: 5px;
+}
+
+.actions .favorite-btn {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.actions .favorite-btn:hover {
+    background-color: #0056b3;
+}
+        .top {
+            height: 64px;
+            width: 100%;
+            background: #41847d;
+            padding-left: 10%;
+        }
+
+
+        img {
+            vertical-align: middle;
+        }
+
+        em {
+            font-style: normal;
+        }
+
+        a img, :link img, :visited img {
+            border: 0;
+        }
+
+        a:link, a:visited {
+            text-decoration: none;
+            color: #666666;
+        }
+
+        a:hover, a:focus {
+            color: #0573bd;
+            text-decoration: none;
+        }
+
+        ul, ul li {
+            list-style-type: none;
+        }
+
+
+        #top_bg {
+            height: 64px;
+            width: 100%;
+            background: #333;
+            box-shadow: 1px 1px 7px #999;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            border-bottom: #C6C6C6 solid 1px;
+        }
+
+        .top .logo_l {
+            width: 180px;
+            height: 64px;
+            color: #ffffff;
+            float: left;
+            line-height: 64px;
+        }
+
+        .nav_z {
+            width: auto !important;
+            height: 64px;
+            float: left;
+            position: relative;
+            z-index: 999;
+        }
+
+        #navul li {
+            float: left;
+            padding: 0 20px;
+            height: 64px;
+            position: relative;
+            text-align: center;
+            line-height: 64px;
+        }
+
+        #navul li a:link, #navul li a:visited {
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        #navul li a {
+            font-size: 14px;
+            color: hsla(0, 0%, 100%, .65);
+        }
+
+        #navul li a:hover {
+            color: #FFF;
+        }
+
+        .login_out {
+            color: hsla(0, 0%, 100%, .65);
+            padding: 0 20px
+        }
+
+        .login_out:hover {
+            color: #FFF;
+        }
+
+        .active {
+            background-color: #1890ff;
+        }
+
+        .bottom {
+            padding-top: 64px;
+        }
+
+
+        .active-nav-item {
+    background-color: #007bff; /* 背景色突出显示 */
+    color: white; /* 文字颜色 */
+    border-radius: 5px; /* 圆角效果 */
+    padding: 5px 10px; /* 内边距 */
+}
+
+
+
+    </style>
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+<div class="children_body" style="height: 100%">
+    <div id="top_bg">
+        <div class="top">
+            <a class="logo_l" href="/" title="星火知立方">
+                    <img src="/static/icons/logo1.png" alt="星火知立方 Logo" style="height: 218px; margin-left: -96px;margin-top: -88px;">
+
+            </a>
+            <!--导航开始-->
+            <div class="nav_z">
+                <ul id="navul" class="cl" style="display: block; height: 100%; margin: 0;">
+                    <li id="AIcourse">
+                        <a href="/AIcourse" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+                            <img src="/static/icons/课程.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+                            课程学习
+                        </a>
+                    </li>
+                    <li id="kaoshi">
+                        <a href="/test_paper" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+                            <img src="/static/icons/考试.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+                            在线考试
+                        </a>
+                    </li>
+                    <li id="individual_chengji">
+                        <a href="/individual_chengji" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+                            <img src="/static/icons/成绩管理.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+                            成绩管理
+                        </a>
+                    </li>
+                    <li id="index">
+                        <a href="/index" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+                            <img src="/static/icons/学习助手.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+                            学习工具
+                        </a>
+                    </li>
+                    <li id="ceshi">
+                        <a href="/loudongjiance" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+                            <img src="/static/icons/查漏补缺.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+                            查漏补缺
+                        </a>
+                    </li>
+                    <li id="upexam">
+                        <a href="/upexam" style="display: flex; align-items: center; font-size: 14px; color: hsl(0deg 0% 100%); text-decoration: none;">
+                            <img src="/static/icons/提交试卷.png" alt="AI Course Icon" style="height: 20px; margin-right: 8px;">
+                            试卷提交
+                        </a>
+                    </li>
+                </ul>
+            </div><!--导航结束-->
+            <div id="welcome-div" style="color: #ffffff; line-height: 64px; font-size: 14px; right: 20px; display: block; width: 200px; position: absolute; margin-right: -42px;">
+                <span id="welcome-span">你好！周涛</span>
+                <a href="/login_out" class="login_out">退出</a>
+            </div>
+           <div id="user-details" class="user-details">
+
+    <div class="user-info">
+        <p>姓名<span>{{ username }}</span></p>
+        <p>年级：<span>{{ '七年级' }}</span></p>
+        <p>班级：<span>{{ '七年二班' }}</span></p>
+        <p>年龄：<span>{{ '17' }}</span></p>
+        <p>邮箱：<span>1943027685@qq.com</span></p>
+        <p>家庭住址：<span>北京</span></p>
+        <p>已获得学分：<span>{{ '20' }}</span></p>
+
+    </div>
+    <div class="actions">
+        <button class="favorite-btn">收藏</button>
+        <button class="favorite-btn">点赞</button>
+    </div>
+</div>
+
+        </div>
+    </div>
+    <div class="bottom" style="height: 100%;display: block">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</div>
+</body>
+<script>
+<!--    document.getElementById('welcome-span').addEventListener('click', function() {-->
+<!--        var userDetails = document.getElementById('user-details');-->
+<!--        if (userDetails.style.display === "none") {-->
+<!--            userDetails.style.display = "block";-->
+<!--        } else {-->
+<!--            userDetails.style.display = "none";-->
+<!--        }-->
+<!--    });-->
+<!--    let currentElemt = window.location.pathname;-->
+<!--    console.log(currentElemt)-->
+<!--    // nav菜单选择-->
+<!--    if (currentElemt.indexOf('user') > -1) {-->
+<!--        currentElemt = 'user'-->
+<!--    } else if (currentElemt.indexOf('chengji') > -1) {-->
+<!--        currentElemt = 'chengji'-->
+<!--    } else if (currentElemt.indexOf('shijuan') > -1) {-->
+<!--        currentElemt = 'shijuan'-->
+<!--    } else if (currentElemt.indexOf('shiti') > -1) {-->
+<!--        currentElemt = 'shiti'-->
+<!--    } else if (currentElemt.indexOf('index') > -1) {-->
+<!--        currentElemt = 'index'-->
+<!--    } else {-->
+<!--        currentElemt = 'kaoshi'-->
+<!--    }-->
+<!--    $('#' + currentElemt).addClass('active');-->
+
+
+
+
+
+
+</script>
+{% block script %}
+{% endblock %}
+</html>
